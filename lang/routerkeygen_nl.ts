@@ -357,33 +357,34 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/qcmdlineparser/qcmdlineparser.cpp" line="127"/>
         <source>Unknown argument: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Onbekent argument: %1</translation>
     </message>
     <message>
         <location filename="../src/qcmdlineparser/qcmdlineparser.cpp" line="134"/>
         <source>Unrecognized argument: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Onbekent argument: %1</translation>
     </message>
     <message>
         <location filename="../src/qcmdlineparser/qcmdlineparser.cpp" line="179"/>
         <source>Argument %1: expected one argument</source>
-        <translation type="unfinished"></translation>
+        <translation>Argument %1: verwacht één argument</translation>
     </message>
     <message>
         <location filename="../src/qcmdlineparser/qcmdlineparser.cpp" line="185"/>
         <source>Invalid format for argument %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Ongeldig formaat voor argument %1</translation>
     </message>
     <message>
         <location filename="../src/qcmdlineparser/qcmdlineparser.cpp" line="252"/>
         <source>Usage: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Gebruik: %1</translation>
     </message>
     <message>
         <location filename="../src/qcmdlineparser/qcmdlineparser.cpp" line="278"/>
         <source>Optional arguments:
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Optionele argumenten:
+</translation>
     </message>
 </context>
 <context>
@@ -396,47 +397,47 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/main.cpp" line="42"/>
         <source>MAC address</source>
-        <translation type="unfinished"></translation>
+        <translation>MAC adres</translation>
     </message>
     <message>
         <location filename="../src/main.cpp" line="43"/>
         <source>No UI launch</source>
-        <translation type="unfinished"></translation>
+        <translation>Opstart zonder UI</translation>
     </message>
     <message>
         <location filename="../src/main.cpp" line="55"/>
         <source>Invalid MAC. It will not be used.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ongeldige MAC. Wordt niet gebruikt.</translation>
     </message>
     <message>
         <location filename="../src/main.cpp" line="62"/>
         <source>Out of memory.</source>
-        <translation type="unfinished"></translation>
+        <translation>Geen vrij geheugen.</translation>
     </message>
     <message>
         <location filename="../src/main.cpp" line="66"/>
         <source>Unsupported network. Check the MAC address and the SSID.</source>
-        <translation type="unfinished"></translation>
+        <translation>Niet ondersteund netwerk. Controleer het MAC adres and de SSID.</translation>
     </message>
     <message>
         <location filename="../src/main.cpp" line="70"/>
         <source>Calculating keys. This can take a while.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sleutels aan het berekenen. Dit kan even duren.</translation>
     </message>
     <message>
         <location filename="../src/main.cpp" line="79"/>
         <source>Errors while calculating.</source>
-        <translation type="unfinished"></translation>
+        <translation>Fouten tijdens het berekenen.</translation>
     </message>
     <message>
         <location filename="../src/main.cpp" line="84"/>
         <source>No keys were calculated.</source>
-        <translation type="unfinished"></translation>
+        <translation>Geen sleutels zijn berekend.</translation>
     </message>
     <message>
         <location filename="../src/main.cpp" line="87"/>
         <source>Calculated Passwords for %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Berekende wachtwoorden voor %1</translation>
     </message>
 </context>
 <context>
@@ -449,7 +450,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/forms/routerkeygen.ui" line="75"/>
         <source>Supported</source>
-        <translation type="unfinished"></translation>
+        <translation>Ondersteund</translation>
     </message>
     <message>
         <location filename="../src/forms/routerkeygen.ui" line="136"/>
@@ -457,7 +458,7 @@ p, li { white-space: pre-wrap; }
         <location filename="../src/forms/routerkeygen.ui" line="299"/>
         <location filename="../src/RouterKeygen.cpp" line="386"/>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Naam</translation>
     </message>
     <message>
         <location filename="../src/forms/routerkeygen.ui" line="141"/>
@@ -473,210 +474,211 @@ p, li { white-space: pre-wrap; }
         <location filename="../src/forms/routerkeygen.ui" line="309"/>
         <location filename="../src/RouterKeygen.cpp" line="386"/>
         <source>Strength</source>
-        <translation type="unfinished"></translation>
+        <translation>Sterkte</translation>
     </message>
     <message>
         <location filename="../src/forms/routerkeygen.ui" line="155"/>
         <source>Unlikely Supported</source>
-        <translation type="unfinished"></translation>
+        <translation>Waarschijnlijk niet ondersteund</translation>
     </message>
     <message>
         <location filename="../src/forms/routerkeygen.ui" line="235"/>
         <source>Unsupported</source>
-        <translation type="unfinished"></translation>
+        <translation>Niet ondersteund</translation>
     </message>
     <message>
         <location filename="../src/forms/routerkeygen.ui" line="323"/>
         <source>Force Scan (Note:requires root privileges)</source>
-        <translation type="unfinished"></translation>
+        <translation>Geforceerde Scan (Note:heeft root privileges nodig)</translation>
     </message>
     <message>
         <location filename="../src/forms/routerkeygen.ui" line="349"/>
         <source>Refresh</source>
-        <translation type="unfinished"></translation>
+        <translation>Ververs</translation>
     </message>
     <message>
         <location filename="../src/forms/routerkeygen.ui" line="363"/>
         <source>Scanned Networks</source>
-        <translation type="unfinished"></translation>
+        <translation>Gescande netwerken</translation>
     </message>
     <message>
         <location filename="../src/forms/routerkeygen.ui" line="396"/>
         <source>MAC Address:</source>
-        <translation type="unfinished"></translation>
+        <translation>MAC adressen:</translation>
     </message>
     <message>
         <location filename="../src/forms/routerkeygen.ui" line="408"/>
         <source>Manual Calculation</source>
-        <translation type="unfinished"></translation>
+        <translation>Handmatige Berekening</translation>
     </message>
     <message>
         <location filename="../src/forms/routerkeygen.ui" line="433"/>
         <source>Calculate</source>
-        <translation type="unfinished"></translation>
+        <translation>Bereken</translation>
     </message>
     <message>
         <location filename="../src/forms/routerkeygen.ui" line="442"/>
         <source>Network Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Netwerk Naam:</translation>
     </message>
     <message>
         <location filename="../src/forms/routerkeygen.ui" line="449"/>
         <source>HH:HH:HH:HH:HH:HH; </source>
-        <translation type="unfinished"></translation>
+        <translation>HH:HH:HH:HH:HH:HH; </translation>
     </message>
     <message>
         <location filename="../src/forms/routerkeygen.ui" line="491"/>
         <source>Calculated Passwords</source>
-        <translation type="unfinished"></translation>
+        <translation>Berekende Wachtwoorden</translation>
     </message>
     <message>
         <location filename="../src/forms/routerkeygen.ui" line="529"/>
         <source>About</source>
-        <translation type="unfinished"></translation>
+        <translation>Over</translation>
     </message>
     <message>
         <location filename="../src/forms/routerkeygen.ui" line="540"/>
         <source>Preferences</source>
-        <translation type="unfinished"></translation>
+        <translation>Voorkeuren</translation>
     </message>
     <message>
         <location filename="../src/forms/routerkeygen.ui" line="548"/>
         <source>Donate (Paypal)</source>
-        <translation type="unfinished"></translation>
+        <translation>Donatie (Paypal)</translation>
     </message>
     <message>
         <location filename="../src/forms/routerkeygen.ui" line="553"/>
         <source>Donate (Google Play)</source>
-        <translation type="unfinished"></translation>
+        <translation>Donatie (Google Play)</translation>
     </message>
     <message>
         <location filename="../src/forms/routerkeygen.ui" line="561"/>
         <location filename="../src/RouterKeygen.cpp" line="127"/>
         <source>Run on Start up</source>
-        <translation type="unfinished"></translation>
+        <translation>Draaien bij het opstarten</translation>
     </message>
     <message>
         <location filename="../src/forms/routerkeygen.ui" line="569"/>
         <location filename="../src/RouterKeygen.cpp" line="133"/>
         <source>Run in the background</source>
-        <translation type="unfinished"></translation>
+        <translation>In de achtergrond draaien</translation>
     </message>
     <message>
         <location filename="../src/forms/routerkeygen.ui" line="574"/>
         <source>About RouterKeygen</source>
-        <translation type="unfinished"></translation>
+        <translation>Over RouterKeygen</translation>
     </message>
     <message>
         <location filename="../src/forms/routerkeygen.ui" line="579"/>
         <source>Check for Updates</source>
-        <translation type="unfinished"></translation>
+        <translation>Controleren op updates</translation>
     </message>
     <message>
         <location filename="../src/forms/routerkeygen.ui" line="584"/>
         <source>Feedback and Bugs</source>
-        <translation type="unfinished"></translation>
+        <translation>Feedback and Bugs</translation>
     </message>
     <message>
         <location filename="../src/RouterKeygen.cpp" line="164"/>
         <source>Checking for updates</source>
-        <translation type="unfinished"></translation>
+        <translation>Aan het controleren voor updates</translation>
     </message>
     <message>
         <location filename="../src/RouterKeygen.cpp" line="186"/>
         <source>The application is already at the latest version.</source>
-        <translation type="unfinished"></translation>
+        <translation>De applicatie is al op de laatste versie.</translation>
     </message>
     <message>
         <location filename="../src/RouterKeygen.cpp" line="195"/>
         <location filename="../src/RouterKeygen.cpp" line="200"/>
         <source>Error while checking for updates</source>
-        <translation type="unfinished"></translation>
+        <translation>Fout tijdens het controleren voor updates</translation>
     </message>
     <message>
         <location filename="../src/RouterKeygen.cpp" line="243"/>
         <source>Invalid MAC. It will not be used.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ongeldige MAC. Word niet gebruikt.</translation>
     </message>
     <message>
         <location filename="../src/RouterKeygen.cpp" line="260"/>
         <source>Unsupported network. Check the MAC address and the SSID.</source>
-        <translation type="unfinished"></translation>
+        <translation>Niet ondersteund netwerk. Controleer het MAC adres en de SSID.</translation>
     </message>
     <message>
         <location filename="../src/RouterKeygen.cpp" line="264"/>
         <source>Calculating keys. This can take a while.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sleutels aan het berekenen. Dit kan even duren.</translation>
     </message>
     <message>
         <location filename="../src/RouterKeygen.cpp" line="297"/>
         <source>Unsupported network.</source>
-        <translation type="unfinished"></translation>
+        <translation>Niet ondersteund netwerk.</translation>
     </message>
     <message>
         <location filename="../src/RouterKeygen.cpp" line="302"/>
         <source>Scanning the network</source>
-        <translation type="unfinished"></translation>
+        <translation>Het netwerk aan het scannen</translation>
     </message>
     <message>
         <location filename="../src/RouterKeygen.cpp" line="322"/>
         <source>Vulnerable networks</source>
-        <translation type="unfinished"></translation>
+        <translation>Kwetsbare netwerken</translation>
     </message>
     <message>
         <location filename="../src/RouterKeygen.cpp" line="376"/>
         <source>None were detected</source>
-        <translation type="unfinished"></translation>
+        <translation>Geen gedetecteerd</translation>
     </message>
     <message>
         <location filename="../src/RouterKeygen.cpp" line="383"/>
         <source>Quit</source>
-        <translation type="unfinished"></translation>
+        <translation>Stoppen</translation>
     </message>
     <message>
         <location filename="../src/RouterKeygen.cpp" line="405"/>
         <source>Network Manager was not detected</source>
-        <translation type="unfinished"></translation>
+        <translation>Netwerk Manager was niet gevonden</translation>
     </message>
     <message>
         <location filename="../src/RouterKeygen.cpp" line="409"/>
         <source>No Wifi device detected</source>
-        <translation type="unfinished"></translation>
+        <translation>Geen WiFi apparaat gevonden</translation>
     </message>
     <message>
         <location filename="../src/RouterKeygen.cpp" line="413"/>
         <source>The wifi device is not enabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Het WiFi apparaat staat niet aan</translation>
     </message>
     <message>
         <location filename="../src/RouterKeygen.cpp" line="437"/>
         <source>Error while calculating.</source>
-        <translation type="unfinished"></translation>
+        <translation>Fout tijdens het berekenen.</translation>
     </message>
     <message>
         <location filename="../src/RouterKeygen.cpp" line="444"/>
         <source>No keys were calculated.</source>
-        <translation type="unfinished"></translation>
+        <translation>Geen sleutels zijn gegenereerd.</translation>
     </message>
     <message>
         <location filename="../src/RouterKeygen.cpp" line="452"/>
         <source>Calculation finished</source>
-        <translation type="unfinished"></translation>
+        <translation>Berekening klaar</translation>
     </message>
     <message>
         <location filename="../src/RouterKeygen.cpp" line="477"/>
         <source>Copy</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopiëren</translation>
     </message>
     <message>
         <location filename="../src/RouterKeygen.cpp" line="479"/>
         <source>Copy this key</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopieer deze sleutel</translation>
     </message>
     <message>
         <location filename="../src/RouterKeygen.cpp" line="492"/>
         <source>%1 copied</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>%1 gekopieerd</translatorcomment>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -684,7 +686,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/forms/UpdateDialog.ui" line="14"/>
         <source>Updates available</source>
-        <translation type="unfinished"></translation>
+        <translation>Update beschikbaar</translation>
     </message>
     <message>
         <location filename="../src/forms/UpdateDialog.ui" line="29"/>
@@ -695,12 +697,18 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;There is a newer version available.&lt;/p&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Open the website to download the latest version.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans&apos;; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Er is een nieuwere versie beschikbaar.&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Open de webpagina om de nieuwe versie te downloaden.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../src/forms/UpdateDialog.ui" line="42"/>
         <source>Open Website</source>
-        <translation type="unfinished"></translation>
+        <translation>Open Webpagina</translation>
     </message>
     <message>
         <location filename="../src/forms/UpdateDialog.ui" line="49"/>
@@ -726,7 +734,15 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt;&quot;&gt;If you like this application, please consider donating.&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Sans Serif&apos;; font-size:9pt;&quot;&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt;&quot;&gt;Your donation will motivate the authors to improve on this great open-source tool.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans&apos;; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt;&quot;&gt;Bedankt voor het uitproberen van RouterKeygen. &lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Sans Serif&apos;; font-size:9pt;&quot;&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt;&quot;&gt;Als u deze applicatie leuk vind, overweeg dan graag te doneren.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Sans Serif&apos;; font-size:9pt;&quot;&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt;&quot;&gt;Uw donatie zal de auteurs motiveren om deze geweldige open-source tool te verbeteren.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../src/forms/welcome_dialog.ui" line="44"/>
