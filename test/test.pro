@@ -18,18 +18,7 @@ HEADERS += ../src/algorithms/*.h \
     ../src/WirelessMatcher.h
 
 INCLUDEPATH += ../src/
-win32{
-    SOURCES += ../src/sha/sha1dgst.c \
-        ../src/sha/sha1-586.win32.S
-    HEADERS += src/sha/sha_locl.h \
-        ../src/sha/sha.h \
-        ../src/sha/opensslconf.h \
-        ../src/sha/md32_common.h
-}
-unix{
-    LIBS += -lcrypto
-}
-
+LIBS += -lcrypto
 
 RESOURCES += ../resources/resources.qrc
 
