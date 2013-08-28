@@ -10,7 +10,6 @@ file(GLOB ROUTERKEYGEN_SRCS
     "config/*.cpp"
     "qcmdlineparser/*.cpp"
     "dialog/*.cpp"
-    "sha/*.cpp"
     "*.cpp"
 )
 
@@ -25,7 +24,6 @@ file(GLOB ROUTERKEYGEN_HDRS
     "config/*.h"
     "dialog/*.h"
     "qcmdlineparser/*.h"
-    "sha/*.h"
     "*.h"
 )
 

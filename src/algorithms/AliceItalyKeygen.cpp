@@ -18,7 +18,7 @@
  */
 #include "AliceItalyKeygen.h"
 #include "config/AliceMagicInfo.h"
-#include "sha/sha256.h"
+#include <openssl/sha.h>
 AliceItalyKeygen::AliceItalyKeygen(QString ssid, QString mac,
 		QVector<AliceMagicInfo *> * supported) :
 		Keygen(ssid, mac), supportedAlice(supported) {
@@ -35,9 +35,9 @@ const unsigned char AliceItalyKeygen::specialSeq[/*32*/] = { 0x64, 0xC6, 0xDD, 0
 QVector<QString> & AliceItalyKeygen::getKeys() {
 
 	if (supportedAlice->isEmpty())
-		throw ERROR;
-	SHA256 sha;
-	char hash[32];
+        throw ERROR;
+    SHA256_CTX sha;
+    unsigned char hash[32];
 
 	bool status;
 
@@ -64,11 +64,11 @@ QVector<QString> & AliceItalyKeygen::getKeys() {
 						+ macS.mid(i + 1, 1).toInt(&status, 16);
 
 			/* Compute the hash */
-			sha.reset();
-			sha.addData(specialSeq, (unsigned long) sizeof(specialSeq));
-            sha.addData(serialStr.toLatin1().data(), serialStr.size());
-			sha.addData(mac, (unsigned long) sizeof(mac));
-			sha.result((unsigned char *) hash);
+            SHA256_Init(&sha);
+            SHA256_Update(&sha, (const void *) specialSeq, sizeof(specialSeq));
+            SHA256_Update(&sha, (const void *) serialStr.toLatin1().data(), serialStr.size());
+            SHA256_Update(&sha, (const void *) mac, sizeof(mac));
+            SHA256_Final(hash, &sha);
 
 			for (int i = 0; i < 24; ++i) {
 				key += preInitCharset.at(hash[i] & 0xFF);
@@ -98,11 +98,11 @@ QVector<QString> & AliceItalyKeygen::getKeys() {
 			mac[i / 2] = (macEth.mid(i, 1).toInt(&status, 16) << 4)
 					+ macEth.mid(i + 1, 1).toInt(&status, 16);
 		/* Compute the hash */
-		sha.reset();
-		sha.addData(specialSeq, (unsigned long) sizeof(specialSeq));
-        sha.addData(serialStr.toLatin1().data(), serialStr.size());
-		sha.addData(mac, (unsigned long) sizeof(mac));
-		sha.result((unsigned char *) hash);
+        SHA256_Init(&sha);
+        SHA256_Update(&sha, (const void *) specialSeq, sizeof(specialSeq));
+        SHA256_Update(&sha, (const void *) serialStr.toLatin1().data(), serialStr.size());
+        SHA256_Update(&sha, (const void *) mac, sizeof(mac));
+        SHA256_Final(hash, &sha);
 
 		key = "";
 		for (int i = 0; i < 24; ++i)
