@@ -456,7 +456,7 @@ p, li { white-space: pre-wrap; }
         <location filename="../src/forms/routerkeygen.ui" line="136"/>
         <location filename="../src/forms/routerkeygen.ui" line="216"/>
         <location filename="../src/forms/routerkeygen.ui" line="299"/>
-        <location filename="../src/RouterKeygen.cpp" line="386"/>
+        <location filename="../src/RouterKeygen.cpp" line="400"/>
         <source>Name</source>
         <translation>Naam</translation>
     </message>
@@ -464,7 +464,7 @@ p, li { white-space: pre-wrap; }
         <location filename="../src/forms/routerkeygen.ui" line="141"/>
         <location filename="../src/forms/routerkeygen.ui" line="221"/>
         <location filename="../src/forms/routerkeygen.ui" line="304"/>
-        <location filename="../src/RouterKeygen.cpp" line="386"/>
+        <location filename="../src/RouterKeygen.cpp" line="400"/>
         <source>MAC</source>
         <translation>MAC</translation>
     </message>
@@ -472,7 +472,7 @@ p, li { white-space: pre-wrap; }
         <location filename="../src/forms/routerkeygen.ui" line="146"/>
         <location filename="../src/forms/routerkeygen.ui" line="226"/>
         <location filename="../src/forms/routerkeygen.ui" line="309"/>
-        <location filename="../src/RouterKeygen.cpp" line="386"/>
+        <location filename="../src/RouterKeygen.cpp" line="400"/>
         <source>Strength</source>
         <translation>Sterkte</translation>
     </message>
@@ -553,13 +553,13 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="../src/forms/routerkeygen.ui" line="561"/>
-        <location filename="../src/RouterKeygen.cpp" line="127"/>
+        <location filename="../src/RouterKeygen.cpp" line="128"/>
         <source>Run on Start up</source>
         <translation>Draaien bij het opstarten</translation>
     </message>
     <message>
         <location filename="../src/forms/routerkeygen.ui" line="569"/>
-        <location filename="../src/RouterKeygen.cpp" line="133"/>
+        <location filename="../src/RouterKeygen.cpp" line="134"/>
         <source>Run in the background</source>
         <translation>In de achtergrond draaien</translation>
     </message>
@@ -579,103 +579,103 @@ p, li { white-space: pre-wrap; }
         <translation>Feedback and Bugs</translation>
     </message>
     <message>
-        <location filename="../src/RouterKeygen.cpp" line="164"/>
+        <location filename="../src/RouterKeygen.cpp" line="166"/>
         <source>Checking for updates</source>
         <translation>Aan het controleren voor updates</translation>
     </message>
     <message>
-        <location filename="../src/RouterKeygen.cpp" line="186"/>
+        <location filename="../src/RouterKeygen.cpp" line="195"/>
         <source>The application is already at the latest version.</source>
         <translation>De applicatie is al op de laatste versie.</translation>
     </message>
     <message>
-        <location filename="../src/RouterKeygen.cpp" line="195"/>
-        <location filename="../src/RouterKeygen.cpp" line="200"/>
+        <location filename="../src/RouterKeygen.cpp" line="205"/>
+        <location filename="../src/RouterKeygen.cpp" line="212"/>
         <source>Error while checking for updates</source>
         <translation>Fout tijdens het controleren voor updates</translation>
     </message>
     <message>
-        <location filename="../src/RouterKeygen.cpp" line="243"/>
+        <location filename="../src/RouterKeygen.cpp" line="257"/>
         <source>Invalid MAC. It will not be used.</source>
         <translation>Ongeldige MAC. Word niet gebruikt.</translation>
     </message>
     <message>
-        <location filename="../src/RouterKeygen.cpp" line="260"/>
+        <location filename="../src/RouterKeygen.cpp" line="274"/>
         <source>Unsupported network. Check the MAC address and the SSID.</source>
         <translation>Niet ondersteund netwerk. Controleer het MAC adres en de SSID.</translation>
     </message>
     <message>
-        <location filename="../src/RouterKeygen.cpp" line="264"/>
+        <location filename="../src/RouterKeygen.cpp" line="278"/>
         <source>Calculating keys. This can take a while.</source>
         <translation>Sleutels aan het berekenen. Dit kan even duren.</translation>
     </message>
     <message>
-        <location filename="../src/RouterKeygen.cpp" line="297"/>
+        <location filename="../src/RouterKeygen.cpp" line="311"/>
         <source>Unsupported network.</source>
         <translation>Niet ondersteund netwerk.</translation>
     </message>
     <message>
-        <location filename="../src/RouterKeygen.cpp" line="302"/>
+        <location filename="../src/RouterKeygen.cpp" line="316"/>
         <source>Scanning the network</source>
         <translation>Het netwerk aan het scannen</translation>
     </message>
     <message>
-        <location filename="../src/RouterKeygen.cpp" line="322"/>
+        <location filename="../src/RouterKeygen.cpp" line="336"/>
         <source>Vulnerable networks</source>
         <translation>Kwetsbare netwerken</translation>
     </message>
     <message>
-        <location filename="../src/RouterKeygen.cpp" line="376"/>
+        <location filename="../src/RouterKeygen.cpp" line="390"/>
         <source>None were detected</source>
         <translation>Geen gedetecteerd</translation>
     </message>
     <message>
-        <location filename="../src/RouterKeygen.cpp" line="383"/>
+        <location filename="../src/RouterKeygen.cpp" line="397"/>
         <source>Quit</source>
         <translation>Stoppen</translation>
     </message>
     <message>
-        <location filename="../src/RouterKeygen.cpp" line="405"/>
+        <location filename="../src/RouterKeygen.cpp" line="419"/>
         <source>Network Manager was not detected</source>
         <translation>Netwerk Manager was niet gevonden</translation>
     </message>
     <message>
-        <location filename="../src/RouterKeygen.cpp" line="409"/>
+        <location filename="../src/RouterKeygen.cpp" line="423"/>
         <source>No Wifi device detected</source>
         <translation>Geen WiFi apparaat gevonden</translation>
     </message>
     <message>
-        <location filename="../src/RouterKeygen.cpp" line="413"/>
+        <location filename="../src/RouterKeygen.cpp" line="427"/>
         <source>The wifi device is not enabled</source>
         <translation>Het WiFi apparaat staat niet aan</translation>
     </message>
     <message>
-        <location filename="../src/RouterKeygen.cpp" line="437"/>
+        <location filename="../src/RouterKeygen.cpp" line="451"/>
         <source>Error while calculating.</source>
         <translation>Fout tijdens het berekenen.</translation>
     </message>
     <message>
-        <location filename="../src/RouterKeygen.cpp" line="444"/>
+        <location filename="../src/RouterKeygen.cpp" line="458"/>
         <source>No keys were calculated.</source>
         <translation>Geen sleutels zijn gegenereerd.</translation>
     </message>
     <message>
-        <location filename="../src/RouterKeygen.cpp" line="452"/>
+        <location filename="../src/RouterKeygen.cpp" line="466"/>
         <source>Calculation finished</source>
         <translation>Berekening klaar</translation>
     </message>
     <message>
-        <location filename="../src/RouterKeygen.cpp" line="477"/>
+        <location filename="../src/RouterKeygen.cpp" line="491"/>
         <source>Copy</source>
         <translation>Kopiëren</translation>
     </message>
     <message>
-        <location filename="../src/RouterKeygen.cpp" line="479"/>
+        <location filename="../src/RouterKeygen.cpp" line="493"/>
         <source>Copy this key</source>
         <translation>Kopieer deze sleutel</translation>
     </message>
     <message>
-        <location filename="../src/RouterKeygen.cpp" line="492"/>
+        <location filename="../src/RouterKeygen.cpp" line="506"/>
         <source>%1 copied</source>
         <translatorcomment>%1 gekopieerd</translatorcomment>
         <translation></translation>
@@ -689,29 +689,29 @@ p, li { white-space: pre-wrap; }
         <translation>Update beschikbaar</translation>
     </message>
     <message>
-        <location filename="../src/forms/UpdateDialog.ui" line="29"/>
+        <location filename="../src/forms/UpdateDialog.ui" line="22"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans&apos;; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;There is a newer version available.&lt;/p&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Open the website to download the latest version.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Ubuntu&apos;; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;There is version %1 available.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;&lt;br /&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;Open the website to download the latest version.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans&apos;; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Er is een nieuwere versie beschikbaar.&lt;/p&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Open de webpagina om de nieuwe versie te downloaden.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Ubuntu&apos;; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;Versie  %1 is beschikbaar.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;&lt;br /&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;Open de webpagina om de nieuwe versie te downloaden.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../src/forms/UpdateDialog.ui" line="42"/>
+        <location filename="../src/forms/UpdateDialog.ui" line="35"/>
         <source>Open Website</source>
         <translation>Open Webpagina</translation>
     </message>
     <message>
-        <location filename="../src/forms/UpdateDialog.ui" line="49"/>
+        <location filename="../src/forms/UpdateDialog.ui" line="42"/>
         <source>Close</source>
         <translation>Sluiten</translation>
     </message>

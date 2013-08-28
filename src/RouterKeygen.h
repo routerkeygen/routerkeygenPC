@@ -78,6 +78,7 @@ private:
     QAction * runInBackgroundAction;
     bool runInBackground;
     bool runOnStartUp;
+    bool automaticUpdateCheck;
     //SETTINGS VALUES
     QSettings * settings;
     QStringList wordList;

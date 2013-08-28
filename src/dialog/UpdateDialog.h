@@ -10,7 +10,7 @@ namespace Ui {
 class UpdateDialog : public QDialog {
     Q_OBJECT
 public:
-    UpdateDialog(QWidget *parent = 0);
+    UpdateDialog(QString url, QString version, QWidget *parent = 0);
     ~UpdateDialog();
 
 protected:
@@ -18,6 +18,7 @@ protected:
 
 private:
     Ui::UpdateDialog *ui;
+    QString url;
 
 private slots:
     void openWebsite();

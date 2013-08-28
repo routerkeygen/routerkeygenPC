@@ -21,12 +21,13 @@
 #include <QDesktopServices>
 #include <QUrl>
 
-UpdateDialog::UpdateDialog(QWidget *parent) :
+UpdateDialog::UpdateDialog(QString url, QString version, QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::UpdateDialog)
+    ui(new Ui::UpdateDialog), url(url)
 {
     ui->setupUi(this);
     connect(ui->openWebsite,SIGNAL(clicked()), this, SLOT(openWebsite()));
+    ui->textBrowser->setHtml(ui->textBrowser->toHtml().arg(version));
 }
 
 UpdateDialog::~UpdateDialog()
@@ -47,6 +48,6 @@ void UpdateDialog::changeEvent(QEvent *e)
 }
 
 void  UpdateDialog::openWebsite(){
-    QDesktopServices::openUrl(QUrl("http://code.google.com/p/android-thomson-key-solver/downloads/list"));
+    QDesktopServices::openUrl(QUrl(url));
     close();
 }

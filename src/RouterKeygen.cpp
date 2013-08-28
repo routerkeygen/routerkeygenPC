@@ -37,6 +37,7 @@
 #include <QNetworkAccessManager>
 #include <QNetworkRequest>
 #include <QTextStream>
+#include <QtScript/QScriptEngine>
 #include <QHeaderView>
 #include <stdlib.h>
 #include "version.h"
@@ -51,7 +52,7 @@
 
 RouterKeygen::RouterKeygen(QWidget *parent) :
     QMainWindow(parent), ui(new Ui::RouterKeygen), manualWifi(NULL),matcher(new WirelessMatcher()),
-        calculator(NULL), loading(NULL), loadingText(NULL), aboutDialog(NULL), welcomeDialog(NULL) {
+    calculator(NULL), loading(NULL), loadingText(NULL), aboutDialog(NULL), welcomeDialog(NULL), automaticUpdateCheck(true) {
     ui->setupUi(this);
 #if !defined(Q_OS_WIN) && !defined(Q_OS_MAC)
     setWindowIcon(QIcon(":/tray_icon.png"));
@@ -72,7 +73,7 @@ RouterKeygen::RouterKeygen(QWidget *parent) :
     connect(ui->actionFeedback, SIGNAL(triggered()), this,SLOT(feedback()));
     connect(ui->actionAbout, SIGNAL(triggered()), this,SLOT(showAboutDialog()) );
     connect(ui->actionCheck_for_Updates, SIGNAL(triggered()), this,SLOT(checkUpdates()));
-
+    ui->actionCheck_for_Updates->setEnabled(false); //It is enabled after the automatic update check
 #if defined(Q_OS_MAC)
 
 
@@ -138,6 +139,7 @@ RouterKeygen::RouterKeygen(QWidget *parent) :
 
     scanFinished(QWifiManager::SCAN_OK);
     wifiManager->startScan();
+    checkUpdates();
 }
 
 void RouterKeygen::showWithDialog(){
@@ -159,19 +161,21 @@ void RouterKeygen::showAboutDialog(){
 void  RouterKeygen::checkUpdates(){
     QNetworkAccessManager* mNetworkManager = new QNetworkAccessManager(this);
     QObject::connect(mNetworkManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(onNetworkReply(QNetworkReply*)));
-
-    enableUI(false);
-    setLoadingAnimation(tr("Checking for updates"));
-    QUrl url("http://android-thomson-key-solver.googlecode.com/svn/trunk/RouterKeygenVersionPC.txt");
+    if ( !automaticUpdateCheck ){
+        enableUI(false);
+        setLoadingAnimation(tr("Checking for updates"));
+    }
+    QUrl url("https://raw.github.com/routerkeygen/routerkeygenAndroid/master/android/routerkeygen_version.json");
     mNetworkManager->get(QNetworkRequest(url));
 }
 
 
 void RouterKeygen::onNetworkReply(QNetworkReply* reply){
-    QString replyString;
     const unsigned int RESPONSE_OK = 200;
-    cleanLoadingAnimation();
-    enableUI(true);
+    if ( !automaticUpdateCheck ){
+        cleanLoadingAnimation();
+        enableUI(true);
+    }
     if(reply->error() == QNetworkReply::NoError)
     {
         unsigned int httpstatuscode = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toUInt();
@@ -180,25 +184,37 @@ void RouterKeygen::onNetworkReply(QNetworkReply* reply){
         case RESPONSE_OK:
             if (reply->isReadable())
             {
-                //Assuming this is a human readable file replyString now contains the file
-                replyString = QString::fromUtf8(reply->readAll().data()).trimmed();
-                if ( replyString == QApplication::applicationVersion() ){
+                 QByteArray result;
+                 result = reply->readAll();
+
+                 QScriptValue sc;
+                 QScriptEngine engine;
+                 sc = engine.evaluate("(" +QString(result) + ")");
+                 QString version = sc.property("version").toString();
+                if ( version == QApplication::applicationVersion() ){
                     ui->statusBar->showMessage(tr("The application is already at the latest version."));
                 }
                 else{
-                    UpdateDialog * updateDialog = new UpdateDialog(this);
+                    //TODO: when the final website is sc.property("url").toString()
+                    UpdateDialog * updateDialog = new UpdateDialog(QString("https://code.google.com/p/android-thomson-key-solver/downloads/list"),
+                                                                   version, this);
                     updateDialog->show();
                 }
             }
             break;
         default:
-            ui->statusBar->showMessage(tr("Error while checking for updates"));
+            if ( !automaticUpdateCheck ){
+                ui->statusBar->showMessage(tr("Error while checking for updates"));
+            }
             break;
         }
     }
     else {
-        ui->statusBar->showMessage(tr("Error while checking for updates"));
+        if ( !automaticUpdateCheck ){
+            ui->statusBar->showMessage(tr("Error while checking for updates"));
+        }
     }
+    automaticUpdateCheck = false;
     reply->deleteLater();
 }
 
