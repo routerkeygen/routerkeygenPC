@@ -165,7 +165,7 @@ void  RouterKeygen::checkUpdates(){
         enableUI(false);
         setLoadingAnimation(tr("Checking for updates"));
     }
-    QUrl url("https://raw.github.com/routerkeygen/routerkeygenAndroid/master/android/routerkeygen_version.json");
+    QUrl url("https://raw.github.com/routerkeygen/routerkeygenPC/master/routerkeygen_version.json");
     mNetworkManager->get(QNetworkRequest(url));
 }
 
