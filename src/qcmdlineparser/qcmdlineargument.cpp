@@ -47,6 +47,11 @@ QString QCmdLineArgument::keyName() const
 {
     if (m_d->keyName.isNull()) {
         QString tmp = m_d->names.first();
+        foreach(QString s, m_d->names){
+            if ( s.length() > tmp.length() ){
+                tmp = s;
+            }
+        }
         while (tmp.startsWith('-'))
             tmp.remove(0, 1);
         m_d->keyName = tmp;

@@ -355,6 +355,11 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>QCmdLineParser</name>
     <message>
+        <location filename="../src/qcmdlineparser/qcmdlineparser.cpp" line="35"/>
+        <source>Show this help message and exit</source>
+        <translation>Mostrar este mensaje de ayuda y termina</translation>
+    </message>
+    <message>
         <location filename="../src/qcmdlineparser/qcmdlineparser.cpp" line="127"/>
         <source>Unknown argument: %1</source>
         <translation>Argumento desconocido: %1</translation>
@@ -400,41 +405,51 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="../src/main.cpp" line="43"/>
+        <source>Version</source>
+        <translation>Versión</translation>
+    </message>
+    <message>
+        <location filename="../src/main.cpp" line="44"/>
         <source>No UI launch</source>
         <translation>No se ejecuto UI</translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="55"/>
+        <location filename="../src/main.cpp" line="52"/>
+        <source>Version: %1</source>
+        <translation>Versión: %1</translation>
+    </message>
+    <message>
+        <location filename="../src/main.cpp" line="60"/>
         <source>Invalid MAC. It will not be used.</source>
         <translation>MAC Invalida. No sera usada.</translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="62"/>
+        <location filename="../src/main.cpp" line="67"/>
         <source>Out of memory.</source>
         <translation>Sin memoria.</translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="66"/>
+        <location filename="../src/main.cpp" line="71"/>
         <source>Unsupported network. Check the MAC address and the SSID.</source>
         <translation>Red no soportada. Revisa la direccion MAC y la red SSID.</translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="70"/>
+        <location filename="../src/main.cpp" line="75"/>
         <source>Calculating keys. This can take a while.</source>
         <translation>Calculando claves. Esto puede durar un rato.</translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="79"/>
+        <location filename="../src/main.cpp" line="84"/>
         <source>Errors while calculating.</source>
         <translation>Error mientras se calculaba.</translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="84"/>
+        <location filename="../src/main.cpp" line="89"/>
         <source>No keys were calculated.</source>
         <translation>No se calculo ninguna clave.</translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="87"/>
+        <location filename="../src/main.cpp" line="92"/>
         <source>Calculated Passwords for %1</source>
         <translation>Contraseña calculada para %1</translation>
     </message>
@@ -455,7 +470,7 @@ p, li { white-space: pre-wrap; }
         <location filename="../src/forms/routerkeygen.ui" line="136"/>
         <location filename="../src/forms/routerkeygen.ui" line="216"/>
         <location filename="../src/forms/routerkeygen.ui" line="299"/>
-        <location filename="../src/RouterKeygen.cpp" line="400"/>
+        <location filename="../src/RouterKeygen.cpp" line="402"/>
         <source>Name</source>
         <translation>Nombre</translation>
     </message>
@@ -463,7 +478,7 @@ p, li { white-space: pre-wrap; }
         <location filename="../src/forms/routerkeygen.ui" line="141"/>
         <location filename="../src/forms/routerkeygen.ui" line="221"/>
         <location filename="../src/forms/routerkeygen.ui" line="304"/>
-        <location filename="../src/RouterKeygen.cpp" line="400"/>
+        <location filename="../src/RouterKeygen.cpp" line="402"/>
         <source>MAC</source>
         <translation>MAC</translation>
     </message>
@@ -471,7 +486,7 @@ p, li { white-space: pre-wrap; }
         <location filename="../src/forms/routerkeygen.ui" line="146"/>
         <location filename="../src/forms/routerkeygen.ui" line="226"/>
         <location filename="../src/forms/routerkeygen.ui" line="309"/>
-        <location filename="../src/RouterKeygen.cpp" line="400"/>
+        <location filename="../src/RouterKeygen.cpp" line="402"/>
         <source>Strength</source>
         <translation>Fuerza</translation>
     </message>
@@ -588,93 +603,93 @@ p, li { white-space: pre-wrap; }
         <translation>Esta aplicacion es la ultima version.</translation>
     </message>
     <message>
-        <location filename="../src/RouterKeygen.cpp" line="205"/>
-        <location filename="../src/RouterKeygen.cpp" line="212"/>
+        <location filename="../src/RouterKeygen.cpp" line="207"/>
+        <location filename="../src/RouterKeygen.cpp" line="214"/>
         <source>Error while checking for updates</source>
         <translation>Error mientras se verificaban actualizaciones</translation>
     </message>
     <message>
-        <location filename="../src/RouterKeygen.cpp" line="257"/>
+        <location filename="../src/RouterKeygen.cpp" line="259"/>
         <source>Invalid MAC. It will not be used.</source>
         <translation>MAC invalida. No sera usada.</translation>
     </message>
     <message>
-        <location filename="../src/RouterKeygen.cpp" line="274"/>
+        <location filename="../src/RouterKeygen.cpp" line="276"/>
         <source>Unsupported network. Check the MAC address and the SSID.</source>
         <translation>Red no soportada. Revisa la direccion MAC y la red SSID.</translation>
     </message>
     <message>
-        <location filename="../src/RouterKeygen.cpp" line="278"/>
+        <location filename="../src/RouterKeygen.cpp" line="280"/>
         <source>Calculating keys. This can take a while.</source>
         <translation>Calculando claves. Esto puede durar un rato.</translation>
     </message>
     <message>
-        <location filename="../src/RouterKeygen.cpp" line="311"/>
+        <location filename="../src/RouterKeygen.cpp" line="313"/>
         <source>Unsupported network.</source>
         <translation>Red no soportada.</translation>
     </message>
     <message>
-        <location filename="../src/RouterKeygen.cpp" line="316"/>
+        <location filename="../src/RouterKeygen.cpp" line="318"/>
         <source>Scanning the network</source>
         <translation>Escaneando la red</translation>
     </message>
     <message>
-        <location filename="../src/RouterKeygen.cpp" line="336"/>
+        <location filename="../src/RouterKeygen.cpp" line="338"/>
         <source>Vulnerable networks</source>
         <translation>Redes Vulnerables</translation>
     </message>
     <message>
-        <location filename="../src/RouterKeygen.cpp" line="390"/>
+        <location filename="../src/RouterKeygen.cpp" line="392"/>
         <source>None were detected</source>
         <translation>Ninguna fue detectada</translation>
     </message>
     <message>
-        <location filename="../src/RouterKeygen.cpp" line="397"/>
+        <location filename="../src/RouterKeygen.cpp" line="399"/>
         <source>Quit</source>
         <translation>Salir</translation>
     </message>
     <message>
-        <location filename="../src/RouterKeygen.cpp" line="419"/>
+        <location filename="../src/RouterKeygen.cpp" line="421"/>
         <source>Network Manager was not detected</source>
         <translation>No se detecta el administrador de redes</translation>
     </message>
     <message>
-        <location filename="../src/RouterKeygen.cpp" line="423"/>
+        <location filename="../src/RouterKeygen.cpp" line="425"/>
         <source>No Wifi device detected</source>
         <translation>El dispositivo Wifi no fue detectado</translation>
     </message>
     <message>
-        <location filename="../src/RouterKeygen.cpp" line="427"/>
+        <location filename="../src/RouterKeygen.cpp" line="429"/>
         <source>The wifi device is not enabled</source>
         <translation>El dispositivo Wifi no esta habilitado</translation>
     </message>
     <message>
-        <location filename="../src/RouterKeygen.cpp" line="451"/>
+        <location filename="../src/RouterKeygen.cpp" line="453"/>
         <source>Error while calculating.</source>
         <translation>Error mientras se calculaba.</translation>
     </message>
     <message>
-        <location filename="../src/RouterKeygen.cpp" line="458"/>
+        <location filename="../src/RouterKeygen.cpp" line="460"/>
         <source>No keys were calculated.</source>
         <translation>No se calcularon claves.</translation>
     </message>
     <message>
-        <location filename="../src/RouterKeygen.cpp" line="466"/>
+        <location filename="../src/RouterKeygen.cpp" line="468"/>
         <source>Calculation finished</source>
         <translation>Calculo finalizado</translation>
     </message>
     <message>
-        <location filename="../src/RouterKeygen.cpp" line="491"/>
+        <location filename="../src/RouterKeygen.cpp" line="493"/>
         <source>Copy</source>
         <translation>Copiar</translation>
     </message>
     <message>
-        <location filename="../src/RouterKeygen.cpp" line="493"/>
+        <location filename="../src/RouterKeygen.cpp" line="495"/>
         <source>Copy this key</source>
         <translation>Copiar esta clave</translation>
     </message>
     <message>
-        <location filename="../src/RouterKeygen.cpp" line="506"/>
+        <location filename="../src/RouterKeygen.cpp" line="508"/>
         <source>%1 copied</source>
         <translation>%1 copiado</translation>
     </message>
@@ -695,7 +710,7 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;There is version %1 available.&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;&lt;br /&gt;&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;Open the website to download the latest version.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+        <translation>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Ubuntu&apos;; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;

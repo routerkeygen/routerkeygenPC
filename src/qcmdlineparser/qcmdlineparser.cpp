@@ -32,7 +32,7 @@ public:
 
 QCmdLineParser::QCmdLineParserPrivate::QCmdLineParserPrivate()
 {
-    QCmdLineArgument helpArg("-h", QCmdLineArgument::StoreTrue, "show this help message and exit");
+    QCmdLineArgument helpArg("-h", QCmdLineArgument::StoreTrue, tr("Show this help message and exit"));
     helpArg.addAlias("--help");
     addOptionalArg(helpArg);
 }
@@ -254,7 +254,7 @@ QString QCmdLineParser::QCmdLineParserPrivate::usage(const QString& applicationN
     foreach (const QCmdLineArgument arg, m_optionalArgs) {
         s << " [" << arg.name();
         if (arg.action() == QCmdLineArgument::StoreValue)
-            s << ' ' << arg.keyName().toUpper();
+            s << ' ' << arg.keyName();
         s << ']';
     }
 
@@ -296,7 +296,7 @@ QString QCmdLineParser::help() const
     for (; it != m_d->m_optionalArgs.end(); ++it) {
         bool isStorable = it->action() == QCmdLineArgument::StoreValue;
         if (isStorable)
-            keyName = it->keyName().toUpper();
+            keyName = it->keyName();
 
         QStringList args;
         foreach(QString name, it->aliases()) {

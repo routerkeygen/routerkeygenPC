@@ -355,6 +355,11 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>QCmdLineParser</name>
     <message>
+        <location filename="../src/qcmdlineparser/qcmdlineparser.cpp" line="35"/>
+        <source>Show this help message and exit</source>
+        <translation>Laat dit hulp bericht zien en sluit af</translation>
+    </message>
+    <message>
         <location filename="../src/qcmdlineparser/qcmdlineparser.cpp" line="127"/>
         <source>Unknown argument: %1</source>
         <translation>Onbekent argument: %1</translation>
@@ -401,41 +406,51 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="../src/main.cpp" line="43"/>
+        <source>Version</source>
+        <translation>Versie</translation>
+    </message>
+    <message>
+        <location filename="../src/main.cpp" line="44"/>
         <source>No UI launch</source>
         <translation>Opstart zonder UI</translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="55"/>
+        <location filename="../src/main.cpp" line="52"/>
+        <source>Version: %1</source>
+        <translation>Versie: %1</translation>
+    </message>
+    <message>
+        <location filename="../src/main.cpp" line="60"/>
         <source>Invalid MAC. It will not be used.</source>
         <translation>Ongeldige MAC. Wordt niet gebruikt.</translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="62"/>
+        <location filename="../src/main.cpp" line="67"/>
         <source>Out of memory.</source>
         <translation>Geen vrij geheugen.</translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="66"/>
+        <location filename="../src/main.cpp" line="71"/>
         <source>Unsupported network. Check the MAC address and the SSID.</source>
         <translation>Niet ondersteund netwerk. Controleer het MAC adres and de SSID.</translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="70"/>
+        <location filename="../src/main.cpp" line="75"/>
         <source>Calculating keys. This can take a while.</source>
         <translation>Sleutels aan het berekenen. Dit kan even duren.</translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="79"/>
+        <location filename="../src/main.cpp" line="84"/>
         <source>Errors while calculating.</source>
         <translation>Fouten tijdens het berekenen.</translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="84"/>
+        <location filename="../src/main.cpp" line="89"/>
         <source>No keys were calculated.</source>
         <translation>Geen sleutels zijn berekend.</translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="87"/>
+        <location filename="../src/main.cpp" line="92"/>
         <source>Calculated Passwords for %1</source>
         <translation>Berekende wachtwoorden voor %1</translation>
     </message>
@@ -456,7 +471,7 @@ p, li { white-space: pre-wrap; }
         <location filename="../src/forms/routerkeygen.ui" line="136"/>
         <location filename="../src/forms/routerkeygen.ui" line="216"/>
         <location filename="../src/forms/routerkeygen.ui" line="299"/>
-        <location filename="../src/RouterKeygen.cpp" line="400"/>
+        <location filename="../src/RouterKeygen.cpp" line="402"/>
         <source>Name</source>
         <translation>Naam</translation>
     </message>
@@ -464,7 +479,7 @@ p, li { white-space: pre-wrap; }
         <location filename="../src/forms/routerkeygen.ui" line="141"/>
         <location filename="../src/forms/routerkeygen.ui" line="221"/>
         <location filename="../src/forms/routerkeygen.ui" line="304"/>
-        <location filename="../src/RouterKeygen.cpp" line="400"/>
+        <location filename="../src/RouterKeygen.cpp" line="402"/>
         <source>MAC</source>
         <translation>MAC</translation>
     </message>
@@ -472,7 +487,7 @@ p, li { white-space: pre-wrap; }
         <location filename="../src/forms/routerkeygen.ui" line="146"/>
         <location filename="../src/forms/routerkeygen.ui" line="226"/>
         <location filename="../src/forms/routerkeygen.ui" line="309"/>
-        <location filename="../src/RouterKeygen.cpp" line="400"/>
+        <location filename="../src/RouterKeygen.cpp" line="402"/>
         <source>Strength</source>
         <translation>Sterkte</translation>
     </message>
@@ -589,93 +604,93 @@ p, li { white-space: pre-wrap; }
         <translation>De applicatie is al op de laatste versie.</translation>
     </message>
     <message>
-        <location filename="../src/RouterKeygen.cpp" line="205"/>
-        <location filename="../src/RouterKeygen.cpp" line="212"/>
+        <location filename="../src/RouterKeygen.cpp" line="207"/>
+        <location filename="../src/RouterKeygen.cpp" line="214"/>
         <source>Error while checking for updates</source>
         <translation>Fout tijdens het controleren voor updates</translation>
     </message>
     <message>
-        <location filename="../src/RouterKeygen.cpp" line="257"/>
+        <location filename="../src/RouterKeygen.cpp" line="259"/>
         <source>Invalid MAC. It will not be used.</source>
         <translation>Ongeldige MAC. Word niet gebruikt.</translation>
     </message>
     <message>
-        <location filename="../src/RouterKeygen.cpp" line="274"/>
+        <location filename="../src/RouterKeygen.cpp" line="276"/>
         <source>Unsupported network. Check the MAC address and the SSID.</source>
         <translation>Niet ondersteund netwerk. Controleer het MAC adres en de SSID.</translation>
     </message>
     <message>
-        <location filename="../src/RouterKeygen.cpp" line="278"/>
+        <location filename="../src/RouterKeygen.cpp" line="280"/>
         <source>Calculating keys. This can take a while.</source>
         <translation>Sleutels aan het berekenen. Dit kan even duren.</translation>
     </message>
     <message>
-        <location filename="../src/RouterKeygen.cpp" line="311"/>
+        <location filename="../src/RouterKeygen.cpp" line="313"/>
         <source>Unsupported network.</source>
         <translation>Niet ondersteund netwerk.</translation>
     </message>
     <message>
-        <location filename="../src/RouterKeygen.cpp" line="316"/>
+        <location filename="../src/RouterKeygen.cpp" line="318"/>
         <source>Scanning the network</source>
         <translation>Het netwerk aan het scannen</translation>
     </message>
     <message>
-        <location filename="../src/RouterKeygen.cpp" line="336"/>
+        <location filename="../src/RouterKeygen.cpp" line="338"/>
         <source>Vulnerable networks</source>
         <translation>Kwetsbare netwerken</translation>
     </message>
     <message>
-        <location filename="../src/RouterKeygen.cpp" line="390"/>
+        <location filename="../src/RouterKeygen.cpp" line="392"/>
         <source>None were detected</source>
         <translation>Geen gedetecteerd</translation>
     </message>
     <message>
-        <location filename="../src/RouterKeygen.cpp" line="397"/>
+        <location filename="../src/RouterKeygen.cpp" line="399"/>
         <source>Quit</source>
         <translation>Stoppen</translation>
     </message>
     <message>
-        <location filename="../src/RouterKeygen.cpp" line="419"/>
+        <location filename="../src/RouterKeygen.cpp" line="421"/>
         <source>Network Manager was not detected</source>
         <translation>Netwerk Manager was niet gevonden</translation>
     </message>
     <message>
-        <location filename="../src/RouterKeygen.cpp" line="423"/>
+        <location filename="../src/RouterKeygen.cpp" line="425"/>
         <source>No Wifi device detected</source>
         <translation>Geen WiFi apparaat gevonden</translation>
     </message>
     <message>
-        <location filename="../src/RouterKeygen.cpp" line="427"/>
+        <location filename="../src/RouterKeygen.cpp" line="429"/>
         <source>The wifi device is not enabled</source>
         <translation>Het WiFi apparaat staat niet aan</translation>
     </message>
     <message>
-        <location filename="../src/RouterKeygen.cpp" line="451"/>
+        <location filename="../src/RouterKeygen.cpp" line="453"/>
         <source>Error while calculating.</source>
         <translation>Fout tijdens het berekenen.</translation>
     </message>
     <message>
-        <location filename="../src/RouterKeygen.cpp" line="458"/>
+        <location filename="../src/RouterKeygen.cpp" line="460"/>
         <source>No keys were calculated.</source>
         <translation>Geen sleutels zijn gegenereerd.</translation>
     </message>
     <message>
-        <location filename="../src/RouterKeygen.cpp" line="466"/>
+        <location filename="../src/RouterKeygen.cpp" line="468"/>
         <source>Calculation finished</source>
         <translation>Berekening klaar</translation>
     </message>
     <message>
-        <location filename="../src/RouterKeygen.cpp" line="491"/>
+        <location filename="../src/RouterKeygen.cpp" line="493"/>
         <source>Copy</source>
         <translation>Kopiëren</translation>
     </message>
     <message>
-        <location filename="../src/RouterKeygen.cpp" line="493"/>
+        <location filename="../src/RouterKeygen.cpp" line="495"/>
         <source>Copy this key</source>
         <translation>Kopieer deze sleutel</translation>
     </message>
     <message>
-        <location filename="../src/RouterKeygen.cpp" line="506"/>
+        <location filename="../src/RouterKeygen.cpp" line="508"/>
         <source>%1 copied</source>
         <translatorcomment>%1 gekopieerd</translatorcomment>
         <translation></translation>
@@ -701,7 +716,7 @@ p, li { white-space: pre-wrap; }
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Ubuntu&apos;; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;Versie  %1 is beschikbaar.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;Versie %1 is beschikbaar.&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;&lt;br /&gt;&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans&apos;; font-size:10pt;&quot;&gt;Open de webpagina om de nieuwe versie te downloaden.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
