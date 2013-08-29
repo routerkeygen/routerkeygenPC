@@ -8,7 +8,7 @@
 
 class QCmdLineParser
 {
-    Q_DECLARE_TR_FUNCTIONS(QCmdLineParser);
+    Q_DECLARE_TR_FUNCTIONS(QCmdLineParser)
 public:
     QCmdLineParser(const QString &description = QString());
     ~QCmdLineParser();
@@ -31,8 +31,8 @@ public:
     void disableHelpOption();
 
     // overload for syntax sugar
-    void addOption(const char *option, QCmdLineArgument::Action action, const QString &help = QString(), const QString &alias = QString());
-    void addOption(const char *option, const QString &help = QString());
+    void addOption(const char *option, QCmdLineArgument::Action action, const QString &help = QString(), const QString &alias = QString(), const QString &valueName = QString());
+    void addOption(const char *option, const QString &help = QString(), const QString &valueName = QString());
 
     QString usage() const;
     void setUsage(const QString &usage);

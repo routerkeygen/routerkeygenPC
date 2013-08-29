@@ -13,8 +13,8 @@ public:
         CountOccurences
     };
 
-    QCmdLineArgument(const QString &name, Action action = StoreTrue, const QString &help = QString());
-    QCmdLineArgument(const char *name, Action action = StoreTrue, const QString &help = QString());
+    QCmdLineArgument(const QString &name, Action action = StoreTrue, const QString &help = QString(), const QString &valueName = QString());
+    QCmdLineArgument(const char *name, Action action = StoreTrue, const QString &help = QString(), const QString &valueName = QString());
     QCmdLineArgument(const QCmdLineArgument &other);
     QCmdLineArgument& operator=(const QCmdLineArgument &other);
     ~QCmdLineArgument();
@@ -25,6 +25,7 @@ public:
     QString name() const;
     void setKeyName(const QString &keyName);
     QString keyName() const;
+    QString valueName() const;
     Action action() const;
     void setValidator(const QRegExp &validator);
     bool validate(const QString &value) const;

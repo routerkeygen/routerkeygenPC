@@ -38,8 +38,8 @@ int main(int argc, char * argv[]) {
         app.installTranslator(&translator);
     QCmdLineParser parser;
     parser.setApplicationName(QCoreApplication::applicationName());
-    parser.addOption("-s", QCmdLineArgument::StoreValue, QObject::tr("SSID"), "--ssid");
-    parser.addOption("-m", QCmdLineArgument::StoreValue, QObject::tr("MAC address"), "--mac");
+    parser.addOption("-s", QCmdLineArgument::StoreValue, QObject::tr("SSID"), "--ssid", "network_name");
+    parser.addOption("-m", QCmdLineArgument::StoreValue, QObject::tr("MAC address"), "--mac", "mac_address");
     parser.addOption("-v", QCmdLineArgument::StoreTrue, QObject::tr("Version"), "--version");
     parser.addOption("--no-gui", QCmdLineArgument::StoreTrue, QObject::tr("No UI launch"));
     QString error = "";

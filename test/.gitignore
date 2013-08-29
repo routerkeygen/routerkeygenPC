@@ -1,3 +1,6 @@
 test.pro.user.*
 *.o
 Makefile
+RouterKeygenTest
+*.moc
+qrc_resources.cpp

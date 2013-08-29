@@ -5,26 +5,27 @@
 class QCmdLineArgument::QCmdLineOptionPrivate
 {
 public:
-    QCmdLineOptionPrivate(const QString &name, QCmdLineArgument::Action action, const QString &help)
-        : names(name), help(help), action(action), isRequired(false)
+    QCmdLineOptionPrivate(const QString &name, QCmdLineArgument::Action action, const QString &help, const QString &valueName)
+        : names(name), valueName(valueName), help(help), action(action), isRequired(false)
     {
     }
 
     QStringList names;
     QString keyName;
+    QString valueName;
     QString help;
     QCmdLineArgument::Action action;
     QRegExp validator;
     bool isRequired;
 };
 
-QCmdLineArgument::QCmdLineArgument(const QString &name, QCmdLineArgument::Action action, const QString &help)
-    : m_d(new QCmdLineOptionPrivate(name, action, help))
+QCmdLineArgument::QCmdLineArgument(const QString &name, QCmdLineArgument::Action action, const QString &help, const QString &valueName)
+    : m_d(new QCmdLineOptionPrivate(name, action, help, valueName))
 {
 }
 
-QCmdLineArgument::QCmdLineArgument(const char *name, QCmdLineArgument::Action action, const QString &help)
-    : m_d(new QCmdLineOptionPrivate(name, action, help))
+QCmdLineArgument::QCmdLineArgument(const char *name, QCmdLineArgument::Action action, const QString &help, const QString &valueName)
+    : m_d(new QCmdLineOptionPrivate(name, action, help, valueName))
 {
 }
 
@@ -47,11 +48,6 @@ QString QCmdLineArgument::keyName() const
 {
     if (m_d->keyName.isNull()) {
         QString tmp = m_d->names.first();
-        foreach(QString s, m_d->names){
-            if ( s.length() > tmp.length() ){
-                tmp = s;
-            }
-        }
         while (tmp.startsWith('-'))
             tmp.remove(0, 1);
         m_d->keyName = tmp;
@@ -67,6 +63,11 @@ void QCmdLineArgument::setKeyName(const QString &keyName)
 QString QCmdLineArgument::name() const
 {
     return m_d->names.first();
+}
+
+QString QCmdLineArgument::valueName() const
+{
+    return m_d->valueName;
 }
 
 QCmdLineArgument& QCmdLineArgument::addAlias(const QString &alias)

@@ -204,14 +204,14 @@ void QCmdLineParser::disableHelpOption()
         m_d->m_optionalArgIndex[str]--;
 }
 
-void QCmdLineParser::addOption(const char* option, QCmdLineArgument::Action action, const QString &help, const QString &alias)
+void QCmdLineParser::addOption(const char* option, QCmdLineArgument::Action action, const QString &help, const QString &alias, const QString &valueName)
 {
-    addOption(QCmdLineArgument(option, action, help).addAlias(alias));
+    addOption(QCmdLineArgument(option, action, help, valueName).addAlias(alias));
 }
 
-void QCmdLineParser::addOption(const char *option, const QString &help)
+void QCmdLineParser::addOption(const char *option, const QString &help, const QString &valueName)
 {
-    addOption(QCmdLineArgument(option, QCmdLineArgument::StoreTrue, help));
+    addOption(QCmdLineArgument(option, QCmdLineArgument::StoreTrue, help, valueName));
 }
 
 void QCmdLineParser::addOption(const QCmdLineArgument &option)
@@ -254,7 +254,7 @@ QString QCmdLineParser::QCmdLineParserPrivate::usage(const QString& applicationN
     foreach (const QCmdLineArgument arg, m_optionalArgs) {
         s << " [" << arg.name();
         if (arg.action() == QCmdLineArgument::StoreValue)
-            s << ' ' << arg.keyName();
+            s << ' ' << arg.valueName();
         s << ']';
     }
 
@@ -286,7 +286,7 @@ QString QCmdLineParser::help() const
         // add the ", "'s
         width += (aliasesCount - 1) * 2;
         if (it->action() == QCmdLineArgument::StoreValue)
-            width += (1 + it->keyName().size()) * it->aliases().count();
+            width += (1 + it->valueName().size()) * it->aliases().count();
         fieldWidth = std::max(fieldWidth, width);
     }
 
@@ -296,7 +296,7 @@ QString QCmdLineParser::help() const
     for (; it != m_d->m_optionalArgs.end(); ++it) {
         bool isStorable = it->action() == QCmdLineArgument::StoreValue;
         if (isStorable)
-            keyName = it->keyName();
+            keyName = it->valueName();
 
         QStringList args;
         foreach(QString name, it->aliases()) {
