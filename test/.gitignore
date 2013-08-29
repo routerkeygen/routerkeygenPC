@@ -1,1 +1,3 @@
 test.pro.user.*
+*.o
+Makefile
