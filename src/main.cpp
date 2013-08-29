@@ -40,12 +40,17 @@ int main(int argc, char * argv[]) {
     parser.setApplicationName(QCoreApplication::applicationName());
     parser.addOption("-s", QCmdLineArgument::StoreValue, QObject::tr("SSID"), "--ssid");
     parser.addOption("-m", QCmdLineArgument::StoreValue, QObject::tr("MAC address"), "--mac");
+    parser.addOption("-v", QCmdLineArgument::StoreTrue, QObject::tr("Version"), "--version");
     parser.addOption("--no-gui", QCmdLineArgument::StoreTrue, QObject::tr("No UI launch"));
     QString error = "";
     QVariantMap options = parser.parse(QCoreApplication::arguments(), &error);
     if ( !error.isEmpty() ){
         std::cout << error.toUtf8().data() << std::endl <<  parser.help().toUtf8().data();
         return -1;
+    }
+    if ( options.value("v", false).toBool() ){
+        std::cout << QObject::tr("Version: %1").arg(app.applicationVersion()).toUtf8().data() << std::endl;
+        return 0;
     }
     if ( options.contains("s") || options.contains("m") ){
         WirelessMatcher m;
