@@ -14,24 +14,65 @@
 .\" You should have received a copy of the GNU General Public License 
 .\" along with this; if not write to the Free Software Foundation, Inc.
 .\" 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
-.TH RouterKeygen 1 "Mar 31, 2013"
+.TH RouterKeygen 1 "Aug 29, 2013"
 .SH NAME
 routerkeygen \- RouterKeygen
 .SH SYNOPSIS
 .B routerkeygen
-.RI [ OPTIONS ]...
-.RI [ filename|URI ]...
+.RI [ OPTIONS ]
 .SH DESCRIPTION
-Put your bla bla here
+Router Keygen generate default WPA/WEP keys for the following router:
+
+  # Thomson based routers ( this includes Thomson, SpeedTouch, Orange, Infinitum, BBox, DMax, BigPond, O2Wireless, Otenet, Cyta , TN_private, Blink )
+  # DLink ( only some models )
+  # Pirelli Discus
+  # Eircom
+  # Verizon FiOS ( only some routers supported)
+  # Alice AGPF
+  # FASTWEB Pirelli and Telsey
+  # Huawei (some InfinitumXXXX)
+  # Wlan_XXXX or Jazztel_XXXX
+  # Wlan_XX ( only some are supported)
+  # Ono ( P1XXXXXX0000X )
+  # WlanXXXXXX, YacomXXXXXX and WifiXXXXXX
+  # Sky V1 routers
+  # Clubinternet.box v1 and v2 ( TECOM-AH4XXXX )
+  # InfostradaWifi
+  # CONN-X
+  # Megared
+  # EasyBox, Arcor and Vodafone
+  # PBS (Austria)
+  # MAXCOM
+  # PTV
+  # TeleTu/Tele2
+  # Axtel, Axtel-xtremo
+  # Intercable
+  # OTE
+  # Cabovisao Sagem
+  # Alice in Germany
+  # Speedport
+
 .SH OPTIONS
+If any option is specified, except for
+.BI \-\-no-gui
+, the program will terminate after processing the command.
 .TP
-.B \-\-help|-?
+.B \-\-ssid|\-s  \fInetwork_name\fR
+Specifies a network to test if it is possible to generate a default key. It may be necessary to specify the MAC address for a correct identification.
+.TP
+.B \-\-mac|\-m \fImac_address\fR
+Specifies the MAC address of a router to test if it is possible to generate a default key.It may be necessary to specify the network name ( see above ) for a correct identification.
+.TP
+.B \-\-help|\-h
 Outputs help.
 .TP
-.B \-\-version
+.B \-\-version|\-v
 Outputs version information and exits.
+.TP
+.B \-\-no-gui
+Executes without displaying the main windows, displaying only the system tray indicator. This is an option by the lauch script when the program start automatically after boot-up. 
 .SH BUGS
-If you find a bug, please report it to ruka.araujo@gmail.com
+If you find a bug, please report it to exobel@gmail.com
 .PP
 .SH AUTHOR
 This manual page was written by Rui Araújo <ruka.araujo@gmail.com>, for the Debian
