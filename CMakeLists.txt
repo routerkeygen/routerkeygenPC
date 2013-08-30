@@ -6,7 +6,7 @@
 # Project Info
 SET(PROJECT_NAME_SHORT   "RouterKeygen")
 SET(PROJECT_NAME_LONG    "RouterKeygen")
-SET(PROJECT_DESCRIPTION  "Router Keygen generate default WPA/WEP keys for the several routers.")
+SET(PROJECT_DESCRIPTION  "Default WPA/WEP key generator for several routers such as Thomson based routers ( this includes Thomson, SpeedTouch, Orange, Infinitum, BBox, DMax, BigPond, O2Wireless, Otenet, Cyta, TN_private and Blink ), DLink ( only some models ), Pirelli Discus, Eircom, Verizon FiOS ( only some routers supported), Alice AGPF, FASTWEB Pirelli and Telsey, Huawei (some InfinitumXXXX), Wlan_XXXX or Jazztel_XXXX, Wlan_XX ( only some are supported), Ono ( P1XXXXXX0000X ), WlanXXXXXX YacomXXXXXX and WifiXXXXXX, Sky V1 routers, Clubinternet.box v1 and v2 ( TECOM-AH4XXXX ), InfostradaWifi, CONN-X, Megared, EasyBox Arcor and Vodafone, PBS (Austria), MAXCOM, PTV, TeleTu/Tele2, Axtel Axtel-xtremo, Intercable, OTE, Cabovisao Sagem, Alice in Germany and Speedport.")
 SET(PROJECT_COPYRIGHT    "Copyright (C) 2010-2013 Rui Araújo")
 SET(PROJECT_CONTACT      "ruka.araujo@gmail.com")
 SET(PROJECT_VENDOR       "Rui Araújo")
@@ -118,7 +118,7 @@ SUBDIRS(src)
 SUBDIRS(nsis)
 
 # Copy stuff to doc subdirectory
-INSTALL (FILES AUTHORS COPYING INSTALL NEWS README
+INSTALL (FILES AUTHORS COPYING INSTALL NEWS README doc/routerkeygen.1
          DESTINATION ${ROUTERKEYGEN_DOC_DIR})
 
 # Copy .desktop file
@@ -132,6 +132,7 @@ INSTALL (FILES share/routerkeygen.png DESTINATION ${ROUTERKEYGEN_PIXMAPS_DIR})
 
 INCLUDE(InstallRequiredSystemLibraries)
 
+SET(CPACK_STRIP_FILES "TRUE")
 SET(CPACK_SYSTEM_NAME ${CMAKE_SYSTEM_NAME})
 SET(CPACK_PACKAGE_NAME ${PROJECT_NAME_SHORT})
 SET(CPACK_PACKAGE_DESCRIPTION "${PROJECT_NAME_LONG}")
@@ -170,7 +171,7 @@ IF(RPMBUILD_FOUND AND NOT WIN32)
     SET(CPACK_RPM_PACKAGE_GROUP ${PROJECT_VENDOR})
     SET(CPACK_RPM_PACKAGE_VENDOR ${PROJECT_VENDOR})
     SET(CPACK_RPM_PACKAGE_SUMMARY ${PROJECT_DESCRIPTION})
-    SET(CPACK_RPM_PACKAGE_DEPENDS "qt ( >= 4.6 ), qt-x11 ( >= 4.6 ), NetworkManager ( >= 0.8 )") # Specify dependencies here
+    SET(CPACK_RPM_PACKAGE_DEPENDS "libc, qt ( >= 4.6 ), qt-x11 ( >= 4.6 ), NetworkManager ( >= 0.8 )") # Specify dependencies here
     SET(CPACK_SET_DESTDIR TRUE)
 ENDIF(RPMBUILD_FOUND AND NOT WIN32)
 
@@ -185,7 +186,7 @@ IF(DPKG_FOUND AND NOT WIN32)
     SET(CPACK_DEBIAN_PACKAGE_PRIORITY "optional")
     SET(CPACK_DEBIAN_PACKAGE_DEBUG ON)
     SET(CPACK_DEBIAN_PACKAGE_DEPENDS ${PACKAGE_REQUIRES})
-    SET(CPACK_DEBIAN_PACKAGE_DEPENDS "libqt4-gui ( >= 4.6 ), libqt4-network ( >= 4.6 ), network-manager ( >= 0.8 )") # Specify dependencies here
+    SET(CPACK_DEBIAN_PACKAGE_DEPENDS "libc6 (>= 2.3.1-6), l, libqt4-gui ( >= 4.6 ), libqt4-network ( >= 4.6 ), network-manager ( >= 0.8 )") # Specify dependencies here
     SET(CPACK_SET_DESTDIR TRUE)
 ENDIF(DPKG_FOUND AND NOT WIN32)
 

@@ -13,9 +13,10 @@ else
 	echo "Could not create Makefiles" 1>&2
 	exit 1
 fi
-if [ "$?" = "0" ]; then
+if [ "$?" = "0" ]; then 
 	cpack -G DEB
 	cpack -G RPM #in Ubuntu rpmbuild must be installed
+	lintian routerkeygen-1.0.0-Linux-x86_64.deb
 else
 	echo "Error while building" 1>&2
 	exit 1
