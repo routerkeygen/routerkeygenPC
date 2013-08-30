@@ -55,7 +55,7 @@ RouterKeygen::RouterKeygen(QWidget *parent) :
     calculator(NULL), loading(NULL), loadingText(NULL), aboutDialog(NULL), welcomeDialog(NULL), automaticUpdateCheck(true) {
     ui->setupUi(this);
 #if !defined(Q_OS_WIN) && !defined(Q_OS_MAC)
-    setWindowIcon(QIcon(":/tray_icon.png"));
+    setWindowIcon(QIcon(":/big_icon.png"));
 #endif
     connect(ui->calculateButton, SIGNAL( clicked() ), this,
             SLOT( manualCalculation() ));
@@ -335,6 +335,9 @@ void RouterKeygen::scanFinished(int code) {
             ui->supportedNetworkslist->setRowCount(wifiNetworks.size());
             ui->unlikelyNetworkslist->setRowCount(wifiNetworks.size());
             trayMenu->clear();
+            connect(trayMenu->addAction(tr("Open")),
+                    SIGNAL(triggered()), this, SLOT(show()));
+            trayMenu->addSeparator();
             connect(trayMenu->addAction(tr("Vulnerable networks")),
                     SIGNAL(triggered()), this, SLOT(show()));
             bool foundVulnerable = false;
@@ -398,6 +401,9 @@ void RouterKeygen::scanFinished(int code) {
             trayMenu->addSeparator();
             QAction * exitAction = trayMenu->addAction(tr("Quit"));
             connect(exitAction, SIGNAL(triggered()), qApp, SLOT(quit()));
+            if (wifiNetworks.size() == 0) {
+                 ui->statusBar->showMessage(tr("None were detected"));
+            }
             QStringList headers;
             headers << tr("Name") << tr("MAC") << tr("Strength");
             ui->supportedNetworkslist->setHorizontalHeaderLabels(headers);
@@ -434,6 +440,8 @@ void RouterKeygen::scanFinished(int code) {
 
 void RouterKeygen::addNetworkToTray(const QString & ssid, int level, bool locked ) {
     QIcon icon;
+#ifdef Q_OS_UNIX
+#ifndef Q_OS_MAC
     if (level >= 75)
         icon = locked?QIcon::fromTheme("nm-signal-100-secure"):QIcon::fromTheme("nm-signal-100");
     else if (level >= 50)
@@ -442,6 +450,8 @@ void RouterKeygen::addNetworkToTray(const QString & ssid, int level, bool locked
         icon = locked?QIcon::fromTheme("nm-signal-50-secure"):QIcon::fromTheme("nm-signal-50");
     else
         icon = locked?QIcon::fromTheme("nm-signal-25-secure"):QIcon::fromTheme("nm-signal-25");
+#endif
+#endif
     QAction * net = trayMenu->addAction(icon, ssid);
     connect(net, SIGNAL(triggered()), this, SLOT(show()));
 }
@@ -466,7 +476,6 @@ void RouterKeygen::getResults() {
     for (int i = 0; i < listKeys.size(); ++i)
         ui->passwordsList->insertItem(0, listKeys.at(i));
     ui->statusBar->showMessage(tr("Calculation finished"));
-    //ui->passwordsLabel->setText(tr("Calculated Passwords for %1").arg(router->getSsidName()));
     delete calculator;
     calculator = NULL;
 }

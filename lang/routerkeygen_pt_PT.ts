@@ -372,7 +372,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/qcmdlineparser/qcmdlineparser.cpp" line="179"/>
         <source>Argument %1: expected one argument</source>
-        <translation type="unfinished">Argumento %1: necessita um argumento</translation>
+        <translation>Argumento %1: é necessário um argumento</translation>
     </message>
     <message>
         <location filename="../src/qcmdlineparser/qcmdlineparser.cpp" line="252"/>
@@ -486,7 +486,7 @@ p, li { white-space: pre-wrap; }
         <location filename="../src/forms/routerkeygen.ui" line="146"/>
         <location filename="../src/forms/routerkeygen.ui" line="226"/>
         <location filename="../src/forms/routerkeygen.ui" line="309"/>
-        <location filename="../src/RouterKeygen.cpp" line="402"/>
+        <location filename="../src/RouterKeygen.cpp" line="408"/>
         <source>Strength</source>
         <translation>Força</translation>
     </message>
@@ -509,7 +509,7 @@ p, li { white-space: pre-wrap; }
         <location filename="../src/forms/routerkeygen.ui" line="136"/>
         <location filename="../src/forms/routerkeygen.ui" line="216"/>
         <location filename="../src/forms/routerkeygen.ui" line="299"/>
-        <location filename="../src/RouterKeygen.cpp" line="402"/>
+        <location filename="../src/RouterKeygen.cpp" line="408"/>
         <source>Name</source>
         <translation>Nome</translation>
     </message>
@@ -517,7 +517,7 @@ p, li { white-space: pre-wrap; }
         <location filename="../src/forms/routerkeygen.ui" line="141"/>
         <location filename="../src/forms/routerkeygen.ui" line="221"/>
         <location filename="../src/forms/routerkeygen.ui" line="304"/>
-        <location filename="../src/RouterKeygen.cpp" line="402"/>
+        <location filename="../src/RouterKeygen.cpp" line="408"/>
         <source>MAC</source>
         <translation>MAC</translation>
     </message>
@@ -607,22 +607,23 @@ p, li { white-space: pre-wrap; }
         <translation>A procurar redes</translation>
     </message>
     <message>
-        <location filename="../src/RouterKeygen.cpp" line="338"/>
+        <location filename="../src/RouterKeygen.cpp" line="341"/>
         <source>Vulnerable networks</source>
         <translation>Redes vulneráveis</translation>
     </message>
     <message>
-        <location filename="../src/RouterKeygen.cpp" line="399"/>
+        <location filename="../src/RouterKeygen.cpp" line="402"/>
         <source>Quit</source>
         <translation>Sair</translation>
     </message>
     <message>
-        <location filename="../src/RouterKeygen.cpp" line="429"/>
+        <location filename="../src/RouterKeygen.cpp" line="435"/>
         <source>The wifi device is not enabled</source>
         <translation>O dispositivo wifi não está ativo</translation>
     </message>
     <message>
-        <location filename="../src/RouterKeygen.cpp" line="392"/>
+        <location filename="../src/RouterKeygen.cpp" line="395"/>
+        <location filename="../src/RouterKeygen.cpp" line="405"/>
         <source>None were detected</source>
         <translation>Nenhuma rede detetada</translation>
     </message>
@@ -655,42 +656,47 @@ p, li { white-space: pre-wrap; }
         <translation>Erro ao verificar por atualizações</translation>
     </message>
     <message>
-        <location filename="../src/RouterKeygen.cpp" line="421"/>
+        <location filename="../src/RouterKeygen.cpp" line="338"/>
+        <source>Open</source>
+        <translation>Abrir</translation>
+    </message>
+    <message>
+        <location filename="../src/RouterKeygen.cpp" line="427"/>
         <source>Network Manager was not detected</source>
         <translation>Gestor de Rede não foi detectado</translation>
     </message>
     <message>
-        <location filename="../src/RouterKeygen.cpp" line="425"/>
+        <location filename="../src/RouterKeygen.cpp" line="431"/>
         <source>No Wifi device detected</source>
         <translation>Nenhum dispositivo Wifi detetado</translation>
     </message>
     <message>
-        <location filename="../src/RouterKeygen.cpp" line="453"/>
+        <location filename="../src/RouterKeygen.cpp" line="463"/>
         <source>Error while calculating.</source>
         <translation>Erro ao calcular.</translation>
     </message>
     <message>
-        <location filename="../src/RouterKeygen.cpp" line="460"/>
+        <location filename="../src/RouterKeygen.cpp" line="470"/>
         <source>No keys were calculated.</source>
         <translation>Não foi possível calcular uma senha.</translation>
     </message>
     <message>
-        <location filename="../src/RouterKeygen.cpp" line="468"/>
+        <location filename="../src/RouterKeygen.cpp" line="478"/>
         <source>Calculation finished</source>
         <translation>Cálculo terminado</translation>
     </message>
     <message>
-        <location filename="../src/RouterKeygen.cpp" line="493"/>
+        <location filename="../src/RouterKeygen.cpp" line="502"/>
         <source>Copy</source>
         <translation>Copiar</translation>
     </message>
     <message>
-        <location filename="../src/RouterKeygen.cpp" line="495"/>
+        <location filename="../src/RouterKeygen.cpp" line="504"/>
         <source>Copy this key</source>
         <translation>Copiar esta chave</translation>
     </message>
     <message>
-        <location filename="../src/RouterKeygen.cpp" line="508"/>
+        <location filename="../src/RouterKeygen.cpp" line="517"/>
         <source>%1 copied</source>
         <translation>%1 copiado</translation>
     </message>
