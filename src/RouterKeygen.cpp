@@ -52,7 +52,7 @@
 
 RouterKeygen::RouterKeygen(QWidget *parent) :
     QMainWindow(parent), ui(new Ui::RouterKeygen), manualWifi(NULL),matcher(new WirelessMatcher()),
-    calculator(NULL), loading(NULL), loadingText(NULL), aboutDialog(NULL), welcomeDialog(NULL), automaticUpdateCheck(true) {
+    calculator(NULL), loading(NULL), loadingText(NULL), aboutDialog(NULL), welcomeDialog(NULL){
     ui->setupUi(this);
 #if !defined(Q_OS_WIN) && !defined(Q_OS_MAC)
     setWindowIcon(QIcon(":/big_icon.png"));
@@ -137,8 +137,24 @@ RouterKeygen::RouterKeygen(QWidget *parent) :
     connect(runInBackgroundAction, SIGNAL(toggled(bool)), this,
             SLOT(backgroundRunToggle(bool)));
 
-    scanFinished(QWifiManager::SCAN_OK);
+    //Set up the tray icon
+    connect(trayMenu->addAction(tr("Open")),
+            SIGNAL(triggered()), this, SLOT(show()));
+    trayMenu->addSeparator();
+    connect(trayMenu->addAction(tr("Vulnerable networks")),
+            SIGNAL(triggered()), this, SLOT(show()));
+    trayMenu->addAction(tr("None were detected"))->setEnabled(false);
+    trayMenu->addSeparator();
+    trayMenu->addAction(startUpAction);
+    trayMenu->addAction(runInBackgroundAction);
+    trayMenu->addSeparator();
+    connect(trayMenu->addAction(tr("Quit")), SIGNAL(triggered()), qApp, SLOT(quit()));
+
+    //Do an initial scan
     wifiManager->startScan();
+
+    //Check for application updates, it fails silently
+    automaticUpdateCheck = true;
     checkUpdates();
 }
 
@@ -192,7 +208,9 @@ void RouterKeygen::onNetworkReply(QNetworkReply* reply){
                  sc = engine.evaluate("(" +QString(result) + ")");
                  QString version = sc.property("version").toString();
                 if ( version == QApplication::applicationVersion() ){
-                    ui->statusBar->showMessage(tr("The application is already at the latest version."));
+                    if ( !automaticUpdateCheck ){
+                        ui->statusBar->showMessage(tr("The application is already at the latest version."));
+                    }
                 }
                 else{
                     //TODO: when the final website is sc.property("url").toString()
@@ -399,8 +417,7 @@ void RouterKeygen::scanFinished(int code) {
             trayMenu->addAction(startUpAction);
             trayMenu->addAction(runInBackgroundAction);
             trayMenu->addSeparator();
-            QAction * exitAction = trayMenu->addAction(tr("Quit"));
-            connect(exitAction, SIGNAL(triggered()), qApp, SLOT(quit()));
+            connect(trayMenu->addAction(tr("Quit")), SIGNAL(triggered()), qApp, SLOT(quit()));
             if (wifiNetworks.size() == 0) {
                  ui->statusBar->showMessage(tr("None were detected"));
             }
@@ -440,8 +457,6 @@ void RouterKeygen::scanFinished(int code) {
 
 void RouterKeygen::addNetworkToTray(const QString & ssid, int level, bool locked ) {
     QIcon icon;
-#ifdef Q_OS_UNIX
-#ifndef Q_OS_MAC
     if (level >= 75)
         icon = locked?QIcon::fromTheme("nm-signal-100-secure"):QIcon::fromTheme("nm-signal-100");
     else if (level >= 50)
@@ -450,8 +465,6 @@ void RouterKeygen::addNetworkToTray(const QString & ssid, int level, bool locked
         icon = locked?QIcon::fromTheme("nm-signal-50-secure"):QIcon::fromTheme("nm-signal-50");
     else
         icon = locked?QIcon::fromTheme("nm-signal-25-secure"):QIcon::fromTheme("nm-signal-25");
-#endif
-#endif
     QAction * net = trayMenu->addAction(icon, ssid);
     connect(net, SIGNAL(triggered()), this, SLOT(show()));
 }
