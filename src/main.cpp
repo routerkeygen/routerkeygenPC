@@ -69,7 +69,6 @@ int main(int argc, char * argv[]) {
         }
         if ( keygens->size() == 0){
             std::cout << QObject::tr("Unsupported network. Check the MAC address and the SSID.").toUtf8().data() << std::endl;
-            delete keygens;
             return -2;
         }
         std::cout << QObject::tr("Calculating keys. This can take a while.").toUtf8().data() << std::endl;
