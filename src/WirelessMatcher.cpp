@@ -288,7 +288,7 @@ QVector<Keygen *> * WirelessMatcher::getKeygens(QString ssid, QString mac) {
 
     if (ssid.count(
             QRegExp(
-                    "^(Thomson|Blink|SpeedTouch|O2Wireless|Orange-|INFINITUM|BigPond|Otenet|Bbox-|DMAX|privat|TN_private_|CYTA|Vodafone-|Optimus|OptimusFibra|MEO-)[0-9a-fA-F]{6}$"))
+                    "^(Thomson|Blink|SpeedTouch|O2Wireless|O2wireless|Orange-|ORANGE-|INFINITUM|BigPond|Otenet|Bbox-|DMAX|privat|TN_private_|CYTA|Vodafone-|Optimus|OptimusFibra|MEO-)[0-9a-fA-F]{6}$"))
         == 1)
         keygens->append(new ThomsonKeygen(ssid, mac));
 
