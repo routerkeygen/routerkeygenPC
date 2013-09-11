@@ -323,7 +323,7 @@ QVector<Keygen *> * WirelessMatcher::getKeygens(QString ssid, QString mac) {
             || mac.startsWith("38:72:C0") || mac.startsWith("30:39:F2")
             || mac.startsWith("8C:0C:A3") || mac.startsWith("5C:33:8E")
             || mac.startsWith("C8:6C:87") || mac.startsWith("D0:AE:EC")
-            || mac.startsWith("00:19:15"))
+            || mac.startsWith("00:19:15") || mac.startsWith("00:1A:2B"))
             keygens->append(new ComtrendKeygen(ssid, mac));
     }
     return keygens;
