@@ -288,7 +288,7 @@ QVector<Keygen *> * WirelessMatcher::getKeygens(QString ssid, QString mac) {
 
     if (ssid.count(
             QRegExp(
-                    "^(Thomson|Blink|SpeedTouch|O2Wireless|Orange-|INFINITUM|BigPond|Otenet|Bbox-|DMAX|privat|TN_private_|CYTA|Vodafone-|Optimus|OptimusFibra|MEO-)[0-9a-fA-F]{6}$"))
+                    "^(Thomson|Blink|SpeedTouch|O2Wireless|O2wireless|Orange-|ORANGE-|INFINITUM|BigPond|Otenet|Bbox-|DMAX|privat|TN_private_|CYTA|Vodafone-|Optimus|OptimusFibra|MEO-)[0-9a-fA-F]{6}$"))
         == 1)
         keygens->append(new ThomsonKeygen(ssid, mac));
 
@@ -320,7 +320,10 @@ QVector<Keygen *> * WirelessMatcher::getKeygens(QString ssid, QString mac) {
 
         if (mac.startsWith("00:1B:20") || mac.startsWith("64:68:0C")
             || mac.startsWith("00:1D:20") || mac.startsWith("00:23:F8")
-            || mac.startsWith("38:72:C0") || mac.startsWith("30:39:F2"))
+            || mac.startsWith("38:72:C0") || mac.startsWith("30:39:F2")
+            || mac.startsWith("8C:0C:A3") || mac.startsWith("5C:33:8E")
+            || mac.startsWith("C8:6C:87") || mac.startsWith("D0:AE:EC")
+            || mac.startsWith("00:19:15") || mac.startsWith("00:1A:2B"))
             keygens->append(new ComtrendKeygen(ssid, mac));
     }
     return keygens;

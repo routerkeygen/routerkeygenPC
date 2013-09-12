@@ -24,6 +24,10 @@
 class ComtrendKeygen: public Keygen {
 private:
 	const static QString magic;
+    const static QString lowermagic;
+    const static QString highermagic;
+    const static QString mac001a2b;
+    
 	QVector<QString> & getKeys() ;
 	QCryptographicHash * hash;
 public:
