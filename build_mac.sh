@@ -13,7 +13,7 @@ APPLICATION_NAME="$TITLE".app
 mkdir -p $BUILD_FOLDER
 cd $BUILD_FOLDER
 
-cmake -DCMAKE_BUILD_TYPE=Release -DQT_QMAKE_EXECUTABLE=/Users/angela/QtSDK/Desktop/Qt/4.8.1/gcc/bin/qmake $SRC_FOLDER
+cmake -DCMAKE_BUILD_TYPE=Release -DQT_QMAKE_EXECUTABLE=`which qmake` $SRC_FOLDER
 if [ "$?" = "0" ]; then	
 	make
 else
@@ -22,7 +22,7 @@ else
 fi
 
 if [ "$?" = "0" ]; then
-    /Users/angela/QtSDK/QtSources/4.8.1/bin/macdeployqt bin/routerkeygen.app
+    macdeployqt bin/routerkeygen.app
     mv bin/routerkeygen.app bin/RouterKeygen.app
 else
     echo "Error while building" 1>&2
