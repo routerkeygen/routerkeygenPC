@@ -1,14 +1,20 @@
+
   INSTALL
-  routerkeygenPC (https://github.com/routerkeygen/routerkeygenPC)
-  -------
-
-
+  
+  routerkeygenPC 
+  https://github.com/routerkeygen/routerkeygenPC
+  
+  
 
 _LINUX_
 
-Tested with Linux Mint 15 64bit KDE:
+I tested this guide with:
+- Mint 15 64bit KDE
+- Debian 7 64 bit Gnome
+
 
 $ sudo aptitude install -y cmake build-essential libqt4-core libqt4-dev libqt4-gui qt4-dev-tools libssl-dev network-manager-dev
 $ cd ./routerkeygenPC
 $ cc -v && qmake-qt4 -v && cmake -DCMAKE_BUILD_TYPE=Release -DQT_QMAKE_EXECUTABLE=$(which qmake-qt4) && make
+$ ./bin/routerkeygen
 
