@@ -1,4 +1,4 @@
-background.png#!/bin/sh
+#!/bin/sh
 
 SRC_FOLDER=`pwd` #assumed to be the current folder, change to compile in another location
 ROOT_FOLDER=`pwd`
