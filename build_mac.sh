@@ -13,7 +13,7 @@ APPLICATION_NAME="$TITLE".app
 mkdir -p $BUILD_FOLDER
 cd $BUILD_FOLDER
 
-cmake -DCMAKE_BUILD_TYPE=Release -DQT_QMAKE_EXECUTABLE=`which qmake` $SRC_FOLDER
+cmake -DCMAKE_BUILD_TYPE=Release -DQT_QMAKE_EXECUTABLE=`which qmake` -DQT_MOC_EXECUTABLE=`which moc` -DQT_RCC_EXECUTABLE=`which rcc` -DQT_UIC_EXECUTABLE=`which uic` $SRC_FOLDER
 if [ "$?" = "0" ]; then	
 	make
 else
