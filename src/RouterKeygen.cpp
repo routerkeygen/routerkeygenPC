@@ -187,7 +187,7 @@ void  RouterKeygen::checkUpdates(){
 
 
 void RouterKeygen::onNetworkReply(QNetworkReply* reply){
-    const unsigned int RESPONSE_OK = 200;
+    const unsigned int RESPONSE_OK = 200, RESPONSE_BAD= 400;
     if ( !automaticUpdateCheck ){
         cleanLoadingAnimation();
         enableUI(true);
@@ -195,18 +195,13 @@ void RouterKeygen::onNetworkReply(QNetworkReply* reply){
     if(reply->error() == QNetworkReply::NoError)
     {
         unsigned int httpstatuscode = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toUInt();
-        switch(httpstatuscode)
-        {
-        case RESPONSE_OK:
-            if (reply->isReadable())
-            {
-                 QByteArray result;
-                 result = reply->readAll();
-
-                 QScriptValue sc;
-                 QScriptEngine engine;
-                 sc = engine.evaluate("(" +QString(result) + ")");
-                 QString version = sc.property("version").toString();
+        if (httpstatuscode >= RESPONSE_OK && httpstatuscode < RESPONSE_BAD){
+            if (reply->isReadable()){
+                QByteArray result = reply->readAll();
+                QScriptValue sc;
+                QScriptEngine engine;
+                sc = engine.evaluate("(" +QString(result) + ")");
+                QString version = sc.property("version").toString();
                 if ( version == QApplication::applicationVersion() ){
                     if ( !automaticUpdateCheck ){
                         ui->statusBar->showMessage(tr("The application is already at the latest version."));
@@ -219,12 +214,11 @@ void RouterKeygen::onNetworkReply(QNetworkReply* reply){
                     updateDialog->show();
                 }
             }
-            break;
-        default:
-            if ( !automaticUpdateCheck ){
-                ui->statusBar->showMessage(tr("Error while checking for updates"));
+            else{
+                if ( !automaticUpdateCheck ){
+                    ui->statusBar->showMessage(tr("Error while checking for updates"));
+                }
             }
-            break;
         }
     }
     else {

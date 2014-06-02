@@ -4,7 +4,7 @@
 #
 
 ## RCC file
-SET(TS_QRC ${CMAKE_SOURCE_DIR}/lang/resources-lang.qrc)
+SET(TS_QRC ${CMAKE_BINARY_DIR}/lang/resources-lang.qrc)
 
 IF(NOT QT_LUPDATE_EXECUTABLE)
     MESSAGE(WARNING "Could not find lupdate. You won't be able to update translations.")
@@ -25,7 +25,7 @@ MACRO(QT4_ADD_TRANSLATIONS outfiles)
 
         FILE(APPEND ${TS_QRC} "<file>${outfile}.qm</file>\n")
 
-        SET(outfile ${CMAKE_SOURCE_DIR}/lang/${outfile}.qm)
+        SET(outfile ${CMAKE_BINARY_DIR}/lang/${outfile}.qm)
 
         ADD_CUSTOM_COMMAND(
             OUTPUT ${outfile}

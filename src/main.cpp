@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with Router Keygen.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include <QtGui/QApplication>
+#include <QApplication>
 #include <QTranslator>
 #include <QLocale>
 #include <QVector>

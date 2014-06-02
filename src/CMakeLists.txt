@@ -13,7 +13,7 @@ file(GLOB ROUTERKEYGEN_SRCS
     "*.cpp"
 )
 
-LIST( APPEND ROUTERKEYGEN_SRCS
+list( APPEND ROUTERKEYGEN_SRCS
     wifi/QScanResult.cpp
     wifi/QWifiManagerPrivate.cpp
     wifi/QWifiManager.cpp
@@ -27,113 +27,121 @@ file(GLOB ROUTERKEYGEN_HDRS
     "*.h"
 )
 
-LIST( APPEND ROUTERKEYGEN_HDRS
+list( APPEND ROUTERKEYGEN_HDRS
     wifi/QWifiManagerPrivate.h
     wifi/QWifiManager.h
     wifi/QScanResult.h
 )
 
-set(HEADERS_HAVING_Q_OBJECT)
-foreach(header ${MYPROJECT_CURRENT_HEADERS})
-    file(STRINGS "${header}" lines REGEX "Q_OBJECT")
-    if(lines)
-        list(APPEND HEADERS_HAVING_Q_OBJECT "${header}")
-    endif()
-endforeach()
-
 #Put here QRC files to be Rcc-ed
-SET(ROUTERKEYGEN_RCC
+set(ROUTERKEYGEN_RCC
     ../resources/resources.qrc
     ../lang/resources-lang.qrc
 )
 
+if(Qt5_POSITION_INDEPENDENT_CODE)
+  set(CMAKE_POSITION_INDEPENDENT_CODE ON)
+endif()
+
+
 #include paths for routerkeygen
-INCLUDE_DIRECTORIES(
+include_directories(
   ${OPENSSL_INCLUDE_DIR}
   ${CMAKE_CURRENT_BINARY_DIR}
   .
 )
 
-CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/cmake/version.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/version.h)
+configure_file(${CMAKE_SOURCE_DIR}/cmake/version.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/version.h)
 
 
 #Put here UI files
-SET(ROUTERKEYGEN_UIS
+set(ROUTERKEYGEN_UIS
     forms/routerkeygen.ui
     forms/welcome_dialog.ui
     forms/aboutdialog.ui
     forms/UpdateDialog.ui
 )
 
-IF (UNIX AND NOT APPLE )
-	LIST( APPEND ROUTERKEYGEN_SRCS
-		         wifi/QWifiManagerPrivateUnix.cpp )
-	LIST( APPEND ROUTERKEYGEN_HDRS
-		         wifi/QWifiManagerPrivateUnix.h )
-    SET(ROUTERKEYGEN_LIBS ${ROUTERKEYGEN_LIBS} ${QT_QTDBUS_LIBRARY})
-    INCLUDE_DIRECTORIES(/usr/include/NetworkManager)
-ENDIF(UNIX AND NOT APPLE )
+if (UNIX AND NOT APPLE )
+    list( APPEND ROUTERKEYGEN_SRCS wifi/QWifiManagerPrivateUnix.cpp )
+    list( APPEND ROUTERKEYGEN_HDRS wifi/QWifiManagerPrivateUnix.h )
+    include_directories(/usr/include/NetworkManager)
+    if(Qt5Core_FOUND)
+         find_package(Qt5Dbus)
+        set(ROUTERKEYGEN_LIBS ${ROUTERKEYGEN_LIBS} ${Qt5Dbus_LIBRARIES})
+    else(Qt5Core_FOUND)
+        set(ROUTERKEYGEN_LIBS ${ROUTERKEYGEN_LIBS} ${QT_QTDBUS_LIBRARY})
+    endif(Qt5Core_FOUND)
+endif(UNIX AND NOT APPLE )
 
 
-IF( MINGW )
+if( MINGW )
     # resource compilation for MinGW
-    ADD_CUSTOM_COMMAND( OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/icon.o
+    add_custom_command( OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/icon.o
         COMMAND ${CMAKE_RC_COMPILER} -I${CMAKE_SOURCE_DIR} -i${CMAKE_SOURCE_DIR}/cmake/icon.rc
         -o ${CMAKE_CURRENT_BINARY_DIR}/icon.o )
-    SET(ROUTERKEYGEN_SRCS ${ROUTERKEYGEN_SRCS} ${CMAKE_CURRENT_BINARY_DIR}/icon.o)
-    SET(LINK_FLAGS -Wl,-subsystem,windows)
-ENDIF( MINGW )
+    set(ROUTERKEYGEN_SRCS ${ROUTERKEYGEN_SRCS} ${CMAKE_CURRENT_BINARY_DIR}/icon.o)
+    set(LINK_FLAGS -Wl,-subsystem,windows)
+endif( MINGW )
 
-IF(WIN32)
-    ENABLE_LANGUAGE(ASM)
-	LIST( APPEND ROUTERKEYGEN_SRCS
-		         wifi/QWifiManagerPrivateWin.cpp )
-	LIST( APPEND ROUTERKEYGEN_HDRS
-		         wifi/QWifiManagerPrivateWin.h )
-    SET(GUI_TYPE WIN32)
-ENDIF(WIN32)
+if(WIN32)
+    enable_language(ASM)
+    list( APPEND ROUTERKEYGEN_SRCS wifi/QWifiManagerPrivateWin.cpp )
+    list( APPEND ROUTERKEYGEN_HDRS wifi/QWifiManagerPrivateWin.h )
+    set(GUI_TYPE WIN32)
+endif(WIN32)
 
-IF(APPLE)
-	LIST( APPEND ROUTERKEYGEN_SRCS
-		         wifi/QWifiManagerPrivateMac.cpp 
-		         mac/macloginitemsmanager.mm)
-	LIST( APPEND ROUTERKEYGEN_HDRS
-		         wifi/QWifiManagerPrivateMac.h
-       			 mac/macloginitemsmanager.h )
-    SET(GUI_TYPE MACOSX_BUNDLE)
-    SET(ROUTERKEYGEN_SRCS ${ROUTERKEYGEN_SRCS} ../share/routerkeygen.icns)
-    SET_SOURCE_FILES_PROPERTIES(../share/routerkeygen.icns PROPERTIES
-        MACOSX_PACKAGE_LOCATION Resources)
-    SET(MACOSX_BUNDLE_ICON_FILE routerkeygen.icns)
-    FIND_LIBRARY(COCOA_LIBRARY Cocoa)
-    FIND_PATH(COCOA_INCLUDE_DIR Cocoa/Cocoa.h)
-    SET(ROUTERKEYGEN_LIBS ${ROUTERKEYGEN_LIBS} ${COCOA_LIBRARY})
-ENDIF(APPLE)
+if(APPLE)
+    list( APPEND ROUTERKEYGEN_SRCS wifi/QWifiManagerPrivateMac.cpp mac/macloginitemsmanager.mm)
+    list( APPEND ROUTERKEYGEN_HDRS wifi/QWifiManagerPrivateMac.h mac/macloginitemsmanager.h )
+    set(GUI_TYPE MACOSX_BUNDLE)
+    set(ROUTERKEYGEN_SRCS ${ROUTERKEYGEN_SRCS} ../share/routerkeygen.icns)
+    find_library(COCOA_LIBRARY Cocoa)
+    find_path(COCOA_INCLUDE_DIR Cocoa/Cocoa.h)
+    set(ROUTERKEYGEN_LIBS ${ROUTERKEYGEN_LIBS} ${COCOA_LIBRARY})
+endif(APPLE)
 
-QT4_WRAP_UI(ROUTERKEYGEN_UIS_H ${ROUTERKEYGEN_UIS})
-QT4_ADD_RESOURCES(ROUTERKEYGEN_RCC_SRCS ${ROUTERKEYGEN_RCC})
-QT4_WRAP_CPP(ROUTERKEYGEN_MOC_SRCS ${ROUTERKEYGEN_HDRS})
+set(CMAKE_AUTOMOC ON)
+if (Qt5Core_FOUND)
+    qt5_wrap_ui(ROUTERKEYGEN_UIS_H ${ROUTERKEYGEN_UIS})
+    qt5_add_resources(ROUTERKEYGEN_RCC_SRCS ${ROUTERKEYGEN_RCC})
+    add_definitions(-DQT_DISABLE_DEPRECATED_BEFORE=0x000000) #handle deprecated methods
+else(Qt5Core_FOUND)
+    qt4_wrap_ui(ROUTERKEYGEN_UIS_H ${ROUTERKEYGEN_UIS})
+    qt4_add_resources(ROUTERKEYGEN_RCC_SRCS ${ROUTERKEYGEN_RCC})
+endif(Qt5Core_FOUND)
 
-ADD_EXECUTABLE(routerkeygen ${GUI_TYPE} ${ROUTERKEYGEN_SRCS} ${ROUTERKEYGEN_HDRS} ${ROUTERKEYGEN_MOC_SRCS} ${ROUTERKEYGEN_UIS_H} ${ROUTERKEYGEN_RCC_SRCS} )
+
+add_executable(routerkeygen ${GUI_TYPE} ${ROUTERKEYGEN_SRCS} ${ROUTERKEYGEN_HDRS} ${ROUTERKEYGEN_UIS_H} ${ROUTERKEYGEN_RCC_SRCS} )
 
 # Add translations
-ADD_DEPENDENCIES(routerkeygen translations)
+add_dependencies(routerkeygen translations)
 
 # Link the target against the Qt libraries
-TARGET_LINK_LIBRARIES(routerkeygen ${ROUTERKEYGEN_LIBS})
+target_link_libraries(routerkeygen ${ROUTERKEYGEN_LIBS} )
+
 
 # Now we are done.
-INSTALL(TARGETS routerkeygen
+install(TARGETS routerkeygen
         BUNDLE  DESTINATION ${ROUTERKEYGEN_BIN_DIR}
         RUNTIME DESTINATION ${ROUTERKEYGEN_BIN_DIR})
 
-ADD_CUSTOM_COMMAND(
+add_custom_command(
     OUTPUT ${CMAKE_SOURCE_DIR}/bin/routerkeygen
     COMMAND ${CMAKE_COMMAND} copy ${CMAKE_CURRENT_SOURCE_DIR}/routerkeygen ${CMAKE_SOURCE_DIR}/bin/routerkeygen
     DEPENDS ${CMAKE_BINARY_DIR}/src/routerkeygen
 )
 
-ADD_DEFINITIONS(-W -Wall)
+if(APPLE)
+    set_target_properties(routerkeygen PROPERTIES MACOSX_BUNDLE_INFO_PLIST ../share/MacOSXBundleInfo.plist.in)
+    set_source_files_properties(share/routerkeygen.icns PROPERTIES
+        MACOSX_PACKAGE_LOCATION Resources)
+    set(MACOSX_BUNDLE_ICON_FILE routerkeygen.icns)
+endif(APPLE)
 
-ADD_DEFINITIONS(-D_FORTIFY_SOURCE=2)
+add_definitions(-W -Wall -D_FORTIFY_SOURCE=2  )
 
+if (APPLE)
+    #Stop Apple from complaining that OpenSSL is deprecated
+    #add_definitions(-DMAC_OS_X_VERSION_MIN_REQUIRED=MAC_OS_X_VERSION_10_8﻿)
+endif(APPLE)

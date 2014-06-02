@@ -5,15 +5,15 @@ ROOT_FOLDER=`pwd`
 BUILD_FOLDER=$ROOT_FOLDER/mac
 BACKGROUND_NAME=background.png
 BACKGROUND_LOCATION=$ROOT_FOLDER/share/$BACKGROUND_NAME
-DMG_NAME=RouterKeygen_V1_0_0
+DMG_NAME=RouterKeygen_V1_1_0
 TITLE=RouterKeygen
 APPLICATION_NAME="$TITLE".app
 
-
+echo $SRC_FOLDER
 mkdir -p $BUILD_FOLDER
 cd $BUILD_FOLDER
 
-cmake -DCMAKE_BUILD_TYPE=Release -DQT_QMAKE_EXECUTABLE=`which qmake` -DQT_MOC_EXECUTABLE=`which moc` -DQT_RCC_EXECUTABLE=`which rcc` -DQT_UIC_EXECUTABLE=`which uic` $SRC_FOLDER
+cmake -DCMAKE_BUILD_TYPE=Release -DQT_QMAKE_EXECUTABLE=`which qmake` -DQT_MOC_EXECUTABLE=`which moc` -DQT_RCC_EXECUTABLE=`which rcc` -DQT_UIC_EXECUTABLE=`which uic` "$SRC_FOLDER"
 if [ "$?" = "0" ]; then	
 	make
 else
