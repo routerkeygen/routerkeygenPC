@@ -1,4 +1,4 @@
-#!/bin/sh
+a#!/bin/sh
 
 MXE_ROOT=/home/ruka/Projetos/mxe
 SRC_FOLDER=`pwd` #assumed to be the current folder, change to compile in another location

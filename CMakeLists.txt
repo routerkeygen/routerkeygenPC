@@ -71,6 +71,7 @@ if (Qt5Core_FOUND)
     find_package(Qt5Widgets REQUIRED)
     find_package(Qt5Network REQUIRED)
     find_package(Qt5Script REQUIRED)
+    find_package(Qt5LinguistTools CONFIG)
     set(ROUTERKEYGEN_LIBS ${Qt5Script_LIBRARIES}  ${Qt5Network_LIBRARIES} ${Qt5Widgets_LIBRARIES} ${QtCore_LIBRARIES} ${OPENSSL_LIBRARIES} )
     include_directories(${Qt5Script_INCLUDE_DIRS} ${Qt5Network_INCLUDE_DIRS} ${Qt5Widgets_INCLUDE_DIRS} ${Qt5Core_INCLUDE_DIRS})
     # Use the compile definitions defined in the Qt 5 modules
@@ -199,7 +200,11 @@ if(DPKG_FOUND AND NOT WIN32)
     set(CPACK_DEBIAN_PACKAGE_PRIORITY "optional")
     set(CPACK_DEBIAN_PACKAGE_DEBUG ON)
     set(CPACK_DEBIAN_PACKAGE_DEPENDS ${PACKAGE_REQUIRES})
-    set(CPACK_DEBIAN_PACKAGE_DEPENDS "libc6 (>= 2.3.1-6), l, libqt4-gui ( >= 4.6 ), libqt4-network ( >= 4.6 ), network-manager ( >= 0.8 )") # Specify dependencies here
+if(Qt5Core_FOUND)
+    set(CPACK_DEBIAN_PACKAGE_DEPENDS "libc6 (>= 2.3.1-6), qt5-default, network-manager ( >= 0.8 )") # Specify dependencies here
+else(Qt5Core_FOUND)
+    set(CPACK_DEBIAN_PACKAGE_DEPENDS "libc6 (>= 2.3.1-6), libqt4-gui ( >= 4.6 ), libqt4-network ( >= 4.6 ), network-manager ( >= 0.8 )") # Specify dependencies here
+endif(Qt5Core_FOUND)
     set(CPACK_set_DESTDIR TRUE)
 endif(DPKG_FOUND AND NOT WIN32)
 

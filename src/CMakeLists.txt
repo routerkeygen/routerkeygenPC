@@ -36,7 +36,7 @@ list( APPEND ROUTERKEYGEN_HDRS
 #Put here QRC files to be Rcc-ed
 set(ROUTERKEYGEN_RCC
     ../resources/resources.qrc
-    ../lang/resources-lang.qrc
+   ${CMAKE_CURRENT_BINARY_DIR}/../lang/resources-lang.qrc
 )
 
 if(Qt5_POSITION_INDEPENDENT_CODE)
@@ -67,8 +67,8 @@ if (UNIX AND NOT APPLE )
     list( APPEND ROUTERKEYGEN_HDRS wifi/QWifiManagerPrivateUnix.h )
     include_directories(/usr/include/NetworkManager)
     if(Qt5Core_FOUND)
-         find_package(Qt5Dbus)
-        set(ROUTERKEYGEN_LIBS ${ROUTERKEYGEN_LIBS} ${Qt5Dbus_LIBRARIES})
+         find_package(Qt5DBus)
+        set(ROUTERKEYGEN_LIBS ${ROUTERKEYGEN_LIBS} ${Qt5DBus_LIBRARIES})
     else(Qt5Core_FOUND)
         set(ROUTERKEYGEN_LIBS ${ROUTERKEYGEN_LIBS} ${QT_QTDBUS_LIBRARY})
     endif(Qt5Core_FOUND)

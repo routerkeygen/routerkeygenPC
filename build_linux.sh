@@ -6,7 +6,7 @@ BUILD_FOLDER=$ROOT_FOLDER/linux
 mkdir -p $BUILD_FOLDER
 cd $BUILD_FOLDER
 
-cmake -DCMAKE_BUILD_TYPE=Release -DQT_QMAKE_EXECUTABLE=/usr/bin/qmake-qt4 $SRC_FOLDER
+cmake -DCMAKE_BUILD_TYPE=Release $SRC_FOLDER
 if [ "$?" = "0" ]; then	
 	make
 else
@@ -16,7 +16,7 @@ fi
 if [ "$?" = "0" ]; then 
 	cpack -G DEB
 	cpack -G RPM #in Ubuntu rpmbuild must be installed
-	lintian routerkeygen-1.0.0-Linux-x86_64.deb
+	lintian routerkeygen-1.1.0-Linux-x86_64.deb
 else
 	echo "Error while building" 1>&2
 	exit 1

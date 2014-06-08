@@ -6,7 +6,12 @@
 ## RCC file
 SET(TS_QRC ${CMAKE_BINARY_DIR}/lang/resources-lang.qrc)
 
-IF(NOT QT_LUPDATE_EXECUTABLE)
+if(Qt5LinguistTools_FOUND)
+    set(QT_LUPDATE_EXECUTABLE lupdate)
+    set(QT_LRELEASE_EXECUTABLE lrelease)
+endif(Qt5LinguistTools_FOUND)
+
+IF(NOT QT_LUPDATE_EXECUTABLE )
     MESSAGE(WARNING "Could not find lupdate. You won't be able to update translations.")
 ENDIF(NOT QT_LUPDATE_EXECUTABLE)
 
@@ -17,7 +22,7 @@ IF(NOT QT_LRELEASE_EXECUTABLE)
 ENDIF(NOT QT_LRELEASE_EXECUTABLE)
 
 ## Wraps the supplied .ts files in lrelease commands
-MACRO(QT4_ADD_TRANSLATIONS outfiles)
+MACRO(QT_ADD_TRANSLATIONS outfiles)
     FILE(WRITE ${TS_QRC} "<RCC><qresource prefix=\"lang\">\n")
     FOREACH (it ${ARGN})
         GET_FILENAME_COMPONENT(it ${it} ABSOLUTE)
@@ -37,7 +42,7 @@ MACRO(QT4_ADD_TRANSLATIONS outfiles)
         SET(${outfiles} ${${outfiles}} ${outfile})
     ENDFOREACH(it)
     FILE(APPEND ${TS_QRC} "</qresource></RCC>")
-ENDMACRO(QT4_ADD_TRANSLATIONS)
+ENDMACRO(QT_ADD_TRANSLATIONS)
 
 ## Set available translations file ids here
 OPTION(LANGUAGES "Using translations")
@@ -74,7 +79,7 @@ ENDFOREACH()
 
 IF(QT_LRELEASE_EXECUTABLE)
     ## Wraps the collected translations
-    QT4_ADD_TRANSLATIONS(routerkeygen_QMS ${routerkeygen_TS})
+    QT_ADD_TRANSLATIONS(routerkeygen_QMS ${routerkeygen_TS})
 
     ## Create a target that runs lrelease for all the .ts files
     ## "ALL" means that it will be run by default.
