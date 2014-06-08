@@ -1,13 +1,13 @@
-a#!/bin/sh
+#!/bin/sh
 
-MXE_ROOT=/home/ruka/Projetos/mxe
+#MXE_ROOT=/home/raraujo/mxe
 SRC_FOLDER=`pwd` #assumed to be the current folder, change to compile in another location
 ROOT_FOLDER=`pwd`
 BUILD_FOLDER=$ROOT_FOLDER/win
 mkdir -p $BUILD_FOLDER
 cd $BUILD_FOLDER
 
-cmake -DCMAKE_TOOLCHAIN_FILE=$MXE_ROOT/usr/i686-pc-mingw32/share/cmake/mxe-conf.cmake  -DQT_LUPDATE_EXECUTABLE=lupdate -DQT_LRELEASE_EXECUTABLE=lrelease  -DOPENSSL_ROOT_DIR=$MXE_ROOT/usr/i686-pc-mingw32 -DCMAKE_CROSS_COMPILING=TRUE -DCMAKE_BUILD_TYPE=Release $SRC_FOLDER
+cmake -DCMAKE_TOOLCHAIN_FILE=$MXE_ROOT/usr/i686-pc-mingw32/share/cmake/mxe-conf.cmake -DOPENSSL_ROOT_DIR=$MXE_ROOT/usr/i686-pc-mingw32 -DCMAKE_CROSS_COMPILING=TRUE -DCMAKE_BUILD_TYPE=Release $SRC_FOLDER
 if [ "$?" = "0" ]; then	
 	make
 else

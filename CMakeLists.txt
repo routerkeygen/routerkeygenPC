@@ -6,7 +6,7 @@
 set(PROJECT_NAME_SHORT   "RouterKeygen")
 set(PROJECT_NAME_LONG    "RouterKeygen")
 set(PROJECT_DESCRIPTION  "Default WPA/WEP key generator for several routers such as Thomson based routers ( this includes Thomson, SpeedTouch, Orange, Infinitum, BBox, DMax, BigPond, O2Wireless, Otenet, Cyta, TN_private and Blink ), DLink ( only some models ), Pirelli Discus, Eircom, Verizon FiOS ( only some routers supported), Alice AGPF, FASTWEB Pirelli and Telsey, Huawei (some InfinitumXXXX), Wlan_XXXX or Jazztel_XXXX, Wlan_XX ( only some are supported), Ono ( P1XXXXXX0000X ), WlanXXXXXX YacomXXXXXX and WifiXXXXXX, Sky V1 routers, Clubinternet.box v1 and v2 ( TECOM-AH4XXXX ), InfostradaWifi, CONN-X, Megared, EasyBox Arcor and Vodafone, PBS (Austria), MAXCOM, PTV, TeleTu/Tele2, Axtel Axtel-xtremo, Intercable, OTE, Cabovisao Sagem, Alice in Germany and Speedport.")
-set(PROJECT_COPYRIGHT    "Copyright (C) 2010-2013 Rui Araújo")
+set(PROJECT_COPYRIGHT    "Copyright (C) 2010-2014 Rui Araújo")
 set(PROJECT_CONTACT      "ruka.araujo@gmail.com")
 set(PROJECT_VENDOR       "Rui Araújo")
 set(ORG_WEBSITE          "http://code.google.com/p/android-thomson-key-solver/")
@@ -65,13 +65,13 @@ endif(UNIX)
 
 # Search and includeQt parameters
 find_package(OpenSSL REQUIRED )
-find_package(Qt5Core CONFIG)
+find_package(Qt5Core QUIET)
 if (Qt5Core_FOUND)
     message("Using Qt${Qt5Core_VERSION_STRING}")
     find_package(Qt5Widgets REQUIRED)
     find_package(Qt5Network REQUIRED)
     find_package(Qt5Script REQUIRED)
-    find_package(Qt5LinguistTools CONFIG)
+    find_package(Qt5LinguistTools QUIET)
     set(ROUTERKEYGEN_LIBS ${Qt5Script_LIBRARIES}  ${Qt5Network_LIBRARIES} ${Qt5Widgets_LIBRARIES} ${QtCore_LIBRARIES} ${OPENSSL_LIBRARIES} )
     include_directories(${Qt5Script_INCLUDE_DIRS} ${Qt5Network_INCLUDE_DIRS} ${Qt5Widgets_INCLUDE_DIRS} ${Qt5Core_INCLUDE_DIRS})
     # Use the compile definitions defined in the Qt 5 modules
@@ -87,7 +87,7 @@ else(Qt5Core_FOUND)
 endif(Qt5Core_FOUND)
 
 if(WIN32 AND CMAKE_CROSS_COMPILING)
-    set (ROUTERKEYGEN_LIBS ${ROUTERKEYGEN_LIBS} crypt32 jpeg png tiff mng lzma lcms2 z imm32 winmm ws2_32 )
+    set (ROUTERKEYGEN_LIBS ${ROUTERKEYGEN_LIBS} crypt32 jpeg png tiff mng lzma lcms z imm32 winmm ws2_32 )
 endif(WIN32 AND CMAKE_CROSS_COMPILING)
 
 # Layout of CMakeQt installation

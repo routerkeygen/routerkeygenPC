@@ -6,10 +6,10 @@
 ## RCC file
 SET(TS_QRC ${CMAKE_BINARY_DIR}/lang/resources-lang.qrc)
 
-if(Qt5LinguistTools_FOUND)
+if(Qt5LinguistTools_FOUND OR CMAKE_CROSS_COMPILING)
     set(QT_LUPDATE_EXECUTABLE lupdate)
     set(QT_LRELEASE_EXECUTABLE lrelease)
-endif(Qt5LinguistTools_FOUND)
+endif(Qt5LinguistTools_FOUND OR CMAKE_CROSS_COMPILING)
 
 IF(NOT QT_LUPDATE_EXECUTABLE )
     MESSAGE(WARNING "Could not find lupdate. You won't be able to update translations.")
