@@ -79,8 +79,8 @@ if (Qt5Core_FOUND)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${Qt5Script_EXECUTABLE_COMPILE_FLAGS} ${Qt5Network_EXECUTABLE_COMPILE_FLAGS} ${Qt5Core_EXECUTABLE_COMPILE_FLAGS}")
 else(Qt5Core_FOUND)
     message("Using Qt4")
-    find_package(Qt4 4.6.0 COMPONENTS QtCore QtGui QtNetwork REQUIRED )
-    set(ROUTERKEYGEN_LIBS ${QT_QTSCRIPT_LIBRARY}  ${QT_QTNETWORK_LIBRARY} ${QT_QTGUI_LIBRARY} ${QT_QTCORE_LIBRARY} ${OPENSSL_LIBRARIES} ) # Add here any other QT module or other library
+    find_package(Qt4 4.8.0 COMPONENTS QtCore QtGui QtNetwork QtScript REQUIRED )
+    set(ROUTERKEYGEN_LIBS ${QT_LIBRARIES} ${OPENSSL_LIBRARIES} ) # Add here any other QT module or other library
     include(${QT_USE_FILE})
 #FindQt4.cmake is so brain-dead when Xcompiling
     add_definitions(${QT_DEFINITIONS})
