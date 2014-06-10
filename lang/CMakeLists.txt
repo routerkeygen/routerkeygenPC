@@ -4,100 +4,100 @@
 #
 
 ## RCC file
-SET(TS_QRC ${CMAKE_BINARY_DIR}/lang/resources-lang.qrc)
+set(TS_QRC ${CMAKE_BINARY_DIR}/lang/resources-lang.qrc)
 
 if(Qt5LinguistTools_FOUND OR CMAKE_CROSS_COMPILING)
     set(QT_LUPDATE_EXECUTABLE lupdate)
     set(QT_LRELEASE_EXECUTABLE lrelease)
 endif(Qt5LinguistTools_FOUND OR CMAKE_CROSS_COMPILING)
 
-IF(NOT QT_LUPDATE_EXECUTABLE )
-    MESSAGE(WARNING "Could not find lupdate. You won't be able to update translations.")
-ENDIF(NOT QT_LUPDATE_EXECUTABLE)
+if(NOT QT_LUPDATE_EXECUTABLE )
+    message(WARNING "Could not find lupdate. You won't be able to update translations.")
+endif(NOT QT_LUPDATE_EXECUTABLE)
 
-IF(NOT QT_LRELEASE_EXECUTABLE)
-    MESSAGE(WARNING "Could not find lrelease. Your build won't contain translations.")
+if(NOT QT_LRELEASE_EXECUTABLE)
+    message(WARNING "Could not find lrelease. Your build won't contain translations.")
     ## Create an empty RCC file
-    FILE(WRITE ${TS_QRC} "<RCC></RCC>")
-ENDIF(NOT QT_LRELEASE_EXECUTABLE)
+    file(WRITE ${TS_QRC} "<RCC></RCC>")
+endif(NOT QT_LRELEASE_EXECUTABLE)
 
 ## Wraps the supplied .ts files in lrelease commands
-MACRO(QT_ADD_TRANSLATIONS outfiles)
-    FILE(WRITE ${TS_QRC} "<RCC><qresource prefix=\"lang\">\n")
+macro(QT_ADD_TRANSLATIONS outfiles)
+    file(WRITE ${TS_QRC} "<RCC><qresource prefix=\"lang\">\n")
     FOREACH (it ${ARGN})
-        GET_FILENAME_COMPONENT(it ${it} ABSOLUTE)
-        GET_FILENAME_COMPONENT(outfile ${it} NAME_WE)
+        get_filename_component(it ${it} ABSOLUTE)
+        get_filename_component(outfile ${it} NAME_WE)
 
-        FILE(APPEND ${TS_QRC} "<file>${outfile}.qm</file>\n")
+        file(APPEND ${TS_QRC} "<file>${outfile}.qm</file>\n")
 
-        SET(outfile ${CMAKE_BINARY_DIR}/lang/${outfile}.qm)
+        set(outfile ${CMAKE_BINARY_DIR}/lang/${outfile}.qm)
 
-        ADD_CUSTOM_COMMAND(
+        add_custom_command(
             OUTPUT ${outfile}
             COMMAND ${QT_LRELEASE_EXECUTABLE}
             ARGS -compress -silent -nounfinished ${it} -qm ${outfile}
             MAIN_DEPENDENCY ${it}
         )
 
-        SET(${outfiles} ${${outfiles}} ${outfile})
-    ENDFOREACH(it)
-    FILE(APPEND ${TS_QRC} "</qresource></RCC>")
-ENDMACRO(QT_ADD_TRANSLATIONS)
+        set(${outfiles} ${${outfiles}} ${outfile})
+    endforeach(it)
+    file(APPEND ${TS_QRC} "</qresource></RCC>")
+endmacro(QT_ADD_TRANSLATIONS)
 
-## Set available translations file ids here
-OPTION(LANGUAGES "Using translations")
-SET(ALL_LANGUAGES
+## set available translations file ids here
+option(LANGUAGES "Using translations")
+set(ALL_LANGUAGES
         en
         pt
 	nl
-	es # add here more lang tokens like jp, ro etc. as per ts files
+        es # add here more lang tokens like jp, ro etc. as per ts files
    )
 
 ## Check if user has provided specific LANGS option
-IF(NOT DEFINED LANGS)
-    SET(LANGUAGES ${ALL_LANGUAGES} CACHE STRING "Using translations" FORCE)
-ELSE(NOT DEFINED LANGS)
-    IF(NOT LANGS)
-        SET(LANGUAGES "" CACHE STRING "Using translations" FORCE)
-    ELSEIF(LANGS STREQUAL *)
-        SET(LANGUAGES ${ALL_LANGUAGES} CACHE STRING "Using translations" FORCE)
-    ELSE(NOT LANGS)
+if(NOT DEFINED LANGS)
+    set(LANGUAGES ${ALL_LANGUAGES} CACHE STRING "Using translations" FORCE)
+else(NOT DEFINED LANGS)
+    if(NOT LANGS)
+        set(LANGUAGES "" CACHE STRING "Using translations" FORCE)
+    elseif(LANGS STREQUAL *)
+        set(LANGUAGES ${ALL_LANGUAGES} CACHE STRING "Using translations" FORCE)
+    else(NOT LANGS)
         STRING(REGEX MATCHALL [a-zA-Z_]+
                langs1 ${LANGS})
-        SET(LANGUAGES ${langs1} CACHE STRING "Using translations" FORCE)
-    ENDIF(NOT LANGS)
-ENDIF(NOT DEFINED LANGS)
+        set(LANGUAGES ${langs1} CACHE STRING "Using translations" FORCE)
+    endif(NOT LANGS)
+endif(NOT DEFINED LANGS)
 
 ## Display what translations files will be processed
-MESSAGE(STATUS "Translations: ${LANGUAGES}")
+message(STATUS "Translations: ${LANGUAGES}")
 
 ## Collect all translations files that are to be processed
-FOREACH(LANGUAGE ${LANGUAGES})
-    FILE(GLOB temp_TS ${CMAKE_SOURCE_DIR}/lang/routerkeygen_*${LANGUAGE}*.ts)
-    LIST(APPEND routerkeygen_TS ${temp_TS})
-ENDFOREACH()
+foreach(LANGUAGE ${LANGUAGES})
+    file(GLOB temp_TS ${CMAKE_SOURCE_DIR}/lang/routerkeygen_*${LANGUAGE}*.ts)
+    list(APPEND routerkeygen_TS ${temp_TS})
+endforeach()
 
-IF(QT_LRELEASE_EXECUTABLE)
+if(QT_LRELEASE_EXECUTABLE)
     ## Wraps the collected translations
     QT_ADD_TRANSLATIONS(routerkeygen_QMS ${routerkeygen_TS})
 
     ## Create a target that runs lrelease for all the .ts files
     ## "ALL" means that it will be run by default.
-    ADD_CUSTOM_TARGET(translations ALL DEPENDS ${routerkeygen_QMS})
-ENDIF(QT_LRELEASE_EXECUTABLE)
+    add_custom_target(translations ALL DEPENDS ${routerkeygen_QMS})
+endif(QT_LRELEASE_EXECUTABLE)
 
-IF(QT_LUPDATE_EXECUTABLE)
+if(QT_LUPDATE_EXECUTABLE)
     ## Search for all translatable strings in the sources directory
-    FILE(GLOB_RECURSE translate_SRCS ${CMAKE_SOURCE_DIR}/src/*.cpp
+    file(GLOB_RECURSE translate_SRCS ${CMAKE_SOURCE_DIR}/src/*.cpp
                                  ${CMAKE_SOURCE_DIR}/src/*.hpp)
-    FILE(GLOB_RECURSE translate_HDRS ${CMAKE_SOURCE_DIR}/src/*.h)
-    FILE(GLOB_RECURSE translate_UIS ${CMAKE_SOURCE_DIR}/src/*.ui)
+    file(GLOB_RECURSE translate_HDRS ${CMAKE_SOURCE_DIR}/src/*.h)
+    file(GLOB_RECURSE translate_UIS ${CMAKE_SOURCE_DIR}/src/*.ui)
 
-    SET(translate_SRCS ${translate_SRCS} ${translate_HDRS} ${translate_UIS})
+    set(translate_SRCS ${translate_SRCS} ${translate_HDRS} ${translate_UIS})
 
     ## Create a target that runs lupdate for all the sources and UI files
-    ADD_CUSTOM_TARGET(lupdate
+    add_custom_target(lupdate
         COMMAND ${QT_LUPDATE_EXECUTABLE} -noobsolete ${translate_SRCS} -ts ${routerkeygen_TS}
     )
-ENDIF(QT_LUPDATE_EXECUTABLE)
+endif(QT_LUPDATE_EXECUTABLE)
 
