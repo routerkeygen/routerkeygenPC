@@ -1,5 +1,8 @@
 #!/bin/sh
 
+#CMAKE_PREFIX_PATH should be defined to somehting like ~/Qt/5.3/clang_64
+
+
 SRC_FOLDER=`pwd` #assumed to be the current folder, change to compile in another location
 ROOT_FOLDER=`pwd`
 BUILD_FOLDER=$ROOT_FOLDER/mac
@@ -13,8 +16,12 @@ echo $SRC_FOLDER
 mkdir -p $BUILD_FOLDER
 cd $BUILD_FOLDER
 
-cmake -DCMAKE_BUILD_TYPE=Release -DQT_QMAKE_EXECUTABLE=`which qmake` -DQT_MOC_EXECUTABLE=`which moc` -DQT_RCC_EXECUTABLE=`which rcc` -DQT_UIC_EXECUTABLE=`which uic` "$SRC_FOLDER"
+cmake -DCMAKE_BUILD_TYPE=Release -DQT_QMAKE_EXECUTABLE=`which qmake` "$SRC_FOLDER"
 if [ "$?" = "0" ]; then	
+	if [ -f bin/RouterKeygen.app ];
+	then
+		rm bin/RouterKeygen.app
+	fi
 	make
 else
 	echo "Could not create Makefiles" 1>&2
@@ -22,13 +29,25 @@ else
 fi
 
 if [ "$?" = "0" ]; then
-    macdeployqt bin/routerkeygen.app
+    macdeployqt bin/routerkeygen.app -always-overwrite
     mv bin/routerkeygen.app bin/RouterKeygen.app
+    #Allow codesign to work properly
+    cp "$CMAKE_PREFIX_PATH"/lib/QtCore.framework/Contents/Info.plist bin/RouterKeygen.app/Contents/Frameworks/QtCore.framework/Resources/
+    cp "$CMAKE_PREFIX_PATH"/lib/QtGui.framework/Contents/Info.plist bin/RouterKeygen.app/Contents/Frameworks/QtGui.framework/Resources/
+    cp "$CMAKE_PREFIX_PATH"/lib/QtWidgets.framework/Contents/Info.plist bin/RouterKeygen.app/Contents/Frameworks/QtWidgets.framework/Resources/
+    cp "$CMAKE_PREFIX_PATH"/lib/QtNetwork.framework/Contents/Info.plist bin/RouterKeygen.app/Contents/Frameworks/QtNetwork.framework/Resources/
+    cp "$CMAKE_PREFIX_PATH"/lib/QtScript.framework/Contents/Info.plist bin/RouterKeygen.app/Contents/Frameworks/QtScript.framework/Resources/
+    cp "$CMAKE_PREFIX_PATH"/lib/QtPrintSupport.framework/Contents/Info.plist bin/RouterKeygen.app/Contents/Frameworks/QtPrintSupport.framework/Resources/
 else
     echo "Error while building" 1>&2
     exit 1
 fi
 
+
+if [ -f pack.temp.dmg ];
+then
+	rm pack.temp.dmg
+fi
 
 mkdir -p bin/.background
 cp "${BACKGROUND_LOCATION}" bin/.background
@@ -41,24 +60,32 @@ sleep 5
 
 echo '
 tell application "Finder"
-tell disk "'${TITLE}'"
-open
-set current view of container window to icon view
-set toolbar visible of container window to false
-set statusbar visible of container window to false
-set the bounds of container window to {400, 100, 885, 430}
-set theViewOptions to the icon view options of container window
-set arrangement of theViewOptions to not arranged
-set icon size of theViewOptions to 128
-set background picture of theViewOptions to file ".background:'${BACKGROUND_NAME}'"
-make new alias file at container window to POSIX file "/Applications" with properties {name:"Applications"}
-set position of item "'${APPLICATION_NAME}'" of container window to {110, 180}
-set position of item "Applications" of container window to {375, 180}
-close
-open
-update without registering applications
-delay 5
-end tell
+with timeout of 300 seconds
+	tell disk "'${TITLE}'"
+	with timeout of 300 seconds
+		open
+		set current view of container window to icon view
+		set toolbar visible of container window to false
+		set statusbar visible of container window to false
+		set the bounds of container window to {400, 100, 885, 430}
+		set theViewOptions to the icon view options of container window
+		set arrangement of theViewOptions to not arranged
+		set icon size of theViewOptions to 128
+		set background picture of theViewOptions to file ".background:'${BACKGROUND_NAME}'"
+		make new alias file at container window to POSIX file "/Applications" with properties {name:"Applications"}
+		set position of item "'${APPLICATION_NAME}'" of container window to {110, 180}
+		set position of item "Applications" of container window to {375, 180}
+		set position of item ".Trashes" of container window to {110, 400}
+		set position of item ".DS_Store" of container window to {375, 400}
+		set position of item ".background" of container window to {110, 500}
+		set position of item ".fseventsd" of container window to {375, 500}
+		close
+		open
+		update without registering applications
+		delay 5
+	end
+	end tell
+end
 end tell
 ' | osascript
 

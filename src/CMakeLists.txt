@@ -134,7 +134,7 @@ add_custom_command(
 
 if(APPLE)
     set_target_properties(routerkeygen PROPERTIES MACOSX_BUNDLE_INFO_PLIST ../share/MacOSXBundleInfo.plist.in)
-    set_source_files_properties(share/routerkeygen.icns PROPERTIES
+    set_source_files_properties(../share/routerkeygen.icns PROPERTIES
         MACOSX_PACKAGE_LOCATION Resources)
     set(MACOSX_BUNDLE_ICON_FILE routerkeygen.icns)
 endif(APPLE)
