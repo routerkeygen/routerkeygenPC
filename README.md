@@ -48,8 +48,8 @@ Get [MXE](http://mxe.cc/)
 
 Define CMAKE_PREFIX_PATH to point to your Qt instalation.
 
-Example: /Users/awesome/Qt/5.3.0/clang_64
 
+Example: /Users/awesome/Qt/5.3.0/clang_64
 `run build_mac.sh`
 
 ##Linux
