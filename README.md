@@ -1,4 +1,4 @@
-#RouteKeygen
+#RouterKeygen
 
 Router Keygen generate default WPA/WEP keys for the following router:
 
