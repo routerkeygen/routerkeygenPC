@@ -55,5 +55,5 @@ Example: /Users/awesome/Qt/5.3.0/clang_64
 ##Linux
 
 ####Ubuntu
-`sudo apt-get install  cmake build-essential qt5-default libssl-dev qtscript5-dev libnm-gtk-dev qttools5-dev`
+`sudo apt-get install cmake build-essential qt5-default libssl-dev qtscript5-dev libnm-gtk-dev qttools5-dev qttools5-dev-tools`
 `run build_linux.sh`
