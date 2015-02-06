@@ -39,6 +39,8 @@ set(ROUTERKEYGEN_RCC
    ${CMAKE_CURRENT_BINARY_DIR}/../lang/resources-lang.qrc
 )
 
+
+
 if(Qt5_POSITION_INDEPENDENT_CODE)
   set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 endif()
@@ -62,7 +64,7 @@ set(ROUTERKEYGEN_UIS
     forms/UpdateDialog.ui
 )
 
-if (UNIX AND NOT APPLE )
+if(UNIX AND NOT APPLE )
     list( APPEND ROUTERKEYGEN_SRCS wifi/QWifiManagerPrivateUnix.cpp )
     list( APPEND ROUTERKEYGEN_HDRS wifi/QWifiManagerPrivateUnix.h )
     include_directories(/usr/include/NetworkManager)
@@ -112,7 +114,12 @@ else(Qt5Core_FOUND)
 endif(Qt5Core_FOUND)
 
 
-add_executable(routerkeygen ${GUI_TYPE} ${ROUTERKEYGEN_SRCS} ${ROUTERKEYGEN_HDRS} ${ROUTERKEYGEN_UIS_H} ${ROUTERKEYGEN_RCC_SRCS} )
+if(APPLE)
+    set(ROUTERKEYGEN_RCC_SRCS ${ROUTERKEYGEN_RCC_SRCS} ../share/routerkeygen.entitlements )
+endif(APPLE)
+
+
+add_executable(routerkeygen ${GUI_TYPE} ${ROUTERKEYGEN_SRCS} ${ROUTERKEYGEN_HDRS} ${ROUTERKEYGEN_UIS_H} ${ROUTERKEYGEN_RCC_SRCS})
 
 # Add translations
 add_dependencies(routerkeygen translations)
@@ -134,9 +141,14 @@ add_custom_command(
 
 if(APPLE)
     set_target_properties(routerkeygen PROPERTIES MACOSX_BUNDLE_INFO_PLIST ../share/MacOSXBundleInfo.plist.in)
-    set_source_files_properties(../share/routerkeygen.icns PROPERTIES
-        MACOSX_PACKAGE_LOCATION Resources)
+    set_source_files_properties(../share/routerkeygen.entitlements PROPERTIES MACOSX_PACKAGE_LOCATION Resources)
+    set_source_files_properties(../share/routerkeygen.icns PROPERTIES  MACOSX_PACKAGE_LOCATION Resources)
     set(MACOSX_BUNDLE_ICON_FILE routerkeygen.icns)
+    set(MACOSX_BUNDLE_BUNDLE_NAME ${PROJECT_NAME_SHORT})
+    set(MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION})
+    set(MACOSX_BUNDLE_LONG_VERSION_STRING ${PROJECT_VERSION})
+    set(MACOSX_BUNDLE_INFO_STRING ${PROJECT_DESCRIPTION})
+    set(MACOSX_BUNDLE_COPYRIGHT ${PROJECT_COPYRIGHT})
 endif(APPLE)
 
 add_definitions(-W -Wall -D_FORTIFY_SOURCE=2  )

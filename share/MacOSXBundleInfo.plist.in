@@ -23,16 +23,16 @@
 	<key>CFBundleShortVersionString</key>
 	<string>${MACOSX_BUNDLE_SHORT_VERSION_STRING}</string>
 	<key>CFBundleSignature</key>
-	<string>????</string>
+	<string>com.routerkeygen</string>
 	<key>CFBundleVersion</key>
 	<string>${MACOSX_BUNDLE_BUNDLE_VERSION}</string>
 	<key>CSResourcesFileMapped</key>
-	<true/>
-	<key>LSRequiresCarbon</key>
 	<true/>
 	<key>NSHumanReadableCopyright</key>
 	<string>${MACOSX_BUNDLE_COPYRIGHT}</string>
     <key>NSPrincipalClass</key>
     <string>NSApplication</string>
+    <key>LSMinimumSystemVersion</key>
+    <string>10.6</string>
 </dict>
 </plist>
