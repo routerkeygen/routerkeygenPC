@@ -3,10 +3,15 @@
 # Author: Rui Araújo <ruka.araujo AT gmail.com>
 #
 # Project Info
+cmake_minimum_required (VERSION 3.0.2)
+
+
 set(PROJECT_NAME_SHORT   "RouterKeygen")
+string(TOLOWER ${PROJECT_NAME_SHORT} PROJECT_NAME_SHORT_LOWER)
+project(${PROJECT_NAME_SHORT_LOWER} CXX)
 set(PROJECT_NAME_LONG    "RouterKeygen")
 set(PROJECT_DESCRIPTION  "Default WPA/WEP key generator for several routers such as Thomson based routers ( this includes Thomson, SpeedTouch, Orange, Infinitum, BBox, DMax, BigPond, O2Wireless, Otenet, Cyta, TN_private and Blink ), DLink ( only some models ), Pirelli Discus, Eircom, Verizon FiOS ( only some routers supported), Alice AGPF, FASTWEB Pirelli and Telsey, Huawei (some InfinitumXXXX), Wlan_XXXX or Jazztel_XXXX, Wlan_XX ( only some are supported), Ono ( P1XXXXXX0000X ), WlanXXXXXX YacomXXXXXX and WifiXXXXXX, Sky V1 routers, Clubinternet.box v1 and v2 ( TECOM-AH4XXXX ), InfostradaWifi, CONN-X, Megared, EasyBox Arcor and Vodafone, PBS (Austria), MAXCOM, PTV, TeleTu/Tele2, Axtel Axtel-xtremo, Intercable, OTE, Cabovisao Sagem, Alice in Germany and Speedport.")
-set(PROJECT_COPYRIGHT    "Copyright (C) 2010-2014 Rui Araújo")
+set(PROJECT_COPYRIGHT    "Copyright (C) 2010-2015 Rui Araújo")
 set(PROJECT_CONTACT      "ruka.araujo@gmail.com")
 set(PROJECT_VENDOR       "Rui Araújo")
 set(ORG_WEBSITE          "https://github.com/routerkeygen/routerkeygenPC")
@@ -30,17 +35,14 @@ if(WIN32)
 endif(WIN32)
 
 # Project Version
-set(CPACK_PACKAGE_VERSION_MAJOR "1")
-set(CPACK_PACKAGE_VERSION_MINOR "1")
-set(CPACK_PACKAGE_VERSION_PATCH "0")
-set(CPACK_PACKAGE_VERSION ${CPACK_PACKAGE_VERSION_MAJOR}.${CPACK_PACKAGE_VERSION_MINOR}.${CPACK_PACKAGE_VERSION_PATCH})
-set(PROJECT_VERSION_MAJOR ${CPACK_PACKAGE_VERSION_MAJOR}.${CPACK_PACKAGE_VERSION_MINOR})
-set(PROJECT_VERSION ${CPACK_PACKAGE_VERSION})
+set(${PROJECT_NAME_SHORT_LOWER}_VERSION_MAJOR 1)
+set(${PROJECT_NAME_SHORT_LOWER}_VERSION_MINOR 1)
+set(${PROJECT_NAME_SHORT_LOWER}_VERSION_PATCH 0)
+set(PROJECT_VERSION ${${PROJECT_NAME_SHORT_LOWER}_VERSION_MAJOR}.${${PROJECT_NAME_SHORT_LOWER}_VERSION_MINOR}.${${PROJECT_NAME_SHORT_LOWER}_VERSION_PATCH})
+set(CPACK_PACKAGE_VERSION ${PROJECT_VERSION})
 
 message(STATUS "Version: ${PROJECT_VERSION}")
 
-string(TOLOWER ${PROJECT_NAME_SHORT} PROJECT_NAME_SHORT_LOWER)
-project(${PROJECT_NAME_SHORT_LOWER}-${PROJECT_VERSION})
 
 # System on which project is built
 site_name(HOSTNAME)

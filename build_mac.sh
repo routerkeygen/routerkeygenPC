@@ -12,11 +12,18 @@ DMG_NAME=RouterKeygen_V1_1_0
 TITLE=RouterKeygen
 APPLICATION_NAME="$TITLE".app
 
-echo $SRC_FOLDER
 mkdir -p $BUILD_FOLDER
 cd $BUILD_FOLDER
 
-cmake -DCMAKE_BUILD_TYPE=Release -DQT_QMAKE_EXECUTABLE=`which qmake` "$SRC_FOLDER"
+command -v qmake >/dev/null 2>&1 || { echo >&2 "qmake is required for building.  Aborting."; exit 1; }
+
+QMAKE=`command -v qmake`
+#remove qmake from path
+CMAKE_PREFIX_PATH=`dirname $QMAKE`
+#remove bin from path
+CMAKE_PREFIX_PATH=`dirname $CMAKE_PREFIX_PATH`
+
+cmake -DCMAKE_BUILD_TYPE=Release -DQT_QMAKE_EXECUTABLE=`command -v qmake` "$SRC_FOLDER"
 if [ "$?" = "0" ]; then	
 	if [ -f bin/RouterKeygen.app ];
 	then
@@ -32,12 +39,12 @@ if [ "$?" = "0" ]; then
     macdeployqt bin/routerkeygen.app -always-overwrite
     mv bin/routerkeygen.app bin/RouterKeygen.app
     #Allow codesign to work properly
-    cp "$CMAKE_PREFIX_PATH"/lib/QtCore.framework/Contents/Info.plist bin/RouterKeygen.app/Contents/Frameworks/QtCore.framework/Resources/
-    cp "$CMAKE_PREFIX_PATH"/lib/QtGui.framework/Contents/Info.plist bin/RouterKeygen.app/Contents/Frameworks/QtGui.framework/Resources/
-    cp "$CMAKE_PREFIX_PATH"/lib/QtWidgets.framework/Contents/Info.plist bin/RouterKeygen.app/Contents/Frameworks/QtWidgets.framework/Resources/
-    cp "$CMAKE_PREFIX_PATH"/lib/QtNetwork.framework/Contents/Info.plist bin/RouterKeygen.app/Contents/Frameworks/QtNetwork.framework/Resources/
-    cp "$CMAKE_PREFIX_PATH"/lib/QtScript.framework/Contents/Info.plist bin/RouterKeygen.app/Contents/Frameworks/QtScript.framework/Resources/
-    cp "$CMAKE_PREFIX_PATH"/lib/QtPrintSupport.framework/Contents/Info.plist bin/RouterKeygen.app/Contents/Frameworks/QtPrintSupport.framework/Resources/
+    cp "$CMAKE_PREFIX_PATH"/lib/QtCore.framework/Resources/Info.plist bin/RouterKeygen.app/Contents/Frameworks/QtCore.framework/Resources/
+    cp "$CMAKE_PREFIX_PATH"/lib/QtGui.framework/Resources/Info.plist bin/RouterKeygen.app/Contents/Frameworks/QtGui.framework/Resources/
+    cp "$CMAKE_PREFIX_PATH"/lib/QtWidgets.framework/Resources/Info.plist bin/RouterKeygen.app/Contents/Frameworks/QtWidgets.framework/Resources/
+    cp "$CMAKE_PREFIX_PATH"/lib/QtNetwork.framework/Resources/Info.plist bin/RouterKeygen.app/Contents/Frameworks/QtNetwork.framework/Resources/
+    cp "$CMAKE_PREFIX_PATH"/lib/QtScript.framework/Resources/Info.plist bin/RouterKeygen.app/Contents/Frameworks/QtScript.framework/Resources/
+    cp "$CMAKE_PREFIX_PATH"/lib/QtPrintSupport.framework/Resources/Info.plist bin/RouterKeygen.app/Contents/Frameworks/QtPrintSupport.framework/Resources/
 else
     echo "Error while building" 1>&2
     exit 1
