@@ -27,6 +27,7 @@ UpdateDialog::UpdateDialog(QString url, QString version, QWidget *parent) :
 {
     ui->setupUi(this);
     connect(ui->openWebsite,SIGNAL(clicked()), this, SLOT(openWebsite()));
+    connect(ui->close,SIGNAL(clicked()), this, SLOT(closeWindow()));
     ui->textBrowser->setHtml(ui->textBrowser->toHtml().arg(version));
 }
 
@@ -49,5 +50,11 @@ void UpdateDialog::changeEvent(QEvent *e)
 
 void  UpdateDialog::openWebsite(){
     QDesktopServices::openUrl(QUrl(url));
+    this->closeWindow();
+}
+
+
+void  UpdateDialog::closeWindow(){
     close();
+    this->deleteLater();
 }

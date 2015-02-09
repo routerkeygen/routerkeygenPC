@@ -22,6 +22,7 @@ private:
 
 private slots:
     void openWebsite();
+    void closeWindow();
 };
 
 #endif // UPDATEDIALOG_H

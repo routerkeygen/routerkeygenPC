@@ -39,6 +39,7 @@
 #include <QTextStream>
 #include <QtScript/QScriptEngine>
 #include <QHeaderView>
+#include <QScopedPointer>
 #include <stdlib.h>
 #include "version.h"
 #include "algorithms/Keygen.h"
@@ -84,6 +85,8 @@ RouterKeygen::RouterKeygen(QWidget *parent) :
 #else
     ui->forceRefresh->setVisible(false); // it is not needed in Windows or Mac
 #endif
+    mNetworkManager = new QNetworkAccessManager(this);
+   connect(mNetworkManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(onNetworkReply(QNetworkReply*)));
 
     wifiManager = new QWifiManager();
     connect(wifiManager, SIGNAL( scanFinished(int) ), this,
@@ -91,7 +94,7 @@ RouterKeygen::RouterKeygen(QWidget *parent) :
     loadingAnim = new QMovie(":/loading.gif");
     loadingAnim->setParent(this);
     //Auto-Complete!
-    wordList << "Alice-" <<  "Arcor-" << "AXTEL-" << "AXTEL-XTREMO-" << "Bbox-" <<
+    wordList << "Alice-" <<  "Arcor-" << "AXTEL-" << "AXTEL-XTREMO-" << "Bbox-" << "Belkin" <<
             "BigPond" << "Blink" << "Cabovisao-" << "CONN" << "CYTA" << "Discus--"<<
             "DLink-" << "DMAX" << "EasyBox-" << "eircom" << "FASTWEB-1-" << "INFINITUM" <<
             "InfostradaWiFi-" << "InterCable" << "JAZZTEL_" << "MAXCOM" << "Megared" <<
@@ -175,27 +178,45 @@ void RouterKeygen::showAboutDialog(){
 }
 
 void  RouterKeygen::checkUpdates(){
-    QNetworkAccessManager* mNetworkManager = new QNetworkAccessManager(this);
-    QObject::connect(mNetworkManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(onNetworkReply(QNetworkReply*)));
     if ( !automaticUpdateCheck ){
         enableUI(false);
         setLoadingAnimation(tr("Checking for updates"));
     }
-    QUrl url("https://raw.github.com/routerkeygen/routerkeygenPC/master/routerkeygen_version.json");
-    mNetworkManager->get(QNetworkRequest(url));
+    mNetworkManager->get(QNetworkRequest(RouterKeygen::UPDATE_URL));
 }
 
 
 void RouterKeygen::onNetworkReply(QNetworkReply* reply){
-    const unsigned int RESPONSE_OK = 200, RESPONSE_BAD= 400;
-    if ( !automaticUpdateCheck ){
-        cleanLoadingAnimation();
-        enableUI(true);
-    }
     if(reply->error() == QNetworkReply::NoError)
     {
-        unsigned int httpstatuscode = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toUInt();
-        if (httpstatuscode >= RESPONSE_OK && httpstatuscode < RESPONSE_BAD){
+        /*
+         * Reply is finished!
+         * We'll ask for the reply about the Redirection attribute
+         * http://doc.trolltech.com/qnetworkrequest.html#Attribute-enum
+         */
+        QVariant possibleRedirectUrl =
+                 reply->attribute(QNetworkRequest::RedirectionTargetAttribute);
+
+        /* We'll deduct if the redirection is valid in the redirectUrl function */
+        _urlRedirectedTo = this->redirectUrl(possibleRedirectUrl.toUrl(),
+                                             _urlRedirectedTo);
+
+        /* If the URL is not empty, we're being redirected. */
+        if(!_urlRedirectedTo.isEmpty()) {
+            /* We'll do another request to the redirection url. */
+            mNetworkManager->get(QNetworkRequest(_urlRedirectedTo));
+        }
+        else {
+            if ( !automaticUpdateCheck ){
+                cleanLoadingAnimation();
+                enableUI(true);
+            }
+            /*
+             * We weren't redirected anymore
+             * so we arrived to the final destination...
+             */
+            /* ...so this can be cleared. */
+            _urlRedirectedTo.clear();
             if (reply->isReadable()){
                 QByteArray result = reply->readAll();
                 QScriptValue sc;
@@ -209,7 +230,7 @@ void RouterKeygen::onNetworkReply(QNetworkReply* reply){
                 }
                 else{
                     //TODO: when the final website is sc.property("url").toString()
-                    UpdateDialog * updateDialog = new UpdateDialog(QString("https://code.google.com/p/android-thomson-key-solver/downloads/list"),
+                    UpdateDialog* updateDialog = new UpdateDialog(QString("https://routerkeygen.github.io/"),
                                                                    version, this);
                     updateDialog->show();
                 }
@@ -219,15 +240,34 @@ void RouterKeygen::onNetworkReply(QNetworkReply* reply){
                     ui->statusBar->showMessage(tr("Error while checking for updates"));
                 }
             }
+            automaticUpdateCheck = false;
         }
     }
     else {
         if ( !automaticUpdateCheck ){
             ui->statusBar->showMessage(tr("Error while checking for updates"));
+            cleanLoadingAnimation();
+            enableUI(true);
         }
+        automaticUpdateCheck = false;
     }
-    automaticUpdateCheck = false;
     reply->deleteLater();
+}
+
+QUrl RouterKeygen::redirectUrl(const QUrl& possibleRedirectUrl,
+                               const QUrl& oldRedirectUrl) const {
+    QUrl redirectUrl;
+    /*
+     * Check if the URL is empty and
+     * that we aren't being fooled into a infinite redirect loop.
+     * We could also keep track of how many redirects we have been to
+     * and set a limit to it, but we'll leave that to you.
+     */
+    if(!possibleRedirectUrl.isEmpty() &&
+       possibleRedirectUrl != oldRedirectUrl) {
+        redirectUrl = possibleRedirectUrl;
+    }
+    return redirectUrl;
 }
 
 void RouterKeygen::donateGooglePlay(){
@@ -263,6 +303,7 @@ RouterKeygen::~RouterKeygen() {
     delete matcher;
     delete aboutDialog;
     delete welcomeDialog;
+    mNetworkManager->deleteLater();
 }
 void RouterKeygen::manualCalculation() {
     QString mac = ui->macInput->text();
@@ -615,7 +656,8 @@ void RouterKeygen::enableUI(bool enable){
     ui->unlikelyNetworkslist->setEnabled(enable);
     ui->unsupportedNetworkslist->setEnabled(enable);
 }
-
+//https://raw.githubusercontent.com/routerkeygen/routerkeygenPC/master/routerkeygen_version.json
+const QUrl RouterKeygen::UPDATE_URL = QUrl("https://raw.github.com/routerkeygen/routerkeygenPC/master/routerkeygen_version.json");
 const QString RouterKeygen::RUN_ON_START_UP = "RUN_ON_START_UP";
 const QString RouterKeygen::RUN_IN_BACKGROUND = "RUN_IN_BACKGROUND";
 const QString RouterKeygen::FORCE_REFRESH = "FORCE_REFRESH";

@@ -8,6 +8,9 @@
 #include <QCompleter>
 #include <QNetworkReply>
 #include <QSharedPointer>
+#include <QUrl>
+#include <QPointer>
+#include <QNetworkAccessManager>
 
 namespace Ui {
     class RouterKeygen;
@@ -59,6 +62,8 @@ private:
     void cleanLoadingAnimation();
     void calc(QScanResult * wifi );
     void enableUI(bool enable);
+    QUrl redirectUrl(const QUrl& possibleRedirectUrl,
+                     const QUrl& oldRedirectUrl) const;
     Ui::RouterKeygen *ui;
     QVector<QString> listKeys;
     QVector<QSharedPointer<QScanResult> > wifiNetworks;
@@ -82,6 +87,11 @@ private:
     //SETTINGS VALUES
     QSettings * settings;
     QStringList wordList;
+
+    //Update checking
+    const static QUrl UPDATE_URL;
+    QPointer<QNetworkAccessManager> mNetworkManager;
+    QUrl _urlRedirectedTo;
 
     const static QString RUN_ON_START_UP;
     const static QString RUN_IN_BACKGROUND;
