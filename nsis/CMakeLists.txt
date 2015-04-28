@@ -3,10 +3,10 @@
 #
 
 # Output file name
-set(NSIS_OUTPUT_FILE "${PROJECT_NAME}.exe")
+set(NSIS_OUTPUT_FILE "${PROJECT_NAME}_installer.exe")
 
 # NSIS is only available for Win32 builds (native or cross compilation)
-if(WIN32)
+if(MSYS)
     set(NSIS_OUTPUT_DIR "${CMAKE_BINARY_DIR}/bin/")
     # Check contribs existence
     if(EXISTS "${CMAKE_FIND_ROOT_PATH}/")
@@ -28,4 +28,4 @@ if(WIN32)
     else(EXISTS "${CMAKE_FIND_ROOT_PATH}/")
         message(WARNING "${CMAKE_FIND_ROOT_PATH} not available, you won't be able to create an installer. Read INSTALL.win32 for details.")
     endif(EXISTS "${CMAKE_FIND_ROOT_PATH}/")
-endif(WIN32)
+endif(MSYS)

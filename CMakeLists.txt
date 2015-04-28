@@ -3,7 +3,7 @@
 # Author: Rui Araújo <ruka.araujo AT gmail.com>
 #
 # Project Info
-cmake_minimum_required (VERSION 3.0.2)
+cmake_minimum_required (VERSION 2.8.11)
 
 
 set(PROJECT_NAME_SHORT   "RouterKeygen")
@@ -26,13 +26,13 @@ ELSE(NOT CMAKE_BUILD_TYPE)
     message("Build type set to '${CMAKE_BUILD_TYPE}'")
 endif(NOT CMAKE_BUILD_TYPE)
 
-if(WIN32)
-    # Building in release for WIN32
+if(MSYS)
+    # Building in release for MSYS
     set(CMAKE_BUILD_TYPE "Release")
     set_property(DIRECTORY APPEND PROPERTY COMPILE_DEFINITIONS_RELEASE QT_NO_DEBUG)
     # Use mingw's sprintf instead of windows's
     add_definitions( -D__USE_MINGW_ANSI_STDIO=1 )
-endif(WIN32)
+endif(MSYS)
 
 # Project Version
 set(${PROJECT_NAME_SHORT_LOWER}_VERSION_MAJOR 1)
@@ -82,15 +82,15 @@ if (Qt5Core_FOUND)
 else(Qt5Core_FOUND)
     message("Using Qt4")
     find_package(Qt4 4.8.0 COMPONENTS QtCore QtGui QtNetwork QtScript REQUIRED )
-    set(ROUTERKEYGEN_LIBS ${QT_LIBRARIES} ${OPENSSL_LIBRARIES} ) # Add here any other QT module or other library
+    set(ROUTERKEYGEN_LIBS ${QT_QTSCRIPT_LIBRARY} ${QT_QTNETWORK_LIBRARY} ${QT_QTGUI_LIBRARY} ${QT_QTCORE_LIBRARY} ${OPENSSL_LIBRARIES} ) # Add here any other QT module or other library
     include(${QT_USE_FILE})
 #FindQt4.cmake is so brain-dead when Xcompiling
     add_definitions(${QT_DEFINITIONS})
 endif(Qt5Core_FOUND)
 
-if(WIN32 AND CMAKE_CROSS_COMPILING)
-    set (ROUTERKEYGEN_LIBS ${ROUTERKEYGEN_LIBS} crypt32 jpeg png tiff mng lzma lcms z imm32 winmm ws2_32 )
-endif(WIN32 AND CMAKE_CROSS_COMPILING)
+if(MSYS AND CMAKE_CROSS_COMPILING)
+    set (ROUTERKEYGEN_LIBS ${ROUTERKEYGEN_LIBS} crypt32 jpeg png tiff mng lzma lcms2 z imm32 winmm ws2_32 )
+endif(MSYS AND CMAKE_CROSS_COMPILING)
 
 # Layout of CMakeQt installation
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
@@ -164,7 +164,7 @@ set(CPACK_PACKAGE_INSTALL_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}")
 set(CPACK_PACKAGE_FILE_NAME ${PROJECT_NAME}-${CPACK_SYSTEM_NAME}-${CMAKE_SYSTEM_PROCESSOR})
 
 # NSIS Windows installer
-if(WIN32 AND NOT UNIX)
+if(MSYS AND NOT UNIX)
     # There is a bug in NSI that does not handle full unix paths properly. Make
     # sure there is at least one set of four (4) backslashes.
     set(CPACK_PACKAGE_ICON "${CMAKE_SOURCE_DIR}/share\\\\routerkeygen.png")
@@ -174,11 +174,11 @@ if(WIN32 AND NOT UNIX)
     set(CPACK_NSIS_URL_INFO_ABOUT "https:\\\\\\\\github.com/routerkeygen/routerkeygenPC/")
     set(CPACK_NSIS_CONTACT "ruka.araujo AT gmail.com")
     set(CPACK_NSIS_MODifY_PATH ON)
-endif(WIN32 AND NOT UNIX)
+endif(MSYS AND NOT UNIX)
 
 # RPM packages
-include(${CMAKE_MODULE_PATH}/RpmBuild.cmake)
-if(RPMBUILD_FOUND AND NOT WIN32)
+include(cmake/RpmBuild.cmake)
+if(RPMBUILD_FOUND AND NOT MSYS)
     set(CPACK_GENERATOR "RPM")
     set(CPACK_RPM_PACKAGE_SUMMARY ${CPACK_PACKAGE_DESCRIPTION_SUMMARY})
     set(CPACK_RPM_PACKAGE_NAME ${CPACK_PACKAGE_NAME})
@@ -189,11 +189,11 @@ if(RPMBUILD_FOUND AND NOT WIN32)
     set(CPACK_RPM_PACKAGE_SUMMARY ${PROJECT_DESCRIPTION})
     set(CPACK_RPM_PACKAGE_DEPENDS "libc, qt ( >= 4.6 ), qt-x11 ( >= 4.6 ), NetworkManager ( >= 0.8 )") # Specify dependencies here
     set(CPACK_set_DESTDIR TRUE)
-endif(RPMBUILD_FOUND AND NOT WIN32)
+endif(RPMBUILD_FOUND AND NOT MSYS)
 
 # Debian packages
-include(${CMAKE_MODULE_PATH}/DpkgBuild.cmake)
-if(DPKG_FOUND AND NOT WIN32)
+include(cmake/DpkgBuild.cmake)
+if(DPKG_FOUND AND NOT MSYS)
     set(CPACK_GENERATOR "DEB")
     set(CPACK_DEBIAN_PACKAGE_NAME ${CPACK_PACKAGE_NAME})
     set(CPACK_DEBIAN_PACKAGE_VERSION ${CPACK_PACKAGE_VERSION})
@@ -208,9 +208,9 @@ else(Qt5Core_FOUND)
     set(CPACK_DEBIAN_PACKAGE_DEPENDS "libc6 (>= 2.3.1-6), libqt4-gui ( >= 4.6 ), libqt4-network ( >= 4.6 ), network-manager ( >= 0.8 )") # Specify dependencies here
 endif(Qt5Core_FOUND)
     set(CPACK_set_DESTDIR TRUE)
-endif(DPKG_FOUND AND NOT WIN32)
+endif(DPKG_FOUND AND NOT MSYS)
 
-set(CPACK_PACKAGE_EXECUTABLES "routerkeygen" "ROUTERKEYGEN")
+set(CPACK_PACKAGE_EXECUTABLES ${PROJECT_NAME_SHORT_LOWER} "ROUTERKEYGEN")
 INCLUDE(CPack)
 
 #For debug purposes, print all variables
