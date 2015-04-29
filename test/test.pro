@@ -8,12 +8,12 @@ SOURCES += \
     ../src/WirelessMatcher.cpp \
     ../src/config/*.cpp \
     ../src/wifi/QScanResult.cpp \
-    AlgorithmsTest.cpp
+    AlgorithmsTest.cpp \
 
 HEADERS += ../src/algorithms/*.h \
     ../src/config/*.h \
     ../src/wifi/QScanResult.h \
-    ../src/WirelessMatcher.h
+    ../src/WirelessMatcher.h \
 
 INCLUDEPATH += ../src/
 LIBS += -lcrypto

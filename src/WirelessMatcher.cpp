@@ -57,6 +57,7 @@
 #include "algorithms/CabovisaoSagemKeygen.h"
 #include "algorithms/Speedport500Keygen.h"
 #include "algorithms/WifimediaRKeygen.h"
+#include "algorithms/BelkinKeygen.h"
 #include <QRegExp>
 
 WirelessMatcher::WirelessMatcher() {
@@ -219,6 +220,12 @@ QVector<Keygen *> * WirelessMatcher::getKeygens(QString ssid, QString mac) {
 
     if (ssid.count(QRegExp("^PBS-[0-9a-fA-F]{6}$")) == 1)
         keygens->append(new PBSKeygen(ssid, mac));
+
+    if ((ssid.count(QRegExp("^(B|b)elkin(\\.|_)[0-9a-fA-F]{3,6}$")) == 1) ||
+            mac.startsWith("94:44:52")||
+            mac.startsWith("08:86:3B")||
+            mac.startsWith("EC:1A:59"))
+        keygens->append(new BelkinKeygen(ssid, mac));
 
     if (ssid.count(
             QRegExp(
