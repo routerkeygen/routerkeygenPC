@@ -98,9 +98,13 @@ QVector<Keygen *> * WirelessMatcher::getKeygens(QString ssid, QString mac) {
         QVector<AliceMagicInfo *> * supported = supportedAlice->value(
                 ssid.mid(6,3));
         if (supported != NULL && supported->size() > 0) {
-            if (mac.length() < 6)
-                mac = supported->at(0)->mac;
-            keygens->append(new AliceItalyKeygen(ssid, mac, supported));
+            QString macProcessed = mac.replace(":", "").replace("-", "").toUpper();
+            if (macProcessed.length() < 6 || macProcessed.left(6) != supported->at(0)->mac) {
+                macProcessed = supported->at(0)->mac;
+            } else {
+                macProcessed = mac;
+            }
+            keygens->append(new AliceItalyKeygen(ssid, macProcessed, supported));
         }
     }
 

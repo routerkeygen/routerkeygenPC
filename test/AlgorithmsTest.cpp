@@ -49,6 +49,18 @@ class AlgorithmsTest: public QObject
 private slots:
 
     void testAliceItaly() {
+        QScanResult wifi("Alice-53847953", "00:25:53:35:a7:91");
+        wifi.checkSupport(matcher);
+        QVector<Keygen *> * keygens = wifi.getKeygens();
+        QVERIFY2(keygens->size() != 0 , "An algorithm was not detected");
+        Keygen * keygen = keygens->at(0);
+        QCOMPARE(typeid(*keygen), typeid(AliceItalyKeygen) );
+        QVector<QString> results = keygen->getResults();
+        QCOMPARE(results.size(),1);
+        QCOMPARE(results.at(0),QString("7nfyuqlahytaml3bkcjasmtf"));
+    }
+
+    void testAliceItaly2() {
         QScanResult wifi("Alice-37588990", "00:23:8e:48:e7:d4");
         wifi.checkSupport(matcher);
         QVector<Keygen *> * keygens = wifi.getKeygens();
@@ -61,6 +73,18 @@ private slots:
         QCOMPARE(results.at(1),QString("fsvcl1ujd3coikm49qowthn8"));
         QCOMPARE(results.at(2),QString("y7xysqmqs9jooa7rersi7ayi"));
         QCOMPARE(results.at(3),QString("9j4hm3ojq4brfdy6wcsuglwu"));
+    }
+
+    void testAliceItaly3() {
+        QScanResult wifi("Alice-95535232", "00:8c:54:07:de:08");
+        wifi.checkSupport(matcher);
+        QVector<Keygen *> * keygens = wifi.getKeygens();
+        QVERIFY2(keygens->size() != 0 , "An algorithm was not detected");
+        Keygen * keygen = keygens->at(0);
+        QCOMPARE(typeid(*keygen), typeid(AliceItalyKeygen) );
+        QVector<QString> results = keygen->getResults();
+        QCOMPARE(results.size(),1);
+        QCOMPARE(results.at(0),QString("e3eudsvbuu2i8zz2yalosd65"));
     }
 
     void testAliceGermany() {
@@ -86,6 +110,7 @@ private slots:
         QCOMPARE(results.size(),1);
         QCOMPARE(results.at(0),QString("040D93B0"));
     }
+
     void testBelkin2() {
         QScanResult wifi("belkin.ed0","94:44:52:00:ce:d0");
         wifi.checkSupport(matcher);
