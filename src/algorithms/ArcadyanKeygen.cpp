@@ -5,19 +5,19 @@
  *      Author: ruka
  */
 
-#include "EasyBoxKeygen.h"
+#include "ArcadyanKeygen.h"
 #include <QRegExp>
 
-EasyBoxKeygen::EasyBoxKeygen(QString ssid, QString mac) :
+ArcadyanKeygen::ArcadyanKeygen(QString ssid, QString mac) :
 		Keygen(ssid, mac) {
 }
 
-int EasyBoxKeygen::getSupportState() const{
+int ArcadyanKeygen::getSupportState() const{
     if ( getSsidName().count(QRegExp("^(Arcor|EasyBox|Vodafone|WLAN)(-| )[0-9a-fA-F]{6}$")) == 1 )
         return SUPPORTED;
     return UNLIKELY;
 }
-QVector<QString> & EasyBoxKeygen::getKeys() {
+QVector<QString> & ArcadyanKeygen::getKeys() {
 	QString mac = getMacAddress();
 	if (mac.length() != 12) {
 		throw ERROR;
@@ -55,6 +55,10 @@ QVector<QString> & EasyBoxKeygen::getKeys() {
 
 	QString wpaKey = X1 + Y1 + Z1 + X2 + Y2 + Z2 + X3 + Y3 + Z3;
 	results.append(wpaKey.toUpper());
+
+    if (wpaKey.indexOf('0')!=-1) {
+        results.append(wpaKey.replace("0", "1").toUpper());
+    }
 	return results;
 }
 

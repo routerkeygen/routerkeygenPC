@@ -10,9 +10,9 @@
 
 #include "Keygen.h"
 
-class EasyBoxKeygen: public Keygen {
+class ArcadyanKeygen: public Keygen {
 public:
-	EasyBoxKeygen(QString ssid, QString mac);
+    ArcadyanKeygen(QString ssid, QString mac);
     int getSupportState() const;
 private:
 	QVector<QString> & getKeys() ;

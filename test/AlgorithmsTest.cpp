@@ -32,11 +32,12 @@
 #include "algorithms/OteHuaweiKeygen.h"
 #include "algorithms/PBSKeygen.h"
 #include "algorithms/PtvKeygen.h"
-#include "algorithms/EasyBoxKeygen.h"
+#include "algorithms/ArcadyanKeygen.h"
 #include "algorithms/CabovisaoSagemKeygen.h"
 #include "algorithms/Speedport500Keygen.h"
 #include "algorithms/WifimediaRKeygen.h"
 #include "algorithms/BelkinKeygen.h"
+#include "algorithms/TplinkKeygen.h"
 #include "WirelessMatcher.h"
 #include "wifi/QScanResult.h"
 #include <QDebug>
@@ -69,9 +70,6 @@ private slots:
         QCOMPARE(typeid(*keygen), typeid(AliceItalyKeygen) );
         QVector<QString> results = keygen->getResults();
         QCOMPARE(results.size(),4);
-        QCOMPARE(results.at(0),QString("djfveeeqyasxhhcqar8ypkcv"));
-        QCOMPARE(results.at(1),QString("fsvcl1ujd3coikm49qowthn8"));
-        QCOMPARE(results.at(2),QString("y7xysqmqs9jooa7rersi7ayi"));
         QCOMPARE(results.at(3),QString("9j4hm3ojq4brfdy6wcsuglwu"));
     }
 
@@ -87,6 +85,18 @@ private slots:
         QCOMPARE(results.at(0),QString("e3eudsvbuu2i8zz2yalosd65"));
     }
 
+    void testAliceItaly4() {
+        QScanResult wifi("Alice-53023425", "00:25:53:05:e3:50");
+        wifi.checkSupport(matcher);
+        QVector<Keygen *> * keygens = wifi.getKeygens();
+        QVERIFY2(keygens->size() != 0 , "An algorithm was not detected");
+        Keygen * keygen = keygens->at(0);
+        QCOMPARE(typeid(*keygen), typeid(AliceItalyKeygen) );
+        QVector<QString> results = keygen->getResults();
+        QCOMPARE(results.size(),4);
+        QCOMPARE(results.at(3),QString("gi0wdaa3crf6wsb53sf7bv5t"));
+    }
+
     void testAliceGermany() {
         QScanResult wifi("ALICE-WLANC3","00:1E:40:A0:84:C4");
         wifi.checkSupport(matcher);
@@ -97,6 +107,31 @@ private slots:
         QVector<QString> results = keygen->getResults();
         QCOMPARE(results.size(),1);
         QCOMPARE(results.at(0),QString("MGIwMjhjYTYzZmM0"));
+    }
+
+    void testArcadyan() {
+        QScanResult wifi("Arcor-910B02", "00:12:BF:91:0B:EC");
+        wifi.checkSupport(matcher);
+        QVector<Keygen *> * keygens = wifi.getKeygens();
+        QVERIFY2(keygens->size() != 0 , "An algorithm was not detected");
+        Keygen * keygen = keygens->at(0);
+        QCOMPARE(typeid(*keygen), typeid(ArcadyanKeygen) );
+        QVector<QString> results = keygen->getResults();
+        QCOMPARE(results.size(),1);
+        QCOMPARE(results.at(0),QString("F9C8C9DEF"));
+    }
+
+    void testArcadyan2() {
+        QScanResult wifi("VodafoneGG11", "74:31:70:33:00:11");
+        wifi.checkSupport(matcher);
+        QVector<Keygen *> * keygens = wifi.getKeygens();
+        QVERIFY2(keygens->size() != 0 , "An algorithm was not detected");
+        Keygen * keygen = keygens->at(0);
+        QCOMPARE(typeid(*keygen), typeid(ArcadyanKeygen) );
+        QVector<QString> results = keygen->getResults();
+        QCOMPARE(results.size(),2);
+        QCOMPARE(results.at(0),QString("58639029A"));
+        QCOMPARE(results.at(1),QString("58639129A"));
     }
 
     void testBelkin() {
@@ -157,18 +192,6 @@ private slots:
         QVector<QString> results = keygen->getResults();
         QCOMPARE(results.size(),1);
         QCOMPARE( results.at(0),QString("6r8qwaYHSNdpqdYw6aN8"));
-    }
-
-    void testEasyBox() {
-        QScanResult wifi("Arcor-910B02", "00:12:BF:91:0B:EC");
-        wifi.checkSupport(matcher);
-        QVector<Keygen *> * keygens = wifi.getKeygens();
-        QVERIFY2(keygens->size() != 0 , "An algorithm was not detected");
-        Keygen * keygen = keygens->at(0);
-        QCOMPARE(typeid(*keygen), typeid(EasyBoxKeygen) );
-        QVector<QString> results = keygen->getResults();
-        QCOMPARE(results.size(),1);
-        QCOMPARE(results.at(0),QString("F9C8C9DEF"));
     }
 
     void testEircom() {
@@ -260,7 +283,7 @@ private slots:
         wifi.checkSupport(matcher);
         QVector<Keygen *> * keygens = wifi.getKeygens();
         QVERIFY2(keygens->size() != 0 , "An algorithm was not detected");
-        QCOMPARE(typeid(*(keygens->at(0))), typeid(EasyBoxKeygen) );
+        QCOMPARE(typeid(*(keygens->at(0))), typeid(ArcadyanKeygen) );
         QVERIFY2(keygens->size() == 2, "2 algorithm should have been detected");
         Keygen * keygen = keygens->at(1);
         QCOMPARE(typeid(*keygen), typeid(Speedport500Keygen) );
@@ -286,6 +309,33 @@ private slots:
         QVector<QString> results = keygen->getResults();
         QCOMPARE(results.size(),1);
         QCOMPARE(results.at(0), QString("15301Y0013305"));
+    }
+
+    void testThomson() {
+        QScanResult wifi("Thomson41518c", "");
+        wifi.checkSupport(matcher);
+        QVector<Keygen *> * keygens = wifi.getKeygens();
+        QVERIFY2(keygens->size() != 0 , "An algorithm was not detected");
+        Keygen * keygen = keygens->at(0);
+        QCOMPARE(typeid(*keygen), typeid(ThomsonKeygen) );
+        QVector<QString> results = keygen->getResults();
+        QCOMPARE(results.size(),3);
+        qSort(results);
+        QCOMPARE(results.at(0), QString("1C2D56E083"));
+        QCOMPARE(results.at(1), QString("69237B667A"));
+        QCOMPARE(results.at(2), QString("8F524DED99"));
+    }
+
+    void testTplink() {
+        QScanResult wifi("tplink","F8:D1:11:1E:28:A5");
+        wifi.checkSupport(matcher);
+        QVector<Keygen *> * keygens = wifi.getKeygens();
+        QVERIFY2(keygens->size() != 0 , "An algorithm was not detected");
+        Keygen * keygen = keygens->at(0);
+        QCOMPARE(typeid(*keygen), typeid(TplinkKeygen) );
+        QVector<QString> results = keygen->getResults();
+        QCOMPARE(results.size(),1);
+        QCOMPARE(results.at(0), QString("111E28A5"));
     }
 
     void testWifimediaR() {

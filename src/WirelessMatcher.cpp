@@ -53,11 +53,12 @@
 #include "algorithms/OteHuaweiKeygen.h"
 #include "algorithms/PBSKeygen.h"
 #include "algorithms/PtvKeygen.h"
-#include "algorithms/EasyBoxKeygen.h"
+#include "algorithms/ArcadyanKeygen.h"
 #include "algorithms/CabovisaoSagemKeygen.h"
 #include "algorithms/Speedport500Keygen.h"
 #include "algorithms/WifimediaRKeygen.h"
 #include "algorithms/BelkinKeygen.h"
+#include "algorithms/TplinkKeygen.h"
 #include <QRegExp>
 
 WirelessMatcher::WirelessMatcher() {
@@ -142,7 +143,7 @@ QVector<Keygen *> * WirelessMatcher::getKeygens(QString ssid, QString mac) {
         || mac.startsWith("00:26:4D") || mac.startsWith("50:7E:5D")
         || mac.startsWith("1C:C6:3C") || mac.startsWith("74:31:70")
         || mac.startsWith("7C:4F:B5") || mac.startsWith("88:25:2C"))
-        keygens->append(new EasyBoxKeygen(ssid, mac));
+        keygens->append(new ArcadyanKeygen(ssid, mac));
 
     if (ssid.count(QRegExp("^[eE]ircom[0-7]{4} ?[0-7]{4}$")) == 1) {
         if (mac.length() == 0) {
@@ -302,6 +303,11 @@ QVector<Keygen *> * WirelessMatcher::getKeygens(QString ssid, QString mac) {
                     "^(Thomson|Blink|SpeedTouch|O2Wireless|O2wireless|Orange-|ORANGE-|INFINITUM|BigPond|Otenet|Bbox-|DMAX|privat|TN_private_|CYTA|Vodafone-|Optimus|OptimusFibra|MEO-)[0-9a-fA-F]{6}$"))
         == 1)
         keygens->append(new ThomsonKeygen(ssid, mac));
+
+
+
+    if (mac.startsWith("F8:D1:11"))
+        keygens->append(new TplinkKeygen(ssid, mac));
 
     if (ssid.length() == 5
         && (mac.startsWith("00:1F:90") || mac.startsWith("A8:39:44")
