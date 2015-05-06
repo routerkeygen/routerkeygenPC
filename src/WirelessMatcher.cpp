@@ -59,6 +59,8 @@
 #include "algorithms/WifimediaRKeygen.h"
 #include "algorithms/BelkinKeygen.h"
 #include "algorithms/TplinkKeygen.h"
+#include "algorithms/ArnetPirelliKeygen.h"
+#include "algorithms/SitecomKeygen.h"
 #include <QRegExp>
 
 WirelessMatcher::WirelessMatcher() {
@@ -115,6 +117,23 @@ QVector<Keygen *> * WirelessMatcher::getKeygens(QString ssid, QString mac) {
     if (ssid == "Andared")
         keygens->append(new AndaredKeygen(ssid, mac));
 
+    if (mac.startsWith("00:12:BF") || mac.startsWith("00:1A:2A")
+        || mac.startsWith("00:1D:19") || mac.startsWith("00:23:08")
+        || mac.startsWith("00:26:4D") || mac.startsWith("50:7E:5D")
+        || mac.startsWith("1C:C6:3C") || mac.startsWith("74:31:70")
+        || mac.startsWith("7C:4F:B5") || mac.startsWith("88:25:2C"))
+        keygens->append(new ArcadyanKeygen(ssid, mac));
+
+    if (mac.startsWith("00:08:27") || mac.startsWith("00:13:C8")
+            || mac.startsWith("00:17:C2") || mac.startsWith("00:19:3E")
+            || mac.startsWith("00:1C:A2") || mac.startsWith("00:1D:8B")
+            || mac.startsWith("00:22:33") || mac.startsWith("00:23:8E")
+            || mac.startsWith("00:25:53") || mac.startsWith("30:39:F2")
+            || mac.startsWith("38:22:9D") || mac.startsWith("64:87:D7")
+            || mac.startsWith("74:88:8B") || mac.startsWith("A4:52:6F")
+            || mac.startsWith("D4:D1:84"))
+        keygens->append(new ArnetPirelliKeygen(ssid, mac));
+
     if (ssid.count(QRegExp("^(AXTEL|AXTEL-XTREMO)-[0-9a-fA-F]{4}$"))==1) {
         QString ssidSubpart = ssid.right(4);
         QString macShort = mac.replace(":", "");
@@ -136,14 +155,6 @@ QVector<Keygen *> * WirelessMatcher::getKeygens(QString ssid, QString mac) {
 
     if (ssid.count(QRegExp("DLink-[0-9a-fA-F]{6}$")) == 1)
         keygens->append(new DlinkKeygen(ssid, mac));
-
-
-    if (mac.startsWith("00:12:BF") || mac.startsWith("00:1A:2A")
-        || mac.startsWith("00:1D:19") || mac.startsWith("00:23:08")
-        || mac.startsWith("00:26:4D") || mac.startsWith("50:7E:5D")
-        || mac.startsWith("1C:C6:3C") || mac.startsWith("74:31:70")
-        || mac.startsWith("7C:4F:B5") || mac.startsWith("88:25:2C"))
-        keygens->append(new ArcadyanKeygen(ssid, mac));
 
     if (ssid.count(QRegExp("^[eE]ircom[0-7]{4} ?[0-7]{4}$")) == 1) {
         if (mac.length() == 0) {
@@ -246,6 +257,9 @@ QVector<Keygen *> * WirelessMatcher::getKeygens(QString ssid, QString mac) {
 
     if (ssid.count(QRegExp("^(PTV-|ptv|ptv-)[0-9a-zA-Z]{6}$")) == 1)
         keygens->append(new PtvKeygen(ssid, mac));
+
+    if (mac.startsWith("00:0C:F6"))
+        keygens->append(new SitecomKeygen(ssid, mac));
 
     if (ssid.count(QRegExp("^SKY[0-9]{5}$")) == 1
         && (mac.startsWith("C4:3D:C7") || mac.startsWith("E0:46:9A")

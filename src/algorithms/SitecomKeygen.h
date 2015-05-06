@@ -16,19 +16,19 @@
  * You should have received a copy of the GNU General Public License
  * along with Router Keygen.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef ALICEKEYGEN_H
-#define ALICEKEYGEN_H
+#ifndef SITECOMKEYGEN_H
+#define SITECOMKEYGEN_H
 #include "Keygen.h"
-struct AliceMagicInfo;
-class AliceItalyKeygen : public Keygen
+
+class SitecomKeygen : public Keygen
 {
     public:
-        const static unsigned char ALICE_SEED[32];
-        AliceItalyKeygen(QString ssid, QString mac,  QVector<AliceMagicInfo *> * supported);
+        SitecomKeygen(QString ssid, QString mac);
     private:
     	QVector<QString> & getKeys();
-        QVector<AliceMagicInfo *> * supportedAlice;
-        const static QString preInitCharset;
+        QString incrementMac(QString mac, int increment);
+        void generateKey(QString mac);
+        const static QString CHARSET;
 };
 
-#endif // ALICEKEYGEN_H
+#endif // SITECOMKEYGEN_H

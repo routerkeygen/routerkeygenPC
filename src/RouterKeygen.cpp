@@ -101,7 +101,7 @@ RouterKeygen::RouterKeygen(QWidget *parent) :
             "MEO-" << "O2Wireless" << "Optimus" << "OptimusFibra" << "Orange-" << "OTE" <<
             "Otenet" << "PBS" << "privat" << "ptv" << "SKY" << "SpeedTouch" << "TECOM-AH4222-" <<
             "TECOM-AH4021-" << "TeleTu" << "Thomson" << "TN_private_" << "Vodafone-" << "WiFi" <<
-            "wifimedia_R-" << "WLAN_" << "WLAN" << "YaCom";
+            "WiFi-Arnet-" << "wifimedia_R-" << "WLAN_" << "WLAN" << "YaCom";
     completer = new QCompleter(wordList, this);
     completer->setCaseSensitivity(Qt::CaseInsensitive);
     completer->setCompletionMode(QCompleter::PopupCompletion);

@@ -13,7 +13,8 @@ ArcadyanKeygen::ArcadyanKeygen(QString ssid, QString mac) :
 }
 
 int ArcadyanKeygen::getSupportState() const{
-    if ( getSsidName().count(QRegExp("^(Arcor|EasyBox|Vodafone|WLAN)(-| )[0-9a-fA-F]{6}$")) == 1 )
+    if ( getSsidName().count(QRegExp("^(Arcor|EasyBox|Vodafone|WLAN)(-| )[0-9a-fA-F]{6}$")) == 1
+         || getSsidName().count(QRegExp("Vodafone[0-9a-zA-Z]{4}")) == 1 )
         return SUPPORTED;
     return UNLIKELY;
 }
