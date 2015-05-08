@@ -3,7 +3,7 @@
 # Author: Rui Araújo <ruka.araujo AT gmail.com>
 #
 # Project Info
-cmake_minimum_required (VERSION 2.8.11)
+cmake_minimum_required (VERSION 2.8.9)
 
 
 set(PROJECT_NAME_SHORT   "RouterKeygen")
@@ -49,7 +49,7 @@ site_name(HOSTNAME)
 set(SYSNAME ${CMAKE_SYSTEM}-${CMAKE_SYSTEM_PROCESSOR})
 
 # CMake settings
-cmake_minimum_required(VERSION 2.8.11)
+cmake_minimum_required(VERSION 2.8.9)
 set(CMAKE_COLOR_MAKEFILE ON)
 set(CMAKE_VERBOSE_MAKEFILE OFF)
 
