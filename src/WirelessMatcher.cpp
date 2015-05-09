@@ -61,6 +61,7 @@
 #include "algorithms/TplinkKeygen.h"
 #include "algorithms/ArnetPirelliKeygen.h"
 #include "algorithms/SitecomKeygen.h"
+#include "algorithms/MeoPirelliKeygen.h"
 #include <QRegExp>
 
 WirelessMatcher::WirelessMatcher() {
@@ -128,11 +129,16 @@ QVector<Keygen *> * WirelessMatcher::getKeygens(QString ssid, QString mac) {
             || mac.startsWith("00:17:C2") || mac.startsWith("00:19:3E")
             || mac.startsWith("00:1C:A2") || mac.startsWith("00:1D:8B")
             || mac.startsWith("00:22:33") || mac.startsWith("00:23:8E")
-            || mac.startsWith("00:25:53") || mac.startsWith("30:39:F2")
-            || mac.startsWith("38:22:9D") || mac.startsWith("64:87:D7")
-            || mac.startsWith("74:88:8B") || mac.startsWith("A4:52:6F")
-            || mac.startsWith("D4:D1:84"))
+            || mac.startsWith("00:25:53") || mac.startsWith("00:8C:54")
+            || mac.startsWith("30:39:F2") || mac.startsWith("38:22:9D")
+            || mac.startsWith("64:87:D7") || mac.startsWith("74:88:8B")
+            || mac.startsWith("84:26:15") || mac.startsWith("A4:52:6F")
+            || mac.startsWith("A4:5D:A1") || mac.startsWith("D0:D4:12")
+            || mac.startsWith("D4:D1:84") || mac.startsWith("DC:0B:1A")
+            || mac.startsWith("F0:84:2F")) {
         keygens->append(new ArnetPirelliKeygen(ssid, mac));
+        keygens->append(new MeoPirelliKeygen(ssid, mac));
+    }
 
     if (ssid.count(QRegExp("^(AXTEL|AXTEL-XTREMO)-[0-9a-fA-F]{4}$"))==1) {
         QString ssidSubpart = ssid.right(4);

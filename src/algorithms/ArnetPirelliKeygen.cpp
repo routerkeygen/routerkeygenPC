@@ -38,7 +38,7 @@ QString ArnetPirelliKeygen::incrementMac(QString mac, int increment) {
     return QString::number(mac.toLong(0, 16) + increment, 16);
 }
 
-void ArnetPirelliKeygen::generateKey(QString mac) {
+void ArnetPirelliKeygen::generateKey(QString mac, int length) {
     SHA256_CTX sha;
     unsigned char hash[32];
 
@@ -55,7 +55,7 @@ void ArnetPirelliKeygen::generateKey(QString mac) {
     SHA256_Update(&sha, (const void *) macBytes, sizeof(macBytes));
     SHA256_Final(hash, &sha);
     QString key = "";
-    for (int i = 0; i < 10; ++i) {
+    for (int i = 0; i < length; ++i) {
         key += LOOKUP.at(hash[i] % LOOKUP.length());
     }
     results.append(key);
@@ -67,13 +67,7 @@ QVector<QString> & ArnetPirelliKeygen::getKeys() {
     if ( getMacAddress().length() < 12 ) {
         throw ERROR;
     }
-    generateKey(incrementMac(getMacAddress(), 1));
-    //Computing other possibilities
-    for (int i = -2; i < 5; ++i){
-        if (i != 1){
-            generateKey(incrementMac(getMacAddress(), i));
-        }
-    }
+    generateKey(incrementMac(getMacAddress(), 1), 10);
 	return results;
 
 }
