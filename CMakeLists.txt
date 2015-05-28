@@ -88,6 +88,11 @@ else(Qt5Core_FOUND)
     add_definitions(${QT_DEFINITIONS})
 endif(Qt5Core_FOUND)
 
+# MSVC specific configuration (for compiling on windows)
+if(MSVC)
+    set(ROUTERKEYGEN_LIBS ${ROUTERKEYGEN_LIBS} ${QT_QTMAIN_LIBRARY})
+endif(MSVC)
+
 if(MSYS AND CMAKE_CROSS_COMPILING)
     set (ROUTERKEYGEN_LIBS ${ROUTERKEYGEN_LIBS} crypt32 jpeg png tiff mng lzma lcms2 z imm32 winmm ws2_32 )
 endif(MSYS AND CMAKE_CROSS_COMPILING)
