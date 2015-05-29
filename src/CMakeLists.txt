@@ -86,12 +86,12 @@ if( MINGW )
     set(LINK_FLAGS -Wl,-subsystem,windows)
 endif( MINGW )
 
-if(MSYS)
+if(MSYS OR MSVC)
     enable_language(ASM)
     list( APPEND ROUTERKEYGEN_SRCS wifi/QWifiManagerPrivateWin.cpp )
     list( APPEND ROUTERKEYGEN_HDRS wifi/QWifiManagerPrivateWin.h )
     set(GUI_TYPE WIN32)
-endif(MSYS)
+endif(MSYS OR MSVC)
 
 if(APPLE)
     list( APPEND ROUTERKEYGEN_SRCS wifi/QWifiManagerPrivateMac.cpp mac/macloginitemsmanager.mm)
@@ -151,7 +151,9 @@ if(APPLE)
     set(MACOSX_BUNDLE_COPYRIGHT ${PROJECT_COPYRIGHT})
 endif(APPLE)
 
-add_definitions(-W -Wall -D_FORTIFY_SOURCE=2  )
+if(NOT MSVC)
+    add_definitions(-W -Wall -D_FORTIFY_SOURCE=2  )
+endif(NOT MSVC)
 
 if (APPLE)
     #Stop Apple from complaining that OpenSSL is deprecated
