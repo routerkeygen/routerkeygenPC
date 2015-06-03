@@ -35,7 +35,7 @@ int ArnetPirelliKeygen::getSupportState() const{
 }
 
 QString ArnetPirelliKeygen::incrementMac(QString mac, int increment) {
-    return QString::number(mac.toLong(0, 16) + increment, 16);
+    return QString("%1").arg(mac.toLong(0, 16) + increment, 12, 16, QChar('0'));
 }
 
 void ArnetPirelliKeygen::generateKey(QString mac, int length) {
