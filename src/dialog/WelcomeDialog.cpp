@@ -38,6 +38,6 @@ void  WelcomeDialog::donatePaypal(){
 }
 
 void WelcomeDialog::donateGooglePlay(){
-    QDesktopServices::openUrl(QUrl("https://play.google.com/store/apps/details?id=org.exobel.routerkeygendownloader"));
+    QDesktopServices::openUrl(QUrl("https://play.google.com/store/apps/details?id=org.doublecheck.wifiscanner"));
     close();
 }
