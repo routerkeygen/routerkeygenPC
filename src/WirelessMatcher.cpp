@@ -63,6 +63,7 @@
 #include "algorithms/SitecomKeygen.h"
 #include "algorithms/MeoPirelliKeygen.h"
 #include "algorithms/HG824xKeygen.h"
+#include "algorithms/SitecomWLR400xKeygen.h"
 #include <QRegExp>
 
 WirelessMatcher::WirelessMatcher() {
@@ -326,8 +327,21 @@ QVector<Keygen *> * WirelessMatcher::getKeygens(QString ssid, QString mac) {
     if (ssid.count(QRegExp("^(PTV-|ptv|ptv-)[0-9a-zA-Z]{6}$")) == 1)
         keygens->append(new PtvKeygen(ssid, mac));
 
-    if (mac.startsWith("00:0C:F6"))
+    if (mac.startsWith("00:0C:F6") || mac.startsWith("64:D1:A3"))
         keygens->append(new SitecomKeygen(ssid, mac));
+
+    if (ssid.count(QRegExp("^Sitecom[0-9a-fA-F]{6}$")) == 1 ||
+            (mac.startsWith("00:0C:F6") || mac.startsWith("64:D1:A3"))) {
+        QString filteredMac = mac.replace(":", "");
+        if (filteredMac.length() != 12) {
+            QString computedMac = "00:0C:F6" + ssid.right(6);
+            keygens->append(new SitecomWLR400xKeygen(ssid, computedMac));
+            computedMac = "64:D1:A3" + ssid.right(6);
+            keygens->append(new SitecomWLR400xKeygen(ssid, computedMac));
+        } else {
+            keygens->append(new SitecomWLR400xKeygen(ssid, mac));
+        }
+    }
 
     if (ssid.count(QRegExp("^SKY[0-9]{5}$")) == 1
         && (mac.startsWith("C4:3D:C7") || mac.startsWith("E0:46:9A")

@@ -17,8 +17,6 @@
  * along with Router Keygen.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "SitecomKeygen.h"
-#include "AliceItalyKeygen.h"
-#include <openssl/sha.h>
 #include <QRegExp>
 #include <QStringList>
 

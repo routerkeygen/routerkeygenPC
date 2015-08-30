@@ -26,7 +26,6 @@ class SitecomKeygen : public Keygen
         SitecomKeygen(QString ssid, QString mac);
     private:
     	QVector<QString> & getKeys();
-        QString incrementMac(QString mac, int increment);
         void generateKey(QString mac);
         const static QString CHARSET;
 };
