@@ -40,6 +40,7 @@
 #include "algorithms/TplinkKeygen.h"
 #include "algorithms/ArnetPirelliKeygen.h"
 #include "algorithms/MeoPirelliKeygen.h"
+#include "algorithms/HG824xKeygen.h"
 #include "WirelessMatcher.h"
 #include "wifi/QScanResult.h"
 #include <QDebug>
@@ -50,6 +51,10 @@ class AlgorithmsTest: public QObject
     Q_OBJECT
     WirelessMatcher matcher;
 private slots:
+
+    void test(){
+
+    }
 
     void testAliceItaly() {
         QScanResult wifi("Alice-53847953", "00:25:53:35:a7:91");
@@ -231,6 +236,28 @@ private slots:
         QVector<QString> results = keygen->getResults();
         QCOMPARE(results.size(),1);
         QCOMPARE(results.at(0),QString("3432333133"));
+    }
+    void testHuawei_HG24x() {
+        QScanResult wifi("", "00:46:4B:D3:CE:5F");
+        wifi.checkSupport(matcher);
+        QVector<Keygen *> * keygens = wifi.getKeygens();
+        QVERIFY2(keygens->size() != 0 , "An algorithm was not detected");
+        Keygen * keygen = keygens->at(1);
+        QCOMPARE(typeid(*keygen), typeid(HG824xKeygen) );
+        QVector<QString> results = keygen->getResults();
+        QCOMPARE(results.size(),1);
+        QCOMPARE(results.at(0),QString("D3CE560D"));
+    }
+    void testHuawei_HG24x2() {
+        QScanResult wifi("", "E0:24:7F:E5:80:01");
+        wifi.checkSupport(matcher);
+        QVector<Keygen *> * keygens = wifi.getKeygens();
+        QVERIFY2(keygens->size() != 0 , "An algorithm was not detected");
+        Keygen * keygen = keygens->at(1);
+        QCOMPARE(typeid(*keygen), typeid(HG824xKeygen) );
+        QVector<QString> results = keygen->getResults();
+        QCOMPARE(results.size(),1);
+        QCOMPARE(results.at(0),QString("E57FF80C"));
     }
 
     void testMegared() {
