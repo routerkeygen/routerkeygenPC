@@ -1,0 +1,8 @@
+before_install:
+  - sudo add-apt-repository --yes ppa:george-edison55/precise-backports
+  - sudo add-apt-repository --yes ppa:ubuntu-sdk-team/ppa
+  - sudo apt-get -qq update
+  - sudo apt-get -qq -o Dpkg::Options::="--force-confnew" install cmake cmake-data build-essential qt5-default libssl-dev qtscript5-dev libnm-gtk-dev qttools5-dev qttools5-dev-tools network-manager-dev lintian
+
+script:
+  - sh build_linux.sh

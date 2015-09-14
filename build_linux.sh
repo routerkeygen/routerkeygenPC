@@ -1,4 +1,5 @@
 #!/bin/sh
+cmake --version
 
 SRC_FOLDER=`pwd` #assumed to be the current folder, change to compile in another location
 ROOT_FOLDER=`pwd`
@@ -16,7 +17,7 @@ fi
 if [ "$?" = "0" ]; then 
 	cpack -G DEB
 	cpack -G RPM #in Ubuntu rpmbuild must be installed
-	lintian routerkeygen-1.1.0-Linux-x86_64.deb
+	lintian routerkeygen-Linux-x86_64.deb || true
 else
 	echo "Error while building" 1>&2
 	exit 1
