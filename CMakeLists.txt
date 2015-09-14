@@ -10,6 +10,7 @@ set(PROJECT_NAME_SHORT   "RouterKeygen")
 string(TOLOWER ${PROJECT_NAME_SHORT} PROJECT_NAME_SHORT_LOWER)
 project(${PROJECT_NAME_SHORT_LOWER} CXX)
 set(PROJECT_NAME_LONG    "RouterKeygen")
+set(PROJECT_DESCRIPTION_SHORT "Generates WPA/WEP keys based on MAC and/or BSSID")
 set(PROJECT_DESCRIPTION  "Default WPA/WEP key generator for several routers such as Thomson based routers ( this includes Thomson, SpeedTouch, Orange, Infinitum, BBox, DMax, BigPond, O2Wireless, Otenet, Cyta, TN_private and Blink ), DLink ( only some models ), Pirelli Discus, Eircom, Verizon FiOS ( only some routers supported), Alice AGPF, FASTWEB Pirelli and Telsey, Huawei (some InfinitumXXXX), Wlan_XXXX or Jazztel_XXXX, Wlan_XX ( only some are supported), Ono ( P1XXXXXX0000X ), WlanXXXXXX YacomXXXXXX and WifiXXXXXX, Sky V1 routers, Clubinternet.box v1 and v2 ( TECOM-AH4XXXX ), InfostradaWifi, CONN-X, Megared, EasyBox Arcor and Vodafone, PBS (Austria), MAXCOM, PTV, TeleTu/Tele2, Axtel Axtel-xtremo, Intercable, OTE, Cabovisao Sagem, Alice in Germany and Speedport.")
 set(PROJECT_COPYRIGHT    "Copyright (C) 2010-2015 Rui Araújo")
 set(PROJECT_CONTACT      "ruka.araujo@gmail.com")
@@ -139,7 +140,7 @@ add_subdirectory(nsis)
 
 
 # Copy stuff to doc subdirectory
-INSTALL (FILES AUTHORS COPYING INSTALL NEWS README.md doc/routerkeygen.1
+INSTALL (FILES debian/copyright AUTHORS INSTALL NEWS README.md doc/routerkeygen.1
          DESTINATION ${ROUTERKEYGEN_DOC_DIR})
 
 # Copy .desktop file
@@ -156,14 +157,15 @@ include(InstallRequiredSystemLibraries)
 set(CPACK_STRIP_FILES "TRUE")
 set(CPACK_SYSTEM_NAME ${CMAKE_SYSTEM_NAME})
 set(CPACK_PACKAGE_NAME ${PROJECT_NAME_SHORT})
-set(CPACK_PACKAGE_DESCRIPTION "${PROJECT_NAME_LONG}")
-set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "${PROJECT_NAME_SHORT} \n\\ ${PROJECT_DESCRIPTION}")
+set(CPACK_PACKAGE_DESCRIPTION "${PROJECT_DESCRIPTION}")
+set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "${PROJECT_DESCRIPTION_SHORT} \n\\ ${PROJECT_DESCRIPTION}")
 set(CPACK_PACKAGE_VENDOR ${PROJECT_VENDOR})
 set(CPACK_PACKAGE_CONTACT ${PROJECT_CONTACT})
 set(CPACK_PACKAGE_DESCRIPTION_FILE "${CMAKE_SOURCE_DIR}/README.md")
 set(CPACK_RESOURCE_FILE_README ${CMAKE_SOURCE_DIR}/README.md)
 set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_SOURCE_DIR}/COPYING")
 set(CPACK_PACKAGE_INSTALL_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}")
+set(CPACK_PACKAGE_CHANGELOG_FILE)
 
 # Force Package Name
 set(CPACK_PACKAGE_FILE_NAME ${PROJECT_NAME}-${CPACK_SYSTEM_NAME}-${CMAKE_SYSTEM_PROCESSOR})
@@ -207,13 +209,18 @@ if(DPKG_FOUND AND NOT MSYS)
     set(CPACK_DEBIAN_PACKAGE_PRIORITY "optional")
     set(CPACK_DEBIAN_PACKAGE_DEBUG ON)
     set(CPACK_DEBIAN_PACKAGE_DEPENDS ${PACKAGE_REQUIRES})
-if(Qt5Core_FOUND)
-    set(CPACK_DEBIAN_PACKAGE_DEPENDS "libc6 (>= 2.3.1-6), qt5-default, network-manager ( >= 0.8 )") # Specify dependencies here
-else(Qt5Core_FOUND)
-    set(CPACK_DEBIAN_PACKAGE_DEPENDS "libc6 (>= 2.3.1-6), libqt4-gui ( >= 4.6 ), libqt4-network ( >= 4.6 ), network-manager ( >= 0.8 )") # Specify dependencies here
-endif(Qt5Core_FOUND)
-    set(CPACK_set_DESTDIR TRUE)
-endif(DPKG_FOUND AND NOT MSYS)
+
+    find_package (UnixCommands REQUIRED)
+    add_custom_target (compress_changelog ALL COMMAND ${GZIP} -9 -c ${PROJECT_SOURCE_DIR}/NEWS > changelog.gz)
+    install (FILES ${PROJECT_BINARY_DIR}/changelog.gz DESTINATION share/doc/${PROJECT_NAME_SHORT_LOWER} COMPONENT app)
+
+    if(Qt5Core_FOUND)
+        set(CPACK_DEBIAN_PACKAGE_DEPENDS "libc6 (>= 2.3.1-6), qtbase5-dev, network-manager ( >= 0.8 )") # Specify dependencies here
+    else(Qt5Core_FOUND)
+        set(CPACK_DEBIAN_PACKAGE_DEPENDS "libc6 (>= 2.3.1-6), libqt4-gui ( >= 4.6 ), libqt4-network ( >= 4.6 ), network-manager ( >= 0.8 )") # Specify dependencies here
+    endif(Qt5Core_FOUND)
+        set(CPACK_set_DESTDIR TRUE)
+    endif(DPKG_FOUND AND NOT MSYS)
 
 set(CPACK_PACKAGE_EXECUTABLES ${PROJECT_NAME_SHORT_LOWER} "ROUTERKEYGEN")
 INCLUDE(CPack)
