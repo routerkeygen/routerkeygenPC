@@ -10,13 +10,15 @@
 
 #include "Keygen.h"
 
+#define NUMBERS_OF_ORDERS   4
+
 class BelkinKeygen: public Keygen {
 public:
     BelkinKeygen(QString ssid, QString mac);
     int getSupportState() const;
 
 private:
-    const static int ORDERS[3][8];
+    const static int ORDERS[NUMBERS_OF_ORDERS][8];
     const static QString CHARSETS[2];
     QVector<QString> & getKeys() ;
     void generateKey(QString mac, QString charset, int order[8]);
