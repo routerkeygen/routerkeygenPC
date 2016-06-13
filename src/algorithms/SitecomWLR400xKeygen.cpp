@@ -22,6 +22,7 @@ SitecomWLR400xKeygen::SitecomWLR400xKeygen(QString ssid, QString mac) :
         Keygen(ssid, mac) {
 }
 
+const QString SitecomWLR400xKeygen::CHARSETS_341[]  = {"0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ", "W0X1CDYNJU8VOZA0BKL46PQ7RS9T2E5HI3MFG"};
 const QString SitecomWLR400xKeygen::CHARSETS_4000[] = {"23456789ABCDEFGHJKLMNPQRSTUVWXYZ38BZ", "WXCDYNJU8VZABKL46PQ7RS9T2E5H3MFGPWR2"};
 const QString SitecomWLR400xKeygen::CHARSETS_4004[] = {"JKLMNPQRST23456789ABCDEFGHUVWXYZ38BK", "E5MFJUWXCDKL46PQHAB3YNJ8VZ7RS9TR2GPW"};
 const long SitecomWLR400xKeygen::MAGIC1 =  0x98124557;
@@ -65,8 +66,21 @@ QVector<QString> & SitecomWLR400xKeygen::getKeys() {
     if ( mac.length() < 12 ) {
         throw ERROR;
     }
+    generateKey(mac, CHARSETS_341);
     generateKey(mac, CHARSETS_4000);
     generateKey(mac, CHARSETS_4004);
+    
+    QString shortMac = mac.left(11);
+    int lastChar = mac.right(1).toInt(0, 16);
+    lastChar = (lastChar + 1) % 0x10;
+    generateKey(shortMac + QString::number(lastChar, 16), CHARSETS_341);
+    generateKey(shortMac + QString::number(lastChar, 16), CHARSETS_4000);
+    generateKey(shortMac + QString::number(lastChar, 16), CHARSETS_4004);
+    lastChar = (lastChar + 3) % 0x10;
+    generateKey(shortMac + QString::number(lastChar, 16), CHARSETS_341);
+    generateKey(shortMac + QString::number(lastChar, 16), CHARSETS_4000);
+    generateKey(shortMac + QString::number(lastChar, 16), CHARSETS_4004);
+
     return results;
 
 }

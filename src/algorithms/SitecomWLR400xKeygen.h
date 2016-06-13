@@ -28,6 +28,7 @@ class SitecomWLR400xKeygen : public Keygen
     private:
     	QVector<QString> & getKeys();
         void generateKey(QString mac, const QString charsets[]);
+        const static QString CHARSETS_341[];
         const static QString CHARSETS_4000[];
         const static QString CHARSETS_4004[];
         const static long MAGIC1;
