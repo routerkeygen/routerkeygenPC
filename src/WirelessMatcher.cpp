@@ -124,7 +124,8 @@ QVector<Keygen *> * WirelessMatcher::getKeygens(QString ssid, QString mac) {
         || mac.startsWith("00:1D:19") || mac.startsWith("00:23:08")
         || mac.startsWith("00:26:4D") || mac.startsWith("50:7E:5D")
         || mac.startsWith("1C:C6:3C") || mac.startsWith("74:31:70")
-        || mac.startsWith("7C:4F:B5") || mac.startsWith("88:25:2C"))
+        || mac.startsWith("7C:4F:B5") || mac.startsWith("84:9C:A6")
+        || mac.startsWith("88:03:55") || mac.startsWith("88:25:2C"))
         keygens->append(new ArcadyanKeygen(ssid, mac));
 
     if (mac.startsWith("00:08:27") || mac.startsWith("00:13:C8")
