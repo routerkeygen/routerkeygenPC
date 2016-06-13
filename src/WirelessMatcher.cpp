@@ -64,6 +64,7 @@
 #include "algorithms/MeoPirelliKeygen.h"
 #include "algorithms/HG824xKeygen.h"
 #include "algorithms/SitecomWLR400xKeygen.h"
+#include "algorithms/SitecomWLR2100Keygen.h"
 #include <QRegExp>
 
 WirelessMatcher::WirelessMatcher() {
@@ -337,10 +338,13 @@ QVector<Keygen *> * WirelessMatcher::getKeygens(QString ssid, QString mac) {
         if (filteredMac.length() != 12) {
             QString computedMac = "00:0C:F6" + ssid.right(6);
             keygens->append(new SitecomWLR400xKeygen(ssid, computedMac));
+            keygens->append(new SitecomWLR2100Keygen(ssid, computedMac));
             computedMac = "64:D1:A3" + ssid.right(6);
             keygens->append(new SitecomWLR400xKeygen(ssid, computedMac));
+            keygens->append(new SitecomWLR2100Keygen(ssid, computedMac));
         } else {
             keygens->append(new SitecomWLR400xKeygen(ssid, mac));
+            keygens->append(new SitecomWLR2100Keygen(ssid, mac));
         }
     }
 
