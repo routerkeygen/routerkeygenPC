@@ -68,6 +68,8 @@ QVector<QString> & ArnetPirelliKeygen::getKeys() {
         throw ERROR;
     }
     generateKey(incrementMac(getMacAddress(), 1), 10);
+    //This is from MEO
+    generateKey(incrementMac(getMacAddress(), -1), 8);
 	return results;
 
 }
