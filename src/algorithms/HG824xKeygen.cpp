@@ -86,20 +86,24 @@ QVector<QString> & HG824xKeygen::getKeys() {
         default:
             throw ERROR;
     }
+    // TODO: There are more than one values for some of lastPasswordHash
     QHash<QString, QString> lastPasswordHash;
     lastPasswordHash["00"] = "0D";
     lastPasswordHash["08"] = "05";
     lastPasswordHash["10"] = "0E";
     lastPasswordHash["20"] = "1F";
     lastPasswordHash["28"] = "03";
-    lastPasswordHash["48"] = "24";
+    lastPasswordHash["48"] = "24"; // 57
+    lastPasswordHash["68"] = "39";
     lastPasswordHash["70"] = "20";
+    lastPasswordHash["78"] = "04";
     lastPasswordHash["80"] = "06";
+    lastPasswordHash["9C"] = "2A";
     lastPasswordHash["AC"] = "1A";
     lastPasswordHash["CC"] = "12";
-    lastPasswordHash["D4"] = "35";
-    lastPasswordHash["E0"] = "0C";
-    lastPasswordHash["F8"] = "21";
+    lastPasswordHash["D4"] = "23"; // 35
+    lastPasswordHash["E0"] = "0C"; // 31
+    lastPasswordHash["F8"] = "21"; // 4E
     if (!lastPasswordHash.contains(mac.mid(0,2))) {
         throw ERROR;
     }
