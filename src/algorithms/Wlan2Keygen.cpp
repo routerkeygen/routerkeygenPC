@@ -73,6 +73,6 @@ QVector<QString> & Wlan2Keygen::getKeys() {
 		key[1] = cadena.at(1);
 	}
 
-	results.append(QString::fromRawData(key, 26));
+	results.append(QString(key));
 	return results;
 }
