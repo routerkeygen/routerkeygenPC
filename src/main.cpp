@@ -82,7 +82,7 @@ int main(int argc, char * argv[]) {
         for ( int i = 0; i < keygens->size(); ++i ){
             try{
                 QVector<QString> r = keygens->at(i)->getResults();
-                results.append(r);
+                results +=r;
             }catch (int e){
                 if ( !options.value("q", false).toBool() )
                     std::cout << QObject::tr("Errors while calculating.").toUtf8().data() << std::endl;
