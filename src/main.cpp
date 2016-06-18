@@ -71,13 +71,13 @@ int main(int argc, char * argv[]) {
                 std::cout << QObject::tr("Calculating keys. This can take a while.").toUtf8().data() << std::endl;
             QVector<QString> results;
             for ( int i = 0; i < keygens->size(); ++i ){
-                try{
+                try {
                     QVector<QString> r = keygens->at(i)->getResults();
                     results +=r;
-                }catch (int e){
+                } catch (int e) {
                     if ( !options.value("q", false).toBool() )
                         std::cout << QObject::tr("Errors while calculating.").toUtf8().data() << std::endl;
-                    return -3;
+                    continue;
                 }
             }
             if (results.isEmpty()) {
