@@ -39,7 +39,6 @@
 #include "algorithms/BelkinKeygen.h"
 #include "algorithms/TplinkKeygen.h"
 #include "algorithms/ArnetPirelliKeygen.h"
-#include "algorithms/MeoPirelliKeygen.h"
 #include "algorithms/SitecomKeygen.h"
 #include "algorithms/HG824xKeygen.h"
 #include "algorithms/SitecomWLR400xKeygen.h"
@@ -152,10 +151,22 @@ private slots:
         Keygen * keygen = keygens->at(0);
         QCOMPARE(typeid(*keygen), typeid(ArnetPirelliKeygen) );
         QVector<QString> results = keygen->getResults();
-        QCOMPARE(results.size(),1);
-        QCOMPARE( results.at(0),QString("781haylokm"));
+        QCOMPARE(results.size(),7);
+        QCOMPARE( results.at(0),QString("hcckr5ch38"));
+        QCOMPARE( results.at(3),QString("781haylokm"));
     }
 
+    void testArnetPirelli2() {
+        QScanResult wifi("ADSLPT-AB65637", "f0:84:2f:83:56:a2");
+        wifi.checkSupport(matcher);
+        QVector<Keygen *> * keygens = wifi.getKeygens();
+        QVERIFY2(keygens->size() != 0 , "An algorithm was not detected");
+        Keygen * keygen = keygens->at(0);
+        QCOMPARE(typeid(*keygen), typeid(ArnetPirelliKeygen) );
+        QVector<QString> results = keygen->getResults();
+        QCOMPARE(results.size(),7);
+        QCOMPARE( results.at(0),QString("ds7prly5"));
+    }
 
     void testBelkin() {
         QScanResult wifi("Belkin.c0de","94:44:52:00:C0:DE");
@@ -198,7 +209,7 @@ private slots:
          wifi.checkSupport(matcher);
          QVector<Keygen *> * keygens = wifi.getKeygens();
          QVERIFY2(keygens->size() != 0 , "An algorithm was not detected");
-         Keygen * keygen = keygens->at(2);
+         Keygen * keygen = keygens->at(1);
          QCOMPARE(typeid(*keygen), typeid(DiscusKeygen) );
          QVector<QString> results = keygen->getResults();
          QCOMPARE(results.size(),1);
@@ -275,18 +286,6 @@ private slots:
         QCOMPARE(results.at(0), QString("75169F60EC"));
     }
 
-    void testMeoPirelli() {
-        QScanResult wifi("ADSLPT-AB37495", "84:26:15:AE:BC:15");
-        wifi.checkSupport(matcher);
-        QVector<Keygen *> * keygens = wifi.getKeygens();
-        QVERIFY2(keygens->size() != 0 , "An algorithm was not detected");
-        Keygen * keygen = keygens->at(1);
-        QCOMPARE(typeid(*keygen), typeid(MeoPirelliKeygen) );
-        QVector<QString> results = keygen->getResults();
-        QCOMPARE(results.size(),1);
-        QCOMPARE( results.at(0),QString("78leqnej"));
-    }
-
     void testOTE() {
         QScanResult wifi("OTE37cb4c", "B0:75:D5:37:CB:4C");
         wifi.checkSupport(matcher);
@@ -328,7 +327,7 @@ private slots:
         wifi.checkSupport(matcher);
         QVector<Keygen *> * keygens = wifi.getKeygens();
         QVERIFY2(keygens->size() != 0 , "An algorithm was not detected");
-        Keygen * keygen = keygens->at(2);
+        Keygen * keygen = keygens->at(1);
         QCOMPARE(typeid(*keygen), typeid(PBSKeygen) );
         QVector<QString> results = keygen->getResults();
         QCOMPARE(results.size(),1);
@@ -343,10 +342,11 @@ private slots:
         Keygen * keygen = keygens->at(0);
         QCOMPARE(typeid(*keygen), typeid(SitecomKeygen) );
         QVector<QString> results = keygen->getResults();
-        QCOMPARE(results.size(),3);
-        QCOMPARE( results.at(0),QString("q69CB1kg"));
-        QCOMPARE( results.at(1),QString("44B5Dmyc"));
-        QCOMPARE( results.at(2),QString("N66zHMRc"));
+        QCOMPARE(results.size(),4);
+        QCOMPARE( results.at(0),QString("c6aBBBbg"));
+        QCOMPARE( results.at(1),QString("q69CB1kg"));
+        QCOMPARE( results.at(2),QString("44B5Dmyc"));
+        QCOMPARE( results.at(3),QString("N66zHMRc"));
     }
 
 
@@ -358,10 +358,11 @@ private slots:
         Keygen * keygen = keygens->at(0);
         QCOMPARE(typeid(*keygen), typeid(SitecomKeygen) );
         QVector<QString> results = keygen->getResults();
-        QCOMPARE(results.size(),3);
-        QCOMPARE( results.at(0),QString("6sWNS6D6"));
-        QCOMPARE( results.at(1),QString("JEmMRJSk"));
-        QCOMPARE( results.at(2),QString("qVMKQq7B"));
+        QCOMPARE(results.size(),4);
+        QCOMPARE( results.at(0),QString("zb1cgzvx"));
+        QCOMPARE( results.at(1),QString("6sWNS6D6"));
+        QCOMPARE( results.at(2),QString("JEmMRJSk"));
+        QCOMPARE( results.at(3),QString("qVMKQq7B"));
     }
 
 
@@ -373,10 +374,11 @@ private slots:
         Keygen * keygen = keygens->at(0);
         QCOMPARE(typeid(*keygen), typeid(SitecomKeygen) );
         QVector<QString> results = keygen->getResults();
-        QCOMPARE(results.size(),3);
-        QCOMPARE( results.at(0),QString("DhCvzDve"));
-        QCOMPARE( results.at(1),QString("S63uySh4"));
-        QCOMPARE( results.at(2),QString("tURTXt6t"));
+        QCOMPARE(results.size(),4);
+        QCOMPARE( results.at(0),QString("ZB1kqZVQ"));
+        QCOMPARE( results.at(1),QString("DhCvzDve"));
+        QCOMPARE( results.at(2),QString("S63uySh4"));
+        QCOMPARE( results.at(3),QString("tURTXt6t"));
     }
 
 
@@ -388,10 +390,11 @@ private slots:
         Keygen * keygen = keygens->at(0);
         QCOMPARE(typeid(*keygen), typeid(SitecomKeygen) );
         QVector<QString> results = keygen->getResults();
-        QCOMPARE(results.size(),3);
-        QCOMPARE( results.at(0),QString("GEBAWGEA"));
-        QCOMPARE( results.at(1),QString("GDPK6GDb"));
-        QCOMPARE( results.at(2),QString("6sq9v6sp"));
+        QCOMPARE(results.size(),4);
+        QCOMPARE( results.at(0),QString("6P2AB6Pb"));
+        QCOMPARE( results.at(1),QString("GEBAWGEA"));
+        QCOMPARE( results.at(2),QString("GDPK6GDb"));
+        QCOMPARE( results.at(3),QString("6sq9v6sp"));
     }
 
     void testSitecomWRL400X() {
@@ -402,9 +405,10 @@ private slots:
         Keygen * keygen = keygens->at(1);
         QCOMPARE(typeid(*keygen), typeid(SitecomWLR400xKeygen) );
         QVector<QString> results = keygen->getResults();
-        QCOMPARE(results.size(),2);
-        QCOMPARE( results.at(0),QString("G2D2KXZBLAFB"));
-        QCOMPARE( results.at(1),QString("6J3J9XZBAS5T"));
+        QCOMPARE(results.size(),9);
+        QCOMPARE( results.at(0),QString("E0B0HTVYI8D9"));
+        QCOMPARE( results.at(1),QString("G2D2KXZBLAFB"));
+        QCOMPARE( results.at(2),QString("6J3J9XZBAS5T"));
     }
 
     void testSitecomWRL400X2() {
@@ -415,15 +419,10 @@ private slots:
         Keygen * keygen = keygens->at(0);
         QCOMPARE(typeid(*keygen), typeid(SitecomWLR400xKeygen) );
         QVector<QString> results = keygen->getResults();
-        QCOMPARE(results.size(),2);
-        QCOMPARE( results.at(0),QString("G2D2KXZBLAFB"));
-        QCOMPARE( results.at(1),QString("6J3J9XZBAS5T"));
-        keygen = keygens->at(1);
-        QCOMPARE(typeid(*keygen), typeid(SitecomWLR400xKeygen) );
-        results = keygen->getResults();
-        QCOMPARE(results.size(),2);
-        QCOMPARE( results.at(0),QString("Q6Z2KXZQ423T"));
-        QCOMPARE( results.at(1),QString("ENZJ9XKELJKH"));
+        QCOMPARE(results.size(),9);
+        QCOMPARE( results.at(0),QString("E0B0HTVYI8D9"));
+        QCOMPARE( results.at(1),QString("G2D2KXZBLAFB"));
+        QCOMPARE( results.at(2),QString("6J3J9XZBAS5T"));
     }
 
     void testSpeedport500() {
@@ -452,7 +451,7 @@ private slots:
         wifi.checkSupport(matcher);
         QVector<Keygen *> * keygens = wifi.getKeygens();
         QVERIFY2(keygens->size() != 0 , "An algorithm was not detected");
-        Keygen * keygen = keygens->at(2);
+        Keygen * keygen = keygens->at(1);
         QCOMPARE(typeid(*keygen), typeid(TeleTuKeygen) );
         QVector<QString> results = keygen->getResults();
         QCOMPARE(results.size(),1);
