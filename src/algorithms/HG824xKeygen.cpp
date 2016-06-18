@@ -105,13 +105,13 @@ QVector<QString> & HG824xKeygen::getKeys() {
     lastPasswordHash["E0"] = "0C"; // 31
     lastPasswordHash["F8"] = "21"; // 4E
     if (lastPasswordHash.contains(mac.mid(0,2))) {
-        results.append(wpaPassword + lastPasswordHash[mac.mid(0,2)].toUpper());
+        results.append(wpaPassword.toUpper() + lastPasswordHash[mac.mid(0,2)].toUpper());
     } else {
         /* Bruteforce if not found */
         QString last;
         for (int i=0; i <= 255; i++) {
             last = QString("%1").arg(i, 2, 16, QLatin1Char('0'));
-            results.append(wpaPassword + last.toUpper());
+            results.append(wpaPassword.toUpper() + last.toUpper());
         }
     }
     
