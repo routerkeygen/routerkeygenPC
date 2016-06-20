@@ -17,6 +17,10 @@ QVector<QString> & TplinkKeygen::getKeys() {
     QString mac = getMacAddress();
     if ( mac.length() != 12 )
         throw ERROR;
-    results.append(mac.mid(4).toUpper());
+    if (getSsidName().startsWith("MGTS")) {
+        results.append(mac.mid(4).toLower());
+    } else {
+        results.append(mac.mid(4).toUpper());
+    }
 	return results;
 }

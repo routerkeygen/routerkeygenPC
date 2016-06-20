@@ -415,7 +415,20 @@ QVector<Keygen *> * WirelessMatcher::getKeygens(QString ssid, QString mac) {
 
 
 
-    if (mac.startsWith("F8:D1:11"))
+    if (mac.startsWith("F8:D1:11")
+        || ssid == "YOTA"
+        || ssid.startsWith("Reliance ")
+        || ssid.count(QRegExp("^Aztech110_[0-9A-F]{4}$")) == 1
+        || ssid.count(QRegExp("^MGTS_GPON_[0-9A-F]{4}$")) == 1
+        || ssid.count(QRegExp("^MGTS(-|_)(\\d)+$")) == 1
+        || ssid.count(QRegExp("^HEXABYTE_[0-9A-F]{6}$")) == 1
+        || ssid.count(QRegExp("^BOLT! SUPER 4G-[0-9A-F]{4}$")) == 1
+        || ssid.count(QRegExp("^MBLAZE-AC3633R2-[0-9A-F]{4}$")) == 1
+        || (ssid.count(QRegExp("^TP-LINK_[0-9A-F]{6}$")) == 1 &&
+            (mac.startsWith("10:FE:ED") || mac.startsWith("30:B5:C2")
+            || mac.startsWith("64:66:B3") || mac.startsWith("64:70:02")
+            || mac.startsWith("90:F6:52") || mac.startsWith("A0:F3:C1")
+            || mac.startsWith("F8:1A:67") )))
         keygens->append(new TplinkKeygen(ssid, mac));
 
     if (ssid.length() == 5
