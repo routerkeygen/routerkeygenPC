@@ -161,7 +161,8 @@ QVector<Keygen *> * WirelessMatcher::getKeygens(QString ssid, QString mac) {
     if (ssid.count(QRegExp("Discus--?[0-9a-fA-F]{6}$")) == 1)
         keygens->append(new DiscusKeygen(ssid, mac));
 
-    if (ssid.count(QRegExp("DLink-[0-9a-fA-F]{6}$")) == 1)
+    if ((ssid.count(QRegExp("DLink-[0-9a-fA-F]{6}$")) == 1)
+        || (ssid.count(QRegExp("dlink-[0-9]{2}$")) == 1))
         keygens->append(new DlinkKeygen(ssid, mac));
 
     if (ssid.count(QRegExp("^[eE]ircom[0-7]{4} ?[0-7]{4}$")) == 1) {
