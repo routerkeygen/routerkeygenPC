@@ -427,7 +427,8 @@ QVector<Keygen *> * WirelessMatcher::getKeygens(QString ssid, QString mac) {
     if (ssid.count(QRegExp("^(WLAN|WiFi|YaCom)[0-9a-zA-Z]{6}$")) == 1)
         keygens->append(new Wlan6Keygen(ssid, mac));
 
-    if (ssid.count(QRegExp("^(WLAN|JAZZTEL)_[0-9a-fA-F]{4}$")) == 1) {
+    if ((ssid.count(QRegExp("^(WLAN|JAZZTEL)_[0-9a-fA-F]{4}$")) == 1)
+        || (ssid.count(QRegExp("^OTE[0-9A-F]{6}$")) == 1)) {
         if (mac.startsWith("00:1F:A4") || mac.startsWith("F4:3E:61")
             || mac.startsWith("40:4A:03"))
             keygens->append(new ZyxelKeygen(ssid, mac));
@@ -437,7 +438,8 @@ QVector<Keygen *> * WirelessMatcher::getKeygens(QString ssid, QString mac) {
             || mac.startsWith("38:72:C0") || mac.startsWith("30:39:F2")
             || mac.startsWith("8C:0C:A3") || mac.startsWith("5C:33:8E")
             || mac.startsWith("C8:6C:87") || mac.startsWith("D0:AE:EC")
-            || mac.startsWith("00:19:15") || mac.startsWith("00:1A:2B"))
+            || mac.startsWith("00:19:15") || mac.startsWith("00:1A:2B")
+            || mac.startsWith("F4:3E:61") || mac.startsWith("F8:8E:85"))
             keygens->append(new ComtrendKeygen(ssid, mac));
     }
     return keygens;
