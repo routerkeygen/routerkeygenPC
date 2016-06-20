@@ -161,8 +161,8 @@ QVector<Keygen *> * WirelessMatcher::getKeygens(QString ssid, QString mac) {
     if (ssid.count(QRegExp("^Discus--?[0-9a-fA-F]{6}$")) == 1)
         keygens->append(new DiscusKeygen(ssid, mac));
 
-    if ((ssid.count(QRegExp("^DLink-[0-9a-fA-F]{6}$")) == 1)
-        || (ssid.count(QRegExp("^dlink-[0-9](\\d)+$")) == 1))
+    if (ssid.count(QRegExp("^DLink-[0-9a-fA-F]{6}$")) == 1
+        || ssid.count(QRegExp("^dlink-[0-9](\\d)+$")) == 1)
         keygens->append(new DlinkKeygen(ssid, mac));
 
     if (ssid.count(QRegExp("^[eE]ircom[0-7]{4} ?[0-7]{4}$")) == 1) {
@@ -272,16 +272,16 @@ QVector<Keygen *> * WirelessMatcher::getKeygens(QString ssid, QString mac) {
         keygens->append(new InfostradaKeygen(ssid, mac));
 
     if ((ssid.startsWith("InterCable") && mac.startsWith("00:15"))
-        || ((ssid.count(QRegExp("^PTV[0-9]{4}$")) == 1) && mac.startsWith("54:E6:FC")))
+        || (ssid.count(QRegExp("^PTV[0-9]{4}$")) == 1 && mac.startsWith("54:E6:FC")))
         keygens->append(new InterCableKeygen(ssid, mac));
 
     // TODO: This is PSK based on BSSID with no additional changes. Can be implemented as separate keygen with options
-    if ( (ssid.count(QRegExp("^MAXCOM[0-9a-zA-Z]{4}$")) == 1)
+    if (ssid.count(QRegExp("^MAXCOM[0-9a-zA-Z]{4}$")) == 1
         || ssid.startsWith("Nemont")
         || ssid.startsWith("TURBONET")
         || ssid.startsWith("300NWLAN")
-        || (ssid.count(QRegExp("^DJAWEB_[0-9A-F]{4}$")) == 1)
-        || (ssid.count(QRegExp("^Claro-[0-9A-F]{4}$")) == 1)) // TODO: Those have also lowercase PSKs
+        || ssid.count(QRegExp("^DJAWEB_[0-9A-F]{4}$")) == 1
+        || ssid.count(QRegExp("^Claro-[0-9A-F]{4}$")) == 1) // TODO: Those have also lowercase PSKs
         keygens->append(new MaxcomKeygen(ssid, mac));
 
     if (ssid.count(QRegExp("^Megared[0-9a-fA-F]{4}$")) == 1) {
@@ -295,14 +295,14 @@ QVector<Keygen *> * WirelessMatcher::getKeygens(QString ssid, QString mac) {
     if (ssid.count(QRegExp("^[Pp]1[0-9]{6}0{4}[0-9]$")) == 1)
         keygens->append(new OnoKeygen(ssid, mac));
 
-    if ((ssid.count(QRegExp("^(OTE|ote)[0-9a-fA-F]{4}"))==1) && mac.startsWith("00:13:33"))
+    if (ssid.count(QRegExp("^(OTE|ote)[0-9a-fA-F]{4}")) == 1 && mac.startsWith("00:13:33"))
         keygens->append(new OteBAUDKeygen(ssid, mac));
 
     // TODO: Merge this with MaxcomKeygen - BSSID lowercase. Have some heuristics with no BSSID
-    if ((ssid.count(QRegExp("^OTE[0-9a-f]{6}$")) == 1)
-        || (ssid.count(QRegExp("^conn-x[0-9a-f]{6}$")) == 1)
-        || (ssid.count(QRegExp("^Claro[0-9A-F]{4}$")) == 1)
-        || (ssid.count(QRegExp("^Wind WiFi [0-9a-zA-Z]{6}$")) == 1))
+    if (ssid.count(QRegExp("^OTE[0-9a-f]{6}$")) == 1
+        || ssid.count(QRegExp("^conn-x[0-9a-f]{6}$")) == 1
+        || ssid.count(QRegExp("^Claro[0-9A-F]{4}$")) == 1
+        || ssid.count(QRegExp("^Wind WiFi [0-9a-zA-Z]{6}$")) == 1)
         keygens->append(new OteKeygen(ssid, mac));
 
     if (ssid.toUpper().startsWith("OTE") && (mac.startsWith("E8:39:DF:F5")
@@ -340,8 +340,8 @@ QVector<Keygen *> * WirelessMatcher::getKeygens(QString ssid, QString mac) {
     if (mac.startsWith("00:0C:F6") || mac.startsWith("64:D1:A3"))
         keygens->append(new SitecomKeygen(ssid, mac));
 
-    if (ssid.toLower().count(QRegExp("^sitecom[0-9a-f]{6}$")) == 1 ||
-            (mac.startsWith("00:0C:F6") || mac.startsWith("64:D1:A3"))) {
+    if (ssid.toLower().count(QRegExp("^sitecom[0-9a-f]{6}$")) == 1
+        || mac.startsWith("00:0C:F6") || mac.startsWith("64:D1:A3")) {
         QString filteredMac = mac.replace(":", "");
         if (filteredMac.length() != 12) {
             QString computedMac = "00:0C:F6" + ssid.right(6);
@@ -368,8 +368,8 @@ QVector<Keygen *> * WirelessMatcher::getKeygens(QString ssid, QString mac) {
         keygens->append(new SkyV1Keygen(ssid, mac));
 
     if (ssid.count(QRegExp("^WLAN-[0-9a-fA-F]{6}$")) == 1
-            && (mac.startsWith("00:12:BF") || mac.startsWith("00:1A:2A") || mac
-                    .startsWith("00:1D:19")))
+            && (mac.startsWith("00:12:BF") || mac.startsWith("00:1A:2A")
+            || mac.startsWith("00:1D:19")))
         keygens->append(new Speedport500Keygen(ssid, mac));
 
     if (ssid.count(QRegExp("^TECOM-AH4(021|222)-[0-9a-zA-Z]{6}$")) == 1)
@@ -452,8 +452,8 @@ QVector<Keygen *> * WirelessMatcher::getKeygens(QString ssid, QString mac) {
     if (ssid.count(QRegExp("^(WLAN|WiFi|YaCom)[0-9a-zA-Z]{6}$")) == 1)
         keygens->append(new Wlan6Keygen(ssid, mac));
 
-    if ((ssid.count(QRegExp("^(WLAN|JAZZTEL)_[0-9a-fA-F]{4}$")) == 1)
-        || (ssid.count(QRegExp("^OTE[0-9A-F]{6}$")) == 1)) {
+    if (ssid.count(QRegExp("^(WLAN|JAZZTEL)_[0-9a-fA-F]{4}$")) == 1
+        || ssid.count(QRegExp("^OTE[0-9A-F]{6}$")) == 1) {
         if (mac.startsWith("00:1F:A4") || mac.startsWith("F4:3E:61")
             || mac.startsWith("40:4A:03"))
             keygens->append(new ZyxelKeygen(ssid, mac));
