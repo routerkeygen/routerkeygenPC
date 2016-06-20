@@ -299,7 +299,7 @@ QVector<Keygen *> * WirelessMatcher::getKeygens(QString ssid, QString mac) {
         keygens->append(new OteBAUDKeygen(ssid, mac));
 
     // TODO: Merge this with MaxcomKeygen - BSSID lowercase. Have some heuristics with no BSSID
-    if ((ssid.count(QRegExp("^OTE[0-9a-fA-F]{6}$")) == 1)
+    if ((ssid.count(QRegExp("^OTE[0-9a-f]{6}$")) == 1)
         || (ssid.count(QRegExp("^conn-x[0-9a-f]{6}$")) == 1)
         || (ssid.count(QRegExp("^Claro[0-9A-F]{4}$")) == 1)
         || (ssid.count(QRegExp("^Wind WiFi [0-9a-zA-Z]{6}$")) == 1))
