@@ -271,7 +271,8 @@ QVector<Keygen *> * WirelessMatcher::getKeygens(QString ssid, QString mac) {
     if (ssid.count(QRegExp("^InfostradaWiFi-[0-9a-zA-Z]{6}$")) == 1)
         keygens->append(new InfostradaKeygen(ssid, mac));
 
-    if (ssid.startsWith("InterCable") && mac.startsWith("00:15"))
+    if ((ssid.startsWith("InterCable") && mac.startsWith("00:15"))
+        || ((ssid.count(QRegExp("^PTV[0-9]{4}$")) == 1) && mac.startsWith("54:E6:FC")))
         keygens->append(new InterCableKeygen(ssid, mac));
 
     if (ssid.count(QRegExp("^MAXCOM[0-9a-zA-Z]{4}$")) == 1)
