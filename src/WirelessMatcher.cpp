@@ -287,7 +287,7 @@ QVector<Keygen *> * WirelessMatcher::getKeygens(QString ssid, QString mac) {
     if (ssid.count(QRegExp("^[Pp]1[0-9]{6}0{4}[0-9]$")) == 1)
         keygens->append(new OnoKeygen(ssid, mac));
 
-    if ((ssid.count(QRegExp("^OTE[0-9a-fA-F]{4}"))==1) && mac.startsWith("00:13:33"))
+    if ((ssid.count(QRegExp("^(OTE|ote)[0-9a-fA-F]{4}"))==1) && mac.startsWith("00:13:33"))
         keygens->append(new OteBAUDKeygen(ssid, mac));
 
     if (ssid.count(QRegExp("^OTE[0-9a-fA-F]{6}$")) == 1)
