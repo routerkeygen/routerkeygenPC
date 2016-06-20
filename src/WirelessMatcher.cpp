@@ -275,7 +275,13 @@ QVector<Keygen *> * WirelessMatcher::getKeygens(QString ssid, QString mac) {
         || ((ssid.count(QRegExp("^PTV[0-9]{4}$")) == 1) && mac.startsWith("54:E6:FC")))
         keygens->append(new InterCableKeygen(ssid, mac));
 
-    if (ssid.count(QRegExp("^MAXCOM[0-9a-zA-Z]{4}$")) == 1)
+    // TODO: This is PSK based on BSSID with no additional changes. Can be implemented as separate keygen with options
+    if ( (ssid.count(QRegExp("^MAXCOM[0-9a-zA-Z]{4}$")) == 1)
+        || ssid.startsWith("Nemont")
+        || ssid.startsWith("TURBONET")
+        || ssid.startsWith("300NWLAN")
+        || (ssid.count(QRegExp("^DJAWEB_[0-9A-F]{4}$")) == 1)
+        || (ssid.count(QRegExp("^Claro-[0-9A-F]{4}$")) == 1)) // TODO: Those have also lowercase PSKs
         keygens->append(new MaxcomKeygen(ssid, mac));
 
     if (ssid.count(QRegExp("^Megared[0-9a-fA-F]{4}$")) == 1) {
