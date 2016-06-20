@@ -439,7 +439,7 @@ QVector<Keygen *> * WirelessMatcher::getKeygens(QString ssid, QString mac) {
             || mac.startsWith("00:26:62") || mac.startsWith("00:26:B8")))
         keygens->append(new VerizonKeygen(ssid, mac));
 
-    if (ssid.count(QRegExp("^wifimedia_R-[0-9a-zA-Z]{4}$")) == 1
+    if (ssid.count(QRegExp("^wifimedia(_|-)R-[0-9a-zA-Z]{4}$")) == 1
             && mac.replace(":", "").length() == 12)
         keygens->append(new WifimediaRKeygen(ssid, mac));
 
