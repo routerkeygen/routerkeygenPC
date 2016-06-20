@@ -46,9 +46,9 @@ QVector<QString> & BelkinKeygen::getKeys() {
     if ( mac.length() != 12 )
         throw ERROR;
     QString ssid = getSsidName();
-    if (ssid.startsWith("B")) {
+    if (ssid.startsWith("Belkin")) {
         generateKey(mac.right(8), CHARSETS[0], (int*)ORDERS[0]);
-    } else if (ssid.startsWith("b")) {
+    } else if (ssid.startsWith("belkin")) {
         mac = addOneToMac(mac);
         generateKey(mac.right(8), CHARSETS[1], (int*)ORDERS[0]);
         if (!mac.startsWith("944452")) {
