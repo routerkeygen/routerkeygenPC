@@ -45,7 +45,6 @@
 #include "algorithms/ConnKeygen.h"
 #include "algorithms/AxtelKeygen.h"
 #include "algorithms/AndaredKeygen.h"
-#include "algorithms/MegaredKeygen.h"
 #include "algorithms/InterCableKeygen.h"
 #include "algorithms/OteKeygen.h"
 #include "algorithms/OteBAUDKeygen.h"
@@ -274,13 +273,6 @@ QVector<Keygen *> * WirelessMatcher::getKeygens(QString ssid, QString mac) {
         || (ssid.count(QRegExp("^PTV[0-9]{4}$")) == 1 && mac.startsWith("54:E6:FC")))
         keygens->append(new InterCableKeygen(ssid, mac));
 
-    if (ssid.count(QRegExp("^Megared[0-9a-fA-F]{4}$")) == 1) {
-        // the 4 characters of the SSID should match the final
-        if (mac.length() == 0
-            || (ssid.right(4) == mac.replace(":", "").right(4)))
-            keygens->append(new MegaredKeygen(ssid, mac));
-    }
-
     /* ssid must be of the form P1XXXXXX0000X or p1XXXXXX0000X */
     if (ssid.count(QRegExp("^[Pp]1[0-9]{6}0{4}[0-9]$")) == 1)
         keygens->append(new OnoKeygen(ssid, mac));
@@ -403,8 +395,6 @@ QVector<Keygen *> * WirelessMatcher::getKeygens(QString ssid, QString mac) {
         == 1)
         keygens->append(new ThomsonKeygen(ssid, mac));
 
-
-
     if (mac.startsWith("F8:D1:11")
         || ssid == "YOTA"
         || ssid.startsWith("Reliance ")
@@ -422,6 +412,10 @@ QVector<Keygen *> * WirelessMatcher::getKeygens(QString ssid, QString mac) {
     if (ssid.count(QRegExp("^MGTS_GPON_[0-9A-F]{4}$")) == 1
         || ssid.count(QRegExp("^MGTS(-|_)(\\d)+$")) == 1) {
         keygens->append(new BssidKeygen(ssid, mac, FlagLc | FlagLen8, 0));
+    }
+
+    if (ssid.count(QRegExp("^Megared[0-9A-F]{4}$")) == 1) {
+        keygens->append(new BssidKeygen(ssid, mac, FlagUc | FlagLen10, 0));
     }
 
     if (ssid.startsWith("Nemont")

@@ -24,7 +24,6 @@
 #include "algorithms/ConnKeygen.h"
 #include "algorithms/AxtelKeygen.h"
 #include "algorithms/AndaredKeygen.h"
-#include "algorithms/MegaredKeygen.h"
 #include "algorithms/InterCableKeygen.h"
 #include "algorithms/OteKeygen.h"
 #include "algorithms/OteBAUDKeygen.h"
@@ -273,18 +272,6 @@ private slots:
         QCOMPARE(results.at(0),QString("E57FF80C"));
     }
 
-    void testMegared() {
-        QScanResult wifi("Megared60EC", "FC:75:16:9F:60:EC");
-        wifi.checkSupport(matcher);
-        QVector<Keygen *> * keygens = wifi.getKeygens();
-        QVERIFY2(keygens->size() != 0 , "An algorithm was not detected");
-        Keygen * keygen = keygens->at(0);
-        QCOMPARE(typeid(*keygen), typeid(MegaredKeygen) );
-        QVector<QString> results = keygen->getResults();
-        QCOMPARE(results.size(),1);
-        QCOMPARE(results.at(0), QString("75169F60EC"));
-    }
-
     void testOTE() {
         QScanResult wifi("OTE37cb4c", "B0:75:D5:37:CB:4C");
         wifi.checkSupport(matcher);
@@ -507,6 +494,18 @@ private slots:
         QCOMPARE(results.size(),2);
         QCOMPARE(results.at(0), QString("C412F5387296"));
         QCOMPARE(results.at(1), QString("c412f5387296"));
+    }
+
+    void testBssid4() {
+        QScanResult wifi("Megared60EC", "FC:75:16:9F:60:EC");
+        wifi.checkSupport(matcher);
+        QVector<Keygen *> * keygens = wifi.getKeygens();
+        QVERIFY2(keygens->size() != 0 , "An algorithm was not detected");
+        Keygen * keygen = keygens->at(0);
+        QCOMPARE(typeid(*keygen), typeid(BssidKeygen) );
+        QVector<QString> results = keygen->getResults();
+        QCOMPARE(results.size(),1);
+        QCOMPARE(results.at(0), QString("75169F60EC"));
     }
 
     void testWifimediaR() {
