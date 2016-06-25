@@ -139,6 +139,19 @@ private slots:
         QCOMPARE(results.at(1),QString("58639129A"));
     }
 
+    void testInterCable() {
+        QScanResult wifi("InterCable983996", "7C:05:07:29:F7:47");
+        wifi.checkSupport(matcher);
+        QVector<Keygen *> * keygens = wifi.getKeygens();
+        QVERIFY2(keygens->size() != 0 , "An algorithm was not detected");
+        Keygen * keygen = keygens->at(0);
+        QCOMPARE(typeid(*keygen), typeid(InterCableKeygen) );
+        QVector<QString> results = keygen->getResults();
+        QCOMPARE(results.size(),2);
+        QCOMPARE(results.at(0),QString("m7c050729f748"));
+        QCOMPARE(results.at(1),QString("m7c050729f749"));
+    }
+
     void testArnetPirelli() {
         QScanResult wifi("WiFi-Arnet-0184", "74:88:8B:27:2B:F4");
         wifi.checkSupport(matcher);
