@@ -37,11 +37,11 @@
 #include "algorithms/Speedport500Keygen.h"
 #include "algorithms/WifimediaRKeygen.h"
 #include "algorithms/BelkinKeygen.h"
-#include "algorithms/TplinkKeygen.h"
 #include "algorithms/ArnetPirelliKeygen.h"
 #include "algorithms/SitecomKeygen.h"
 #include "algorithms/HG824xKeygen.h"
 #include "algorithms/SitecomWLR400xKeygen.h"
+#include "algorithms/BssidKeygen.h"
 #include "WirelessMatcher.h"
 #include "wifi/QScanResult.h"
 #include <QDebug>
@@ -473,13 +473,13 @@ private slots:
         QCOMPARE(results.at(2), QString("8F524DED99"));
     }
 
-    void testTplink() {
+    void testBssid() {
         QScanResult wifi("tplink","F8:D1:11:1E:28:A5");
         wifi.checkSupport(matcher);
         QVector<Keygen *> * keygens = wifi.getKeygens();
         QVERIFY2(keygens->size() != 0 , "An algorithm was not detected");
         Keygen * keygen = keygens->at(0);
-        QCOMPARE(typeid(*keygen), typeid(TplinkKeygen) );
+        QCOMPARE(typeid(*keygen), typeid(BssidKeygen) );
         QVector<QString> results = keygen->getResults();
         QCOMPARE(results.size(),1);
         QCOMPARE(results.at(0), QString("111E28A5"));

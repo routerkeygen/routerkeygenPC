@@ -58,12 +58,12 @@
 #include "algorithms/Speedport500Keygen.h"
 #include "algorithms/WifimediaRKeygen.h"
 #include "algorithms/BelkinKeygen.h"
-#include "algorithms/TplinkKeygen.h"
 #include "algorithms/ArnetPirelliKeygen.h"
 #include "algorithms/SitecomKeygen.h"
 #include "algorithms/HG824xKeygen.h"
 #include "algorithms/SitecomWLR400xKeygen.h"
 #include "algorithms/SitecomWLR2100Keygen.h"
+#include "algorithms/BssidKeygen.h"
 #include <QRegExp>
 
 WirelessMatcher::WirelessMatcher() {
@@ -419,8 +419,6 @@ QVector<Keygen *> * WirelessMatcher::getKeygens(QString ssid, QString mac) {
         || ssid == "YOTA"
         || ssid.startsWith("Reliance ")
         || ssid.count(QRegExp("^Aztech110_[0-9A-F]{4}$")) == 1
-        || ssid.count(QRegExp("^MGTS_GPON_[0-9A-F]{4}$")) == 1
-        || ssid.count(QRegExp("^MGTS(-|_)(\\d)+$")) == 1
         || ssid.count(QRegExp("^HEXABYTE_[0-9A-F]{6}$")) == 1
         || ssid.count(QRegExp("^BOLT! SUPER 4G-[0-9A-F]{4}$")) == 1
         || ssid.count(QRegExp("^MBLAZE-AC3633R2-[0-9A-F]{4}$")) == 1
@@ -429,7 +427,12 @@ QVector<Keygen *> * WirelessMatcher::getKeygens(QString ssid, QString mac) {
             || mac.startsWith("64:66:B3") || mac.startsWith("64:70:02")
             || mac.startsWith("90:F6:52") || mac.startsWith("A0:F3:C1")
             || mac.startsWith("F8:1A:67") )))
-        keygens->append(new TplinkKeygen(ssid, mac));
+        keygens->append(new BssidKeygen(ssid, mac, FlagUc | FlagLen8, 0));
+
+    if (ssid.count(QRegExp("^MGTS_GPON_[0-9A-F]{4}$")) == 1
+        || ssid.count(QRegExp("^MGTS(-|_)(\\d)+$")) == 1) {
+        keygens->append(new BssidKeygen(ssid, mac, FlagLc | FlagLen8, 0));
+    }
 
     if (ssid.length() == 5
         && (mac.startsWith("00:1F:90") || mac.startsWith("A8:39:44")
