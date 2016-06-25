@@ -46,7 +46,6 @@
 #include "algorithms/AxtelKeygen.h"
 #include "algorithms/AndaredKeygen.h"
 #include "algorithms/MegaredKeygen.h"
-#include "algorithms/MaxcomKeygen.h"
 #include "algorithms/InterCableKeygen.h"
 #include "algorithms/OteKeygen.h"
 #include "algorithms/OteBAUDKeygen.h"
@@ -275,15 +274,6 @@ QVector<Keygen *> * WirelessMatcher::getKeygens(QString ssid, QString mac) {
         || (ssid.count(QRegExp("^PTV[0-9]{4}$")) == 1 && mac.startsWith("54:E6:FC")))
         keygens->append(new InterCableKeygen(ssid, mac));
 
-    // TODO: This is PSK based on BSSID with no additional changes. Can be implemented as separate keygen with options
-    if (ssid.count(QRegExp("^MAXCOM[0-9a-zA-Z]{4}$")) == 1
-        || ssid.startsWith("Nemont")
-        || ssid.startsWith("TURBONET")
-        || ssid.startsWith("300NWLAN")
-        || ssid.count(QRegExp("^DJAWEB_[0-9A-F]{4}$")) == 1
-        || ssid.count(QRegExp("^Claro-[0-9A-F]{4}$")) == 1) // TODO: Those have also lowercase PSKs
-        keygens->append(new MaxcomKeygen(ssid, mac));
-
     if (ssid.count(QRegExp("^Megared[0-9a-fA-F]{4}$")) == 1) {
         // the 4 characters of the SSID should match the final
         if (mac.length() == 0
@@ -433,6 +423,16 @@ QVector<Keygen *> * WirelessMatcher::getKeygens(QString ssid, QString mac) {
         || ssid.count(QRegExp("^MGTS(-|_)(\\d)+$")) == 1) {
         keygens->append(new BssidKeygen(ssid, mac, FlagLc | FlagLen8, 0));
     }
+
+    if (ssid.startsWith("Nemont")
+        || ssid.startsWith("TURBONET")
+        || ssid.startsWith("300NWLAN")
+        || ssid.count(QRegExp("^MAXCOM[0-9a-zA-Z]{4}$")) == 1
+        || ssid.count(QRegExp("^DJAWEB_[0-9A-F]{4}$")) == 1)
+        keygens->append(new BssidKeygen(ssid, mac, FlagUc | FlagLen12, 0));
+
+    if (ssid.count(QRegExp("^Claro-[0-9A-F]{4}$")) == 1)
+        keygens->append(new BssidKeygen(ssid, mac, FlagUc | FlagLc | FlagLen12, 0));
 
     if (ssid.length() == 5
         && (mac.startsWith("00:1F:90") || mac.startsWith("A8:39:44")

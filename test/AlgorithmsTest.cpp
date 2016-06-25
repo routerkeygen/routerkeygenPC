@@ -25,7 +25,6 @@
 #include "algorithms/AxtelKeygen.h"
 #include "algorithms/AndaredKeygen.h"
 #include "algorithms/MegaredKeygen.h"
-#include "algorithms/MaxcomKeygen.h"
 #include "algorithms/InterCableKeygen.h"
 #include "algorithms/OteKeygen.h"
 #include "algorithms/OteBAUDKeygen.h"
@@ -483,6 +482,31 @@ private slots:
         QVector<QString> results = keygen->getResults();
         QCOMPARE(results.size(),1);
         QCOMPARE(results.at(0), QString("111E28A5"));
+    }
+
+    void testBssid2() {
+        QScanResult wifi("Nemont","00:04:ED:DD:8C:E0");
+        wifi.checkSupport(matcher);
+        QVector<Keygen *> * keygens = wifi.getKeygens();
+        QVERIFY2(keygens->size() != 0 , "An algorithm was not detected");
+        Keygen * keygen = keygens->at(0);
+        QCOMPARE(typeid(*keygen), typeid(BssidKeygen) );
+        QVector<QString> results = keygen->getResults();
+        QCOMPARE(results.size(),1);
+        QCOMPARE(results.at(0), QString("0004EDDD8CE0"));
+    }
+
+    void testBssid3() {
+        QScanResult wifi("Claro-7296","C4:12:F5:38:72:96");
+        wifi.checkSupport(matcher);
+        QVector<Keygen *> * keygens = wifi.getKeygens();
+        QVERIFY2(keygens->size() != 0 , "An algorithm was not detected");
+        Keygen * keygen = keygens->at(0);
+        QCOMPARE(typeid(*keygen), typeid(BssidKeygen) );
+        QVector<QString> results = keygen->getResults();
+        QCOMPARE(results.size(),2);
+        QCOMPARE(results.at(0), QString("C412F5387296"));
+        QCOMPARE(results.at(1), QString("c412f5387296"));
     }
 
     void testWifimediaR() {
