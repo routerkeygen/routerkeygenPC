@@ -46,7 +46,6 @@
 #include "algorithms/AxtelKeygen.h"
 #include "algorithms/AndaredKeygen.h"
 #include "algorithms/InterCableKeygen.h"
-#include "algorithms/OteKeygen.h"
 #include "algorithms/OteBAUDKeygen.h"
 #include "algorithms/OteHuaweiKeygen.h"
 #include "algorithms/PBSKeygen.h"
@@ -280,13 +279,6 @@ QVector<Keygen *> * WirelessMatcher::getKeygens(QString ssid, QString mac) {
     if (ssid.count(QRegExp("^(OTE|ote)[0-9a-fA-F]{4}")) == 1 && mac.startsWith("00:13:33"))
         keygens->append(new OteBAUDKeygen(ssid, mac));
 
-    // TODO: Merge this with MaxcomKeygen - BSSID lowercase. Have some heuristics with no BSSID
-    if (ssid.count(QRegExp("^OTE[0-9a-f]{6}$")) == 1
-        || ssid.count(QRegExp("^conn-x[0-9a-f]{6}$")) == 1
-        || ssid.count(QRegExp("^Claro[0-9A-F]{4}$")) == 1
-        || ssid.count(QRegExp("^Wind WiFi [0-9a-zA-Z]{6}$")) == 1)
-        keygens->append(new OteKeygen(ssid, mac));
-
     if (ssid.toUpper().startsWith("OTE") && (mac.startsWith("E8:39:DF:F5")
         || mac.startsWith("E8:39:DF:F6") || mac.startsWith("E8:39:DF:FD"))) {
         QString filteredMac = mac.replace(":", "");
@@ -427,6 +419,12 @@ QVector<Keygen *> * WirelessMatcher::getKeygens(QString ssid, QString mac) {
 
     if (ssid.count(QRegExp("^Claro-[0-9A-F]{4}$")) == 1)
         keygens->append(new BssidKeygen(ssid, mac, FlagUc | FlagLc | FlagLen12, 0));
+
+    if (ssid.count(QRegExp("^OTE[0-9a-f]{6}$")) == 1
+        || ssid.count(QRegExp("^conn-x[0-9a-f]{6}$")) == 1
+        || ssid.count(QRegExp("^Claro[0-9A-F]{4}$")) == 1
+        || ssid.count(QRegExp("^Wind WiFi [0-9a-zA-Z]{6}$")) == 1)
+        keygens->append(new BssidKeygen(ssid, mac, FlagLc | FlagLen12, 0));
 
     if (ssid.length() == 5
         && (mac.startsWith("00:1F:90") || mac.startsWith("A8:39:44")

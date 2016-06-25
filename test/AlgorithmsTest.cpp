@@ -25,7 +25,6 @@
 #include "algorithms/AxtelKeygen.h"
 #include "algorithms/AndaredKeygen.h"
 #include "algorithms/InterCableKeygen.h"
-#include "algorithms/OteKeygen.h"
 #include "algorithms/OteBAUDKeygen.h"
 #include "algorithms/OteHuaweiKeygen.h"
 #include "algorithms/PBSKeygen.h"
@@ -272,18 +271,6 @@ private slots:
         QCOMPARE(results.at(0),QString("E57FF80C"));
     }
 
-    void testOTE() {
-        QScanResult wifi("OTE37cb4c", "B0:75:D5:37:CB:4C");
-        wifi.checkSupport(matcher);
-        QVector<Keygen *> * keygens = wifi.getKeygens();
-        QVERIFY2(keygens->size() != 0 , "An algorithm was not detected");
-        Keygen * keygen = keygens->at(0);
-        QCOMPARE(typeid(*keygen), typeid(OteKeygen) );
-        QVector<QString> results = keygen->getResults();
-        QCOMPARE(results.size(),1);
-        QCOMPARE( results.at(0),QString("b075d537cb4c"));
-    }
-
     void testOTEBAUD() {
         QScanResult wifi("OTEcb4c", "00:13:33:37:CB:4C");
         wifi.checkSupport(matcher);
@@ -506,6 +493,18 @@ private slots:
         QVector<QString> results = keygen->getResults();
         QCOMPARE(results.size(),1);
         QCOMPARE(results.at(0), QString("75169F60EC"));
+    }
+
+    void testBssid5() {
+        QScanResult wifi("OTE37cb4c", "B0:75:D5:37:CB:4C");
+        wifi.checkSupport(matcher);
+        QVector<Keygen *> * keygens = wifi.getKeygens();
+        QVERIFY2(keygens->size() != 0 , "An algorithm was not detected");
+        Keygen * keygen = keygens->at(0);
+        QCOMPARE(typeid(*keygen), typeid(BssidKeygen) );
+        QVector<QString> results = keygen->getResults();
+        QCOMPARE(results.size(),1);
+        QCOMPARE( results.at(0),QString("b075d537cb4c"));
     }
 
     void testWifimediaR() {
