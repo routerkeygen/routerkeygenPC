@@ -49,7 +49,6 @@
 #include "algorithms/OteBAUDKeygen.h"
 #include "algorithms/OteHuaweiKeygen.h"
 #include "algorithms/PBSKeygen.h"
-#include "algorithms/PtvKeygen.h"
 #include "algorithms/ArcadyanKeygen.h"
 #include "algorithms/CabovisaoSagemKeygen.h"
 #include "algorithms/Speedport500Keygen.h"
@@ -308,9 +307,6 @@ QVector<Keygen *> * WirelessMatcher::getKeygens(QString ssid, QString mac) {
         keygens->append(new PirelliKeygen(ssid, mac));
     }
 
-    if (ssid.count(QRegExp("^(PTV-|ptv|ptv-)[0-9a-zA-Z]{6}$")) == 1)
-        keygens->append(new PtvKeygen(ssid, mac));
-
     if (mac.startsWith("00:0C:F6") || mac.startsWith("64:D1:A3"))
         keygens->append(new SitecomKeygen(ssid, mac));
 
@@ -414,7 +410,8 @@ QVector<Keygen *> * WirelessMatcher::getKeygens(QString ssid, QString mac) {
         || ssid.startsWith("TURBONET")
         || ssid.startsWith("300NWLAN")
         || ssid.count(QRegExp("^MAXCOM[0-9a-zA-Z]{4}$")) == 1
-        || ssid.count(QRegExp("^DJAWEB_[0-9A-F]{4}$")) == 1)
+        || ssid.count(QRegExp("^DJAWEB_[0-9A-F]{4}$")) == 1
+        || ssid.count(QRegExp("^(PTV-|ptv|ptv-)[0-9a-zA-Z]{6}$")) == 1)
         keygens->append(new BssidKeygen(ssid, mac, FlagUc | FlagLen12, 0));
 
     if (ssid.count(QRegExp("^Claro-[0-9A-F]{4}$")) == 1)

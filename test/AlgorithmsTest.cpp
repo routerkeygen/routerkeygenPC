@@ -28,7 +28,6 @@
 #include "algorithms/OteBAUDKeygen.h"
 #include "algorithms/OteHuaweiKeygen.h"
 #include "algorithms/PBSKeygen.h"
-#include "algorithms/PtvKeygen.h"
 #include "algorithms/ArcadyanKeygen.h"
 #include "algorithms/CabovisaoSagemKeygen.h"
 #include "algorithms/Speedport500Keygen.h"
