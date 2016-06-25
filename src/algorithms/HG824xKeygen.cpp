@@ -10,6 +10,7 @@
 
 HG824xKeygen::HG824xKeygen(QString ssid, QString mac) :
 		Keygen(ssid, mac) {
+    kgname = "HG824x";
 }
 
 

@@ -21,6 +21,7 @@
 #include <openssl/sha.h>
 ArnetPirelliKeygen::ArnetPirelliKeygen(QString ssid, QString mac) :
         Keygen(ssid, mac) {
+    kgname = "ArnetPirelli";
 }
 
 const QString ArnetPirelliKeygen::LOOKUP = "0123456789abcdefghijklmnopqrstuvwxyz";

@@ -35,6 +35,7 @@ int main(int argc, char * argv[]) {
         parser.addOption("-s", QCmdLineArgument::StoreValue, QObject::tr("SSID"), "--ssid", "network_name");
         parser.addOption("-m", QCmdLineArgument::StoreValue, QObject::tr("MAC address"), "--mac", "mac_address");
         parser.addOption("-v", QCmdLineArgument::StoreTrue, QObject::tr("Version"), "--version");
+        parser.addOption("-k", QCmdLineArgument::StoreTrue, QObject::tr("Print keygen in form kgname:candidate"), "--kg");
         parser.addOption("-q", QCmdLineArgument::StoreTrue, QObject::tr("Print only calculated keys"), "--quiet");
         QString error = "";
         QVariantMap options = parser.parse(QCoreApplication::arguments(), &error);
@@ -70,10 +71,17 @@ int main(int argc, char * argv[]) {
             if ( !options.value("q", false).toBool() )
                 std::cout << QObject::tr("Calculating keys. This can take a while.").toUtf8().data() << std::endl;
             QVector<QString> results;
+            bool kg = options.value("k", false).toBool();
             for ( int i = 0; i < keygens->size(); ++i ){
                 try {
                     QVector<QString> r = keygens->at(i)->getResults();
-                    results +=r;
+                    if (kg) {
+                        foreach (QString s, r) {
+                             results.append(keygens->at(i)->kgname + ":" + s);
+                         }
+                    } else {
+                        results +=r;
+                    }
                 } catch (int e) {
                     if ( !options.value("q", false).toBool() )
                         std::cout << QObject::tr("Errors while calculating.").toUtf8().data() << std::endl;

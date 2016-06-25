@@ -19,7 +19,8 @@
 #include "OteBAUDKeygen.h"
 
 OteBAUDKeygen::OteBAUDKeygen(QString ssid, QString mac) :
-		Keygen(ssid, mac) {
+        Keygen(ssid, mac) {
+    kgname = "OteBAUD";
 }
 
 

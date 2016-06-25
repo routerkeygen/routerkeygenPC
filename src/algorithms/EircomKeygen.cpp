@@ -21,6 +21,7 @@
 #include <QCryptographicHash>
 EircomKeygen::EircomKeygen(QString ssid, QString mac) :
 		Keygen(ssid, mac) {
+    kgname = "Eircom";
 }
 
 QVector<QString> & EircomKeygen::getKeys() {

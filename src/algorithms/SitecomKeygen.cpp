@@ -22,6 +22,7 @@
 
 SitecomKeygen::SitecomKeygen(QString ssid, QString mac) :
         Keygen(ssid, mac) {
+    kgname = "Sitecom";
 }
 
 const QString SitecomKeygen::CHARSET = "123456789abcdefghjkmnpqrstuvwxyzABCDEFGHJKMNPQRSTUVWXYZ";

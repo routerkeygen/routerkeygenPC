@@ -20,6 +20,7 @@
 
 SitecomWLR400xKeygen::SitecomWLR400xKeygen(QString ssid, QString mac) :
         Keygen(ssid, mac) {
+    kgname = "SitecomWLR400x";
 }
 
 const QString SitecomWLR400xKeygen::CHARSETS_341[]  = {"0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ", "W0X1CDYNJU8VOZA0BKL46PQ7RS9T2E5HI3MFG"};

@@ -19,7 +19,9 @@
 #include "VerizonKeygen.h"
 
 VerizonKeygen::VerizonKeygen(QString ssid, QString mac) :
-		Keygen(ssid, mac){}
+		Keygen(ssid, mac) {
+    kgname = "Verizon";
+}
 
 QVector<QString> & VerizonKeygen::getKeys() {
     QChar inverse[5];

@@ -20,7 +20,9 @@
 #include <QCryptographicHash>
 
 TecomKeygen::TecomKeygen(QString ssid, QString mac) :
-		Keygen(ssid, mac) {}
+		Keygen(ssid, mac) {
+    kgname = "Tecom";
+}
 
 QVector<QString> & TecomKeygen::getKeys() {
     QString result;

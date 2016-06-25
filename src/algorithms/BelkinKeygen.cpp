@@ -10,8 +10,8 @@
 
 BelkinKeygen::BelkinKeygen(QString ssid, QString mac) :
 		Keygen(ssid, mac) {
+    kgname = "Belkin";
 }
-
 
 int BelkinKeygen::getSupportState() const{
     if ( getSsidName().count(QRegExp("^(B|b)elkin(\\.|_)[0-9a-fA-F]{3,6}$")) == 1 )

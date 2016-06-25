@@ -10,6 +10,7 @@
 
 ArcadyanKeygen::ArcadyanKeygen(QString ssid, QString mac) :
 		Keygen(ssid, mac) {
+    kgname = "Arcadyan";
 }
 
 int ArcadyanKeygen::getSupportState() const{

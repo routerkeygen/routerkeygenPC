@@ -20,7 +20,9 @@
 #include <QRegExp>
 
 HuaweiKeygen::HuaweiKeygen(QString ssid, QString mac) :
-		Keygen(ssid, mac){}
+		Keygen(ssid, mac) {
+    kgname = "Huawei";
+}
 
 
 int HuaweiKeygen::getSupportState() const{

@@ -9,9 +9,8 @@
 
 AxtelKeygen::AxtelKeygen(QString ssid, QString mac) :
 		Keygen(ssid, mac) {
+    kgname = "Axtel";
 }
-
-
 
 QVector<QString> & AxtelKeygen::getKeys() {
     QString mac = getMacAddress();

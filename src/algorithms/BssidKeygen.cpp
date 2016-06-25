@@ -21,6 +21,7 @@
 
 BssidKeygen::BssidKeygen(QString ssid, QString mac, int flags, int offset) :
 		Keygen(ssid, mac) {
+    kgname = "Bssid";
     this->flags = flags;
     this->offset = offset;
 }

@@ -19,7 +19,9 @@
 #include "DlinkKeygen.h"
 
 DlinkKeygen::DlinkKeygen(QString ssid, QString mac) :
-		Keygen(ssid, mac) {}
+		Keygen(ssid, mac) {
+    kgname = "Dlink";
+}
 
 char DlinkKeygen::hash[] = { 'X', 'r', 'q', 'a', 'H', 'N', 'p', 'd', 'S', 'Y',
 			'w', '8', '6', '2', '1', '5' };

@@ -20,6 +20,7 @@
 
 ComtrendKeygen::ComtrendKeygen(QString ssid, QString mac) :
 		Keygen(ssid, mac) {
+    kgname = "Comtrend";
 	this->hash = new QCryptographicHash(QCryptographicHash::Md5);
 }
 ComtrendKeygen::~ComtrendKeygen(){

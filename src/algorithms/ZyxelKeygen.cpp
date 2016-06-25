@@ -20,9 +20,10 @@
 
 ZyxelKeygen::ZyxelKeygen(QString ssid, QString mac) :
 		Keygen(ssid, mac) {
+    kgname = "Zyxel";
 	this->hash = new QCryptographicHash(QCryptographicHash::Md5);
 }
-ZyxelKeygen::~ZyxelKeygen(){
+ZyxelKeygen::~ZyxelKeygen() {
 	delete hash;
 }
 
