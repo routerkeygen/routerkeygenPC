@@ -29,7 +29,7 @@ Upc07Keygen::Upc07Keygen(QString ssid, QString mac) :
 }
 
 int Upc07Keygen::getSupportState() const{
-    if ( getSsidName().contains(QRegExp("^UPC[0-9]{7}$")) )
+    if ( getSsidName().count(QRegExp("^UPC[0-9]{7}$")) == 1 )
         return SUPPORTED;
     return UNLIKELY;
 }
