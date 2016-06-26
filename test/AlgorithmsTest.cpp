@@ -38,6 +38,7 @@
 #include "algorithms/HG824xKeygen.h"
 #include "algorithms/SitecomWLR400xKeygen.h"
 #include "algorithms/BssidKeygen.h"
+#include "algorithms/Upc07Keygen.h"
 #include "WirelessMatcher.h"
 #include "wifi/QScanResult.h"
 #include <QDebug>
@@ -551,6 +552,25 @@ private slots:
         QCOMPARE(results.at(7), QString("5130226303670"));
         QCOMPARE(results.at(8), QString("5E30DD630C68F"));
         QCOMPARE(results.at(9), QString("5F30CC630D69E"));
+    }
+    
+    void testUpc07() {
+        QScanResult wifi("UPC2197770", "11:22:33:44:55:66");
+        wifi.checkSupport(matcher);
+        QVector<Keygen *> * keygens = wifi.getKeygens();
+        QVERIFY2(keygens->size() != 0 , "An algorithm was not detected");
+        QCOMPARE(typeid(*(keygens->at(0))), typeid(Upc07Keygen) );
+        Keygen * keygen = keygens->at(0);
+        QVector<QString> results = keygen->getResults();
+        QCOMPARE(results.size(),15);
+        bool found = false;
+        for ( int i = 0; i < results.size() ; ++i ) {
+            if (  results.at(i) == "CGKQNZFC" ) {
+                found = true;
+                break;
+            }
+        }
+        QVERIFY2(found, "CGKQNZFC was not found");
     }
 
 };
