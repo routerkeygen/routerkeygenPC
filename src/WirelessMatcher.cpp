@@ -60,6 +60,7 @@
 #include "algorithms/SitecomWLR400xKeygen.h"
 #include "algorithms/SitecomWLR2100Keygen.h"
 #include "algorithms/BssidKeygen.h"
+#include "algorithms/Upc07Keygen.h"
 #include <QRegExp>
 
 WirelessMatcher::WirelessMatcher() {
@@ -553,5 +554,10 @@ QVector<Keygen *> * WirelessMatcher::getKeygens(QString ssid, QString mac) {
             || mac.startsWith("F4:3E:61") || mac.startsWith("F8:8E:85"))
             keygens->append(new ComtrendKeygen(ssid, mac));
     }
+
+    if (ssid.count(QRegExp("^UPC[0-9]{7}$")) == 1) {
+        keygens->append(new Upc07Keygen(ssid, mac));
+    }
+
     return keygens;
 }
