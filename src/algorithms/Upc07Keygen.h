@@ -35,6 +35,7 @@ private:
 	const static unsigned int max1;
 	const static unsigned int max2;
 	const static unsigned int max3;
+	const static char* prefixes[];
 
     QString hash2pass(quint8 *in_hash);
     quint32 mangle(quint32 *pp);

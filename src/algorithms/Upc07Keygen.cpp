@@ -45,6 +45,12 @@ const unsigned int Upc07Keygen::max0 = 9;
 const unsigned int Upc07Keygen::max1 = 99;
 const unsigned int Upc07Keygen::max2 = 9;
 const unsigned int Upc07Keygen::max3 = 9999;
+const char* Upc07Keygen::prefixes[] = {
+    "SAAP",
+    "SAPP",
+    "UAAP",
+    "SBAP"
+};
 
 QString Upc07Keygen::hash2pass(quint8 *in_hash) {
 	quint32 i, a;
@@ -90,7 +96,7 @@ QVector<QString> & Upc07Keygen::getKeys() {
     char serial_input[64];
     char tmpstr[17];
     quint8 h1[16], h2[16];
-    quint32 hv[4], w1, w2, i;
+    quint32 hv[4], w1, w2, i, j;
     int mode;
     QString pass;
     bool ok;
@@ -99,6 +105,8 @@ QVector<QString> & Upc07Keygen::getKeys() {
     target = ssid7.toInt(&ok, 10);
     if (!ok)
         throw ERROR;
+        
+    const unsigned int prefix_cnt = sizeof(prefixes) / sizeof(prefixes[0]);
 
     MD5_CTX ctx;
 
@@ -117,40 +125,42 @@ QVector<QString> & Upc07Keygen::getKeys() {
             continue;
         }
 
-        sprintf(serial, "SAAP%d%02d%d%04d", buf[0], buf[1], buf[2], buf[3]);
-        memset(serial_input, 0, 64);
+        for(j = 0; j < prefix_cnt; j++) {
+            sprintf(serial, "%s%d%02d%d%04d", prefixes[j], buf[0], buf[1], buf[2], buf[3]);
+            memset(serial_input, 0, 64);
 
-        if (mode == 2) {
-            for(i=0; i<strlen(serial); i++) {
-                serial_input[strlen(serial)-1-i] = serial[i];
+            if (mode == 2) {
+                for(i=0; i<strlen(serial); i++) {
+                    serial_input[strlen(serial)-1-i] = serial[i];
+                }
+            } else {
+                memcpy(serial_input, serial, strlen(serial));
             }
-        } else {
-            memcpy(serial_input, serial, strlen(serial));
+
+            MD5_Init(&ctx);
+            MD5_Update(&ctx, serial_input, strlen(serial_input));
+            MD5_Final(h1, &ctx);
+
+            for (i = 0; i < 4; i++) {
+                hv[i] = *(quint16 *)(h1 + i*2);
+            }
+
+            w1 = mangle(hv);
+
+            for (i = 0; i < 4; i++) {
+                hv[i] = *(quint16 *)(h1 + 8 + i*2);
+            }
+
+            w2 = mangle(hv);
+
+            sprintf(tmpstr, "%08X%08X", w1, w2);
+
+            MD5_Init(&ctx);
+            MD5_Update(&ctx, tmpstr, strlen(tmpstr));
+            MD5_Final(h2, &ctx);
+
+            results.append(hash2pass(h2));
         }
-
-        MD5_Init(&ctx);
-        MD5_Update(&ctx, serial_input, strlen(serial_input));
-        MD5_Final(h1, &ctx);
-
-        for (i = 0; i < 4; i++) {
-            hv[i] = *(quint16 *)(h1 + i*2);
-        }
-
-        w1 = mangle(hv);
-
-        for (i = 0; i < 4; i++) {
-            hv[i] = *(quint16 *)(h1 + 8 + i*2);
-        }
-
-        w2 = mangle(hv);
-
-        sprintf(tmpstr, "%08X%08X", w1, w2);
-
-        MD5_Init(&ctx);
-        MD5_Update(&ctx, tmpstr, strlen(tmpstr));
-        MD5_Final(h2, &ctx);
-
-        results.append(hash2pass(h2));
     }
 
     return results;   

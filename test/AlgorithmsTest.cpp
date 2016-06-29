@@ -562,7 +562,7 @@ private slots:
         QCOMPARE(typeid(*(keygens->at(0))), typeid(Upc07Keygen) );
         Keygen * keygen = keygens->at(0);
         QVector<QString> results = keygen->getResults();
-        QCOMPARE(results.size(),15);
+        QCOMPARE(results.size(),60);
         bool found = false;
         for ( int i = 0; i < results.size() ; ++i ) {
             if (  results.at(i) == "CGKQNZFC" ) {
