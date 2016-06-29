@@ -105,12 +105,17 @@ QVector<QString> & Upc07Keygen::getKeys() {
     for (buf[0] = 0; buf[0] <= max0; buf[0]++)
     for (buf[1] = 0; buf[1] <= max1; buf[1]++)
     for (buf[2] = 0; buf[2] <= max2; buf[2]++)
-    for (buf[3] = 0; buf[3] <= max3; buf[3]++)
-    for (mode = 1; mode <= 2; mode++) {
-		if (mode == 1 && upc_generate_ssid(buf, magic24) != target)
-			continue;
-		if (mode == 2 && upc_generate_ssid(buf, magic5) != target)
-			continue;
+    for (buf[3] = 0; buf[3] <= max3; buf[3]++) {
+        mode = 0;
+        if (upc_generate_ssid(buf, magic24) == target) {
+            mode = 1;
+        }
+        if (upc_generate_ssid(buf, magic5) == target) {
+            mode = 2;
+        }
+        if (mode != 1 && mode != 2) {
+            continue;
+        }
 
         sprintf(serial, "SAAP%d%02d%d%04d", buf[0], buf[1], buf[2], buf[3]);
         memset(serial_input, 0, 64);
