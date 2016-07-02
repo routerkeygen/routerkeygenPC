@@ -8,12 +8,10 @@
 #include "BelkinKeygen.h"
 #include <QRegExp>
 
-#define NUMBERS_OF_ORDERS   3
-
 BelkinKeygen::BelkinKeygen(QString ssid, QString mac) :
 		Keygen(ssid, mac) {
+    kgname = "Belkin";
 }
-
 
 int BelkinKeygen::getSupportState() const{
     if ( getSsidName().count(QRegExp("^(B|b)elkin(\\.|_)[0-9a-fA-F]{3,6}$")) == 1 )
@@ -48,13 +46,14 @@ QVector<QString> & BelkinKeygen::getKeys() {
     if ( mac.length() != 12 )
         throw ERROR;
     QString ssid = getSsidName();
-    if (ssid.startsWith("B")) {
+    if (ssid.startsWith("Belkin")) {
         generateKey(mac.right(8), CHARSETS[0], (int*)ORDERS[0]);
-    } else if (ssid.startsWith("b")) {
+    } else if (ssid.startsWith("belkin")) {
         mac = addOneToMac(mac);
         generateKey(mac.right(8), CHARSETS[1], (int*)ORDERS[0]);
         if (!mac.startsWith("944452")) {
             generateKey(mac.right(8), CHARSETS[1], (int*)ORDERS[2]);
+            generateKey(mac.right(8), CHARSETS[1], (int*)ORDERS[3]);
             mac = addOneToMac(mac);
             generateKey(mac.right(8), CHARSETS[1], (int*)ORDERS[0]);
         }
@@ -72,5 +71,5 @@ QVector<QString> & BelkinKeygen::getKeys() {
 }
 
 
-const int BelkinKeygen::ORDERS[NUMBERS_OF_ORDERS][8] = {{6,2,3,8,5,1,7,4},{1,2,3,8,5,1,7,4},{1,2,3,8,5,6,7,4}};
+const int BelkinKeygen::ORDERS[NUMBERS_OF_ORDERS][8] = {{6,2,3,8,5,1,7,4},{1,2,3,8,5,1,7,4},{1,2,3,8,5,6,7,4},{6,2,3,8,5,6,7,4}};
 const QString BelkinKeygen::CHARSETS[2] = {QString("024613578ACE9BDF"), QString("944626378ace9bdf")};

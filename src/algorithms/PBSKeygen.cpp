@@ -10,6 +10,7 @@
 
 PBSKeygen::PBSKeygen(QString ssid, QString mac) :
 		Keygen(ssid, mac) {
+    kgname = "PBS";
 }
 
 const QString PBSKeygen::lookup =

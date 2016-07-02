@@ -9,9 +9,8 @@
 
 ConnKeygen::ConnKeygen(QString ssid, QString mac) :
 		Keygen(ssid, mac) {
+    kgname = "Conn";
 }
-
-
 
 QVector<QString> & ConnKeygen::getKeys() {
 	results.append(QString("1234567890123"));

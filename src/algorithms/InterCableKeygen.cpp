@@ -9,19 +9,20 @@
 
 InterCableKeygen::InterCableKeygen(QString ssid, QString mac) :
 		Keygen(ssid, mac) {
+    kgname = "InterCable";
 }
 
 QVector<QString> & InterCableKeygen::getKeys() {
     QString mac = getMacAddress();
     if ( mac.length() != 12 )
         throw ERROR;
-    results.append(mac.mid(2).toUpper());
-    QString wep = "m" + getMacAddress().left(10);
-    QString hex = getMacAddress().right(2);
-    int intValue = hex.toInt(NULL, 16);
-    intValue += 1; // we add 1 and then convert again to hex
-    hex.setNum(intValue);
-    wep += hex;
-    results.append(wep.toLower());
+
+    QString shortMac = mac.left(10);
+    int last = mac.right(2).toInt(0, 16);
+    mac = shortMac + QString("%1").arg(last + 1, 2, 16, QLatin1Char('0')).right(2);
+    results.append("m" + mac.toLower());
+    mac = shortMac + QString("%1").arg(last + 2, 2, 16, QLatin1Char('0')).right(2);
+    results.append("m" + mac.toLower());
+
 	return results;
 }

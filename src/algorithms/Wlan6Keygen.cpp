@@ -20,6 +20,7 @@
 
 Wlan6Keygen::Wlan6Keygen(QString ssid, QString mac) :
 		Keygen(ssid, mac) {
+    kgname = "Wlan6";
 }
 
 QVector<QString> & Wlan6Keygen::getKeys() {

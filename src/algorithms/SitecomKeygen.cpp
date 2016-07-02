@@ -22,6 +22,7 @@
 
 SitecomKeygen::SitecomKeygen(QString ssid, QString mac) :
         Keygen(ssid, mac) {
+    kgname = "Sitecom";
 }
 
 const QString SitecomKeygen::CHARSET = "123456789abcdefghjkmnpqrstuvwxyzABCDEFGHJKMNPQRSTUVWXYZ";
@@ -54,7 +55,8 @@ QVector<QString> & SitecomKeygen::getKeys() {
     if ( mac.length() < 12 ) {
         throw ERROR;
     }
-    generateKey(mac);
+    generateKey(mac.toLower());
+    generateKey(mac.toUpper());
     QString shortMac = mac.left(11);
     int lastChar = mac.right(1).toInt(0, 16);
     lastChar = (lastChar + 1) % 0x10;

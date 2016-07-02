@@ -102,8 +102,8 @@ private:
 
 ThomsonKeygen::ThomsonKeygen(QString ssid, QString mac) :
 		Keygen(ssid, mac) {
+    kgname = "Thomson";
 }
-
 
 int ThomsonKeygen::getSupportState() const{
     if (getMacAddress().length() < 12)

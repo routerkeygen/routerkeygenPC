@@ -21,6 +21,7 @@
 #include <openssl/sha.h>
 ArnetPirelliKeygen::ArnetPirelliKeygen(QString ssid, QString mac) :
         Keygen(ssid, mac) {
+    kgname = "ArnetPirelli";
 }
 
 const QString ArnetPirelliKeygen::LOOKUP = "0123456789abcdefghijklmnopqrstuvwxyz";
@@ -29,7 +30,8 @@ const QString ArnetPirelliKeygen::SEED = "1236790";
 
 
 int ArnetPirelliKeygen::getSupportState() const{
-    if (getSsidName().startsWith("WiFi-Arnet-"))
+    if (getSsidName().startsWith("WiFi-Arnet-") ||
+        getSsidName().startsWith("ADSLPT-AB"))
         return SUPPORTED;
     return UNLIKELY;
 }
@@ -38,7 +40,7 @@ QString ArnetPirelliKeygen::incrementMac(QString mac, int increment) {
     return QString("%1").arg(mac.toLong(0, 16) + increment, 12, 16, QChar('0'));
 }
 
-void ArnetPirelliKeygen::generateKey(QString mac, int length) {
+QString ArnetPirelliKeygen::generateKey(QString mac, int length) {
     SHA256_CTX sha;
     unsigned char hash[32];
 
@@ -58,7 +60,8 @@ void ArnetPirelliKeygen::generateKey(QString mac, int length) {
     for (int i = 0; i < length; ++i) {
         key += LOOKUP.at(hash[i] % LOOKUP.length());
     }
-    results.append(key);
+    return key;
+    
 
 }
 
@@ -67,7 +70,34 @@ QVector<QString> & ArnetPirelliKeygen::getKeys() {
     if ( getMacAddress().length() < 12 ) {
         throw ERROR;
     }
-    generateKey(incrementMac(getMacAddress(), 1), 10);
+
+    QVector<QString> keys;
+    QVector<QString>::iterator iter;
+
+    /* Fill key with 0 (most possible key) on the top */
+    keys << generateKey(incrementMac(getMacAddress(), 0), 10);
+    for (int i = -2; i < 5; i++) {
+        if (i == 0)
+            continue;
+        keys << generateKey(incrementMac(getMacAddress(), i), 10);
+    }
+
+    if (getSsidName().startsWith("WiFi-Arnet-")) {
+        for(iter = keys.begin(); iter != keys.end(); iter++) {
+            results.append(*iter);
+        }
+    } else if (getSsidName().startsWith("ADSLPT-AB")) {
+        for(iter = keys.begin(); iter != keys.end(); iter++) {
+            results.append(QString(*iter).left(8));
+        }
+    } else {
+        /* No hit on SSID, try all anyway */
+        for(iter = keys.begin(); iter != keys.end(); iter++) {
+            results.append(*iter);
+            results.append(QString(*iter).left(8));
+        }
+    }
+
 	return results;
 
 }

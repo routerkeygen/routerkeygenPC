@@ -20,7 +20,9 @@
 #include <stdint.h>
 #include <cstring>
 TelseyKeygen::TelseyKeygen(QString ssid, QString mac) :
-		Keygen(ssid, mac) {}
+		Keygen(ssid, mac) {
+    kgname = "Telsey";
+}
 
 QVector<QString> & TelseyKeygen::getKeys() {
     if ( getMacAddress() == ""  )

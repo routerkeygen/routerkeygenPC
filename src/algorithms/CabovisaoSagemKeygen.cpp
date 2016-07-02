@@ -20,6 +20,7 @@
 
 CabovisaoSagemKeygen::CabovisaoSagemKeygen(QString ssid, QString mac) :
 		Keygen(ssid, mac) {
+    kgname = "CabovisaoSagem";
     ssidIdentifier = ssid.right(4).toLower();
 }
 

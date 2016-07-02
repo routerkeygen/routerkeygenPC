@@ -1,5 +1,5 @@
 /*
- * Copyright 2012 Rui Araújo, Luís Fonseca
+ * Copyright 2016 Alex Stanev <alex@stanev.org>
  *
  * This file is part of Router Keygen.
  *
@@ -16,28 +16,34 @@
  * You should have received a copy of the GNU General Public License
  * along with Router Keygen.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include "SkyV1Keygen.h"
+#include "SitecomWLR2100Keygen.h"
 #include <QCryptographicHash>
+#include <QDataStream>
 
-SkyV1Keygen::SkyV1Keygen(QString ssid, QString mac) :
+SitecomWLR2100Keygen::SitecomWLR2100Keygen(QString ssid, QString mac) :
 		Keygen(ssid, mac) {
-    kgname = "SkyV1";
+    kgname = "SitecomWLR2100";
 }
 
-const QString SkyV1Keygen::ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+const QString SitecomWLR2100Keygen::ALPHABET = "ABCDEFGHJKLMNPQRSTUVWXYZ";
 
-QVector<QString> & SkyV1Keygen::getKeys() {
-	QString mac = getMacAddress();
+QVector<QString> & SitecomWLR2100Keygen::getKeys() {
+	QString mac = getMacAddress().toLower();
+
 	if (mac.size() != 12)
 		throw ERROR;
+
     QByteArray hash = QCryptographicHash::hash(mac.toLatin1(),
-			QCryptographicHash::Md5);
+            QCryptographicHash::Md5);
+
+    QDataStream halfmd5(hash.right(8));
+    quint64 md5int;
+    halfmd5 >> md5int;
 
 	QString key = "";
-	for (int i = 1; i <= 15; i += 2) {
-		unsigned char index = hash[i];
-		index %= 26;
-		key += ALPHABET.at(index);
+	for (int i = 1; i <= 12; i += 1) {
+        key += ALPHABET.at(md5int%24);
+        md5int /= 24;
 	}
 	this->results.append(key);
 	return results;

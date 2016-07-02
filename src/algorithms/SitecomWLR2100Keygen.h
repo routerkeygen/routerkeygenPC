@@ -1,5 +1,5 @@
 /*
- * Copyright 2012 Rui Araújo, Luís Fonseca
+ * Copyright 2016 Alex Stanev <alex@stanev.org>
  *
  * This file is part of Router Keygen.
  *
@@ -16,18 +16,17 @@
  * You should have received a copy of the GNU General Public License
  * along with Router Keygen.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef MEOPIRELLIKEYGEN_H
-#define MEOPIRELLIKEYGEN_H
+#ifndef SITECOMWLR2100KEYGEN_H
+#define SITECOMWLR2100KEYGEN_H
 #include "Keygen.h"
-#include "ArnetPirelliKeygen.h"
 
-class MeoPirelliKeygen : public ArnetPirelliKeygen
+class SitecomWLR2100Keygen : public Keygen
 {
     public:
-        MeoPirelliKeygen(QString ssid, QString mac);
-        int getSupportState() const;
+        SitecomWLR2100Keygen(QString ssid, QString mac);
     private:
         QVector<QString> & getKeys();
+        const static QString ALPHABET;
 };
 
-#endif // MEOPIRELLIKEYGEN_H
+#endif // SITECOMWLR2100KEYGEN_H

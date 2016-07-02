@@ -27,6 +27,7 @@ public:
     const static int SUPPORTED = 0;
     const static int UNLIKELY = 1;
     const static int UNSUPPORTED = 2;
+    QString kgname;
     Keygen(QString & ssid, QString & mac);
 	QVector<QString> & getResults();
 	void stop();

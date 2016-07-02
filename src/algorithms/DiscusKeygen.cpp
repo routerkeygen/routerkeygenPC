@@ -20,6 +20,7 @@
 
 DiscusKeygen::DiscusKeygen(QString ssid, QString mac) :
 		Keygen(ssid, mac) {
+    kgname = "Discus";
 }
 
 QVector<QString> & DiscusKeygen::getKeys() {

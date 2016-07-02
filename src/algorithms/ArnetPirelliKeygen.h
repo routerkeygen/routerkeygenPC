@@ -27,7 +27,7 @@ class ArnetPirelliKeygen : public Keygen
         int getSupportState() const;
     protected:
         QString incrementMac(QString mac, int increment);
-        void generateKey(QString mac, int length);
+        QString generateKey(QString mac, int length);
     private:
         QVector<QString> & getKeys();
         const static QString LOOKUP;
