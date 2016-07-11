@@ -342,8 +342,9 @@ QVector<Keygen *> * WirelessMatcher::getKeygens(QString ssid, QString mac) {
             || mac.startsWith("00:1D:19")))
         keygens->append(new Speedport500Keygen(ssid, mac));
 
-    if (ssid.count(QRegExp("^TECOM-AH4(021|222)-[0-9a-zA-Z]{6}$")) == 1)
+    if (ssid.count(QRegExp("^TECOM-AH4(021|222)-[0-9A-Z]{6}$")) == 1) {
         keygens->append(new TecomKeygen(ssid, mac));
+    }
 
     if (ssid.toLower().startsWith("teletu")) {
         QString filteredMac = mac.replace(":", "");
