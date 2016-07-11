@@ -149,8 +149,9 @@ QVector<Keygen *> * WirelessMatcher::getKeygens(QString ssid, QString mac) {
             keygens->append(new CabovisaoSagemKeygen(ssid, mac));
     }
 
-    if (ssid == "CONN-X")
+    if (ssid.toUpper().startsWith("CONN-X")) {
         keygens->append(new ConnKeygen(ssid, mac));
+    }
 
     if (ssid.count(QRegExp("^Discus--?[0-9a-fA-F]{6}$")) == 1)
         keygens->append(new DiscusKeygen(ssid, mac));
