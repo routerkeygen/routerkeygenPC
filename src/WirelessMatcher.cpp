@@ -176,7 +176,7 @@ QVector<Keygen *> * WirelessMatcher::getKeygens(QString ssid, QString mac) {
         keygens->append(new EircomKeygen(ssid, mac));
     }
 
-    if (ssid.count(QRegExp("^INFINITUM[0-9a-zA-Z]{4}$")) == 1
+    if (ssid.count(QRegExp("^INFINITUM[0-9a-z]{4}$")) == 1
         || (mac.startsWith("00:18:82") || mac.startsWith("00:19:15") || mac.startsWith("00:1E:10")
              || mac.startsWith("00:22:A1") || mac.startsWith("00:25:68") || mac.startsWith("00:25:9E")
              || mac.startsWith("00:34:FE") || mac.startsWith("00:46:4B") || mac.startsWith("00:66:4B")
