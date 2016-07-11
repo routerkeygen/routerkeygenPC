@@ -368,8 +368,7 @@ QVector<Keygen *> * WirelessMatcher::getKeygens(QString ssid, QString mac) {
         }
     }
 
-    if (ssid.count(QRegExp("^FASTWEB-(1|2)-(002196|00036F)[0-9A-Fa-f]{6}$"))
-        == 1) {
+    if (ssid.count(QRegExp("^FASTWEB-(1|2)-(002196|00036F)[0-9A-F]{6}$")) == 1) {
         if (mac.length() == 0) {
             QString end = ssid.right(12);
             mac = end.left(2) + ":" + end.mid(2, 2) + ":" + end.mid(4, 2) + ":"
