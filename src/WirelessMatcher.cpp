@@ -288,7 +288,7 @@ QVector<Keygen *> * WirelessMatcher::getKeygens(QString ssid, QString mac) {
                                        supportedOTE->at(OteHuaweiKeygen::MAGIC_NUMBER - target)));
     }
 
-    if (ssid.count(QRegExp("^PBS-[0-9a-fA-F]{6}$")) == 1)
+    if (ssid.count(QRegExp("^PBS-[0-9A-F]{6}$")) == 1)
         keygens->append(new PBSKeygen(ssid, mac));
 
     if (mac.startsWith("08:86:3B") || mac.startsWith("94:44:52")
