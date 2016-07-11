@@ -15,6 +15,7 @@ AxtelKeygen::AxtelKeygen(QString ssid, QString mac) :
 QVector<QString> & AxtelKeygen::getKeys() {
     QString mac = getMacAddress();
     QString macShort = mac.replace(":", "");
+    bool gotResult = false;
     
     if ( macShort.length() != 12 )
         throw ERROR;
@@ -22,7 +23,7 @@ QVector<QString> & AxtelKeygen::getKeys() {
     QString ssidSubpart = getSsidName().right(4);
     if ( ssidSubpart.toLower() == macShort.right(4).toLower()) {
         results.append(mac.mid(2).toUpper());
-        return results;
+        gotResult = true;
     }
 
     //WPA = (Second octet + 1) + (Fourth octect) + (Fifth octect) + (Sixth octect - 1)
@@ -33,8 +34,12 @@ QVector<QString> & AxtelKeygen::getKeys() {
         QString wpaKey = M1 + M2 + ssidSubpart;
 
         results.append(wpaKey.toUpper());
-	    return results;
+	    gotResult = true;
 	}
 	
-	throw ERROR;
+	if (gotResult) {
+	    return results;
+	} else {
+	    throw ERROR;
+	}
 }
