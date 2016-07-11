@@ -144,7 +144,7 @@ QVector<Keygen *> * WirelessMatcher::getKeygens(QString ssid, QString mac) {
             keygens->append(new AxtelKeygen(ssid, mac));
     }
 
-    if (ssid.count(QRegExp("^Cabovisao-[0-9a-fA-F]{4}$")) == 1) {
+    if (ssid.count(QRegExp("^Cabovisao-[0-9A-F]{4}$")) == 1) {
         if (mac.length() == 0 || mac.startsWith("C0:AC:54"))
             keygens->append(new CabovisaoSagemKeygen(ssid, mac));
     }
