@@ -140,11 +140,7 @@ QVector<Keygen *> * WirelessMatcher::getKeygens(QString ssid, QString mac) {
         keygens->append(new ArnetPirelliKeygen(ssid, mac));
     }
 
-    if (ssid.count(QRegExp("^(AXTEL|AXTEL-XTREMO|AXTEL XTREMO)-[0-9a-fA-F]{4}$"))==1) {
-        //QString ssidSubpart = ssid.right(4);
-        //QString macShort = mac.replace(":", "");
-        //if (macShort.length() == 12
-        //    && ( ssidSubpart.toLower() == macShort.right(4).toLower()))
+    if (ssid.count(QRegExp("^(AXTEL|AXTEL-XTREMO|AXTEL XTREMO)-[0-9A-F]{4}$")) == 1) {
             keygens->append(new AxtelKeygen(ssid, mac));
     }
 
