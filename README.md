@@ -55,6 +55,9 @@ Example: /Users/awesome/Qt/5.3.0/clang_64
 ##Linux
 
 ####Ubuntu
-	sudo apt-get install cmake build-essential qt5-default libssl-dev qtscript5-dev libnm-gtk-dev qttools5-dev qttools5-dev-tools
+	sudo apt-get update
+	sudo apt-get install cmake build-essential qt5-default libssl-dev qtscript5-dev libnm-gtk-dev qttools5-dev qttools5-dev-tools rpm lintian
 	chmod a+x build_linux.sh
 	bash build_linux.sh
+
+DEB and RPM package are on `linux/`
