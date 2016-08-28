@@ -307,7 +307,7 @@ QVector<Keygen *> * WirelessMatcher::getKeygens(QString ssid, QString mac) {
         keygens->append(new PirelliKeygen(ssid, mac));
     }
 
-    if (ssid.toLower().count(QRegExp("^Sitecom[0-9a-fA-F]{6}$")) == 1
+    if (ssid.count(QRegExp("^Sitecom[0-9a-fA-F]{6}$")) == 1
         || mac.startsWith("00:0C:F6") || mac.startsWith("64:D1:A3")) {
         QString filteredMac = mac.replace(":", "");
         if (filteredMac.length() != 12) {

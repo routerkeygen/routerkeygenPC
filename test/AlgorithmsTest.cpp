@@ -401,8 +401,8 @@ private slots:
         QScanResult wifi("SitecomF12FFE", "");
         wifi.checkSupport(matcher);
         QVector<Keygen *> * keygens = wifi.getKeygens();
-        QVERIFY2(keygens->size() != 0 , "An algorithm was not detected");
-        Keygen * keygen = keygens->at(0);
+        QVERIFY2(keygens->size() == 6 , "An algorithm was not detected");
+        Keygen * keygen = keygens->at(1);
         QCOMPARE(typeid(*keygen), typeid(SitecomWLR400xKeygen) );
         QVector<QString> results = keygen->getResults();
         QCOMPARE(results.size(),9);
