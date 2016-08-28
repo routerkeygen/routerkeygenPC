@@ -39,6 +39,7 @@
 #include "algorithms/SitecomWLR400xKeygen.h"
 #include "algorithms/BssidKeygen.h"
 #include "algorithms/Upc07Keygen.h"
+#include "algorithms/Upc07UbeeKeygen.h"
 #include "WirelessMatcher.h"
 #include "wifi/QScanResult.h"
 #include <QDebug>
@@ -401,8 +402,8 @@ private slots:
         QScanResult wifi("SitecomF12FFE", "");
         wifi.checkSupport(matcher);
         QVector<Keygen *> * keygens = wifi.getKeygens();
-        QVERIFY2(keygens->size() != 0 , "An algorithm was not detected");
-        Keygen * keygen = keygens->at(0);
+        QVERIFY2(keygens->size() == 6 , "An algorithm was not detected");
+        Keygen * keygen = keygens->at(1);
         QCOMPARE(typeid(*keygen), typeid(SitecomWLR400xKeygen) );
         QVector<QString> results = keygen->getResults();
         QCOMPARE(results.size(),9);
@@ -571,6 +572,37 @@ private slots:
             }
         }
         QVERIFY2(found, "CGKQNZFC was not found");
+    }
+
+    void testUpc07Ubee() {
+        QScanResult wifi("UPC5684389", "64:7C:34:3C:ff:63");
+        wifi.checkSupport(matcher);
+        QVector<Keygen *> * keygens = wifi.getKeygens();
+        QVERIFY2(keygens->size() != 0 , "An algorithm was not detected");
+        QCOMPARE(typeid(*(keygens->at(0))), typeid(Upc07UbeeKeygen) );
+        Keygen * keygen = keygens->at(0);
+        QVector<QString> results = keygen->getResults();
+        QCOMPARE(results.size(),1);
+        QCOMPARE(results.at(0),QString("TVROBKMN"));
+    }
+
+    void testUpc07Ubee2() {
+        QScanResult wifi("", "64:7C:34:3C:ff:63");
+        wifi.checkSupport(matcher);
+        QVector<Keygen *> * keygens = wifi.getKeygens();
+        QVERIFY2(keygens->size() != 0 , "An algorithm was not detected");
+        QCOMPARE(typeid(*(keygens->at(0))), typeid(Upc07UbeeKeygen) );
+        Keygen * keygen = keygens->at(0);
+        QVector<QString> results = keygen->getResults();
+        QCOMPARE(results.size(),12);
+        bool found = false;
+        for ( int i = 0; i < results.size() ; ++i ) {
+            if (  results.at(i) == "TVROBKMN" ) {
+                found = true;
+                break;
+            }
+        }
+        QVERIFY2(found, "TVROBKMN was not found");
     }
 
 };
