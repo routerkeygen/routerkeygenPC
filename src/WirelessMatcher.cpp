@@ -63,6 +63,7 @@
 #include "algorithms/Upc07Keygen.h"
 #include "algorithms/Upc07UbeeKeygen.h"
 #include "algorithms/Tpw4gKeygen.h"
+#include "algorithms/PldtKeygen.h"
 #include <QRegExp>
 
 WirelessMatcher::WirelessMatcher() {
@@ -565,6 +566,16 @@ QVector<Keygen *> * WirelessMatcher::getKeygens(QString ssid, QString mac) {
 
     if (ssid.count(QRegExp("^TPW4G_[0-9A-F]{6}$")) == 1)
         keygens->append(new Tpw4gKeygen(ssid, mac));
+
+    if (ssid.startsWith("PLDTMyDSL")
+        || ssid.startsWith("PLDTHOMEDSL")) {
+        keygens->append(new PldtKeygen(ssid, mac, 0));
+    }
+
+    if (ssid.startsWith("PLDTFIBR")
+        || ssid.startsWith("PLDTHOMEFIBR")) {
+        keygens->append(new PldtKeygen(ssid, mac, 1));
+    }
 
     return keygens;
 }
