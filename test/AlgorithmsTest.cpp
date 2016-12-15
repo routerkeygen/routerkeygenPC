@@ -40,6 +40,8 @@
 #include "algorithms/BssidKeygen.h"
 #include "algorithms/Upc07Keygen.h"
 #include "algorithms/Upc07UbeeKeygen.h"
+#include "algorithms/Tpw4gKeygen.h"
+#include "algorithms/PldtKeygen.h"
 #include "WirelessMatcher.h"
 #include "wifi/QScanResult.h"
 #include <QDebug>
@@ -603,6 +605,42 @@ private slots:
             }
         }
         QVERIFY2(found, "TVROBKMN was not found");
+    }
+
+    void testTpw4g() {
+        QScanResult wifi("TPW4G_1A2B3C", "11:22:33:44:aa:BB");
+        wifi.checkSupport(matcher);
+        QVector<Keygen *> * keygens = wifi.getKeygens();
+        QVERIFY2(keygens->size() != 0 , "An algorithm was not detected");
+        Keygen * keygen = keygens->at(0);
+        QCOMPARE(typeid(*keygen),typeid(Tpw4gKeygen) );
+        QVector<QString> results = keygen->getResults();
+        QCOMPARE( results.size(),1);
+        QCOMPARE(results.at(0), QString("874744AABB"));
+    }
+
+    void testPldt0() {
+        QScanResult wifi("PLDTMyDSL", "11:22:33:44:aa:BB");
+        wifi.checkSupport(matcher);
+        QVector<Keygen *> * keygens = wifi.getKeygens();
+        QVERIFY2(keygens->size() != 0 , "An algorithm was not detected");
+        Keygen * keygen = keygens->at(0);
+        QCOMPARE(typeid(*keygen),typeid(PldtKeygen) );
+        QVector<QString> results = keygen->getResults();
+        QCOMPARE( results.size(),1);
+        QCOMPARE(results.at(0), QString("PLDTWIFI4AABB"));
+    }
+
+    void testPldt1() {
+        QScanResult wifi("PLDTHOMEFIBR_44aabb", "11:22:33:44:aa:BB");
+        wifi.checkSupport(matcher);
+        QVector<Keygen *> * keygens = wifi.getKeygens();
+        QVERIFY2(keygens->size() != 0 , "An algorithm was not detected");
+        Keygen * keygen = keygens->at(0);
+        QCOMPARE(typeid(*keygen),typeid(PldtKeygen) );
+        QVector<QString> results = keygen->getResults();
+        QCOMPARE( results.size(),1);
+        QCOMPARE(results.at(0), QString("wlanbb5544"));
     }
 
 };
