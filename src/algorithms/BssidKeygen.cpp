@@ -57,9 +57,9 @@ QVector<QString> & BssidKeygen::getKeys() {
         if (flags & FlagLc)
             results.append(mac.toLower());
     }
-    
+
     if (results.isEmpty())
         throw ERROR;
 
-	return results;
+    return results;
 }
