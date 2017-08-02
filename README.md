@@ -1,4 +1,4 @@
-#RouterKeygen
+# RouterKeygen
 
 Router Keygen generate default WPA/WEP keys for the following router:
 
@@ -31,20 +31,20 @@ Router Keygen generate default WPA/WEP keys for the following router:
   * Alice in Germany
   * Speedport 
 
-#Releases
+# Releases
 
 Get them from here:
 https://github.com/routerkeygen/routerkeygenPC/releases
 
-#Building
+# Building
 
-##Windows (Cross Compilation from Ubuntu)
+## Windows (Cross Compilation from Ubuntu)
 
 Get [MXE](http://mxe.cc/)
 `make qt openssl`
 `run build_win.sh`
 
-##Mac OS X
+## Mac OS X
 
 Define CMAKE_PREFIX_PATH to point to your Qt instalation.
 
@@ -52,9 +52,9 @@ Define CMAKE_PREFIX_PATH to point to your Qt instalation.
 Example: /Users/awesome/Qt/5.3.0/clang_64
 `run build_mac.sh`
 
-##Linux
+## Linux
 
-####Ubuntu
+#### Ubuntu
 	sudo apt-get update
 	sudo apt-get install cmake build-essential qt5-default libssl-dev qtscript5-dev libnm-gtk-dev qttools5-dev qttools5-dev-tools rpm lintian
 	chmod a+x build_linux.sh
