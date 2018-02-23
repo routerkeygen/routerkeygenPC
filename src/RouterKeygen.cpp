@@ -68,6 +68,8 @@ RouterKeygen::RouterKeygen(QWidget *parent) :
             SLOT( unlikelyNetworkRowSelected(int,int) ));
     connect(ui->unsupportedNetworkslist, SIGNAL( cellClicked(int,int) ), this,
             SLOT( unsupportedNetworkRowSelected(int,int) ));
+    connect(ui->copyAllButton, SIGNAL( clicked() ), this,
+            SLOT( copyAll() ));
 
     connect(ui->actionDonate,SIGNAL(triggered()), this, SLOT(donatePaypal()));
     connect(ui->actionDonate_Google_Play, SIGNAL(triggered()),this, SLOT(donateGooglePlay()) );
@@ -318,6 +320,16 @@ void RouterKeygen::manualCalculation() {
     manualWifi = new QScanResult(ui->ssidInput->text().trimmed(), mac.toUpper());
     manualWifi->checkSupport(*matcher);
     calc(manualWifi);
+}
+
+void RouterKeygen::copyAll() {
+    int cnt;
+    QClipboard *clipboard = QApplication::clipboard();
+    QString passwords;
+    for(cnt = 0; cnt < ui->passwordsList->count(); cnt++)
+      passwords += ui->passwordsList->item(cnt)->text() + QString("\n");
+    clipboard->setText(passwords, QClipboard::Clipboard);
+    ui->statusBar->showMessage(tr("%1 passwords copied").arg(cnt));
 }
 
 void RouterKeygen::calc(QScanResult * wifi) {
