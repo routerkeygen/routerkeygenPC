@@ -44,6 +44,7 @@ private slots:
     void startUpRunToggle(bool);
     void refreshNetworks();
     void manualCalculation();
+    void copyAll();
     void scanFinished(int);
     void supportedNetworkRowSelected(int, int);
     void unlikelyNetworkRowSelected(int, int);

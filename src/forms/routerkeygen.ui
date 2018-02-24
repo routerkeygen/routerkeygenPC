@@ -75,7 +75,16 @@
              <string>Supported</string>
             </attribute>
             <layout class="QGridLayout" name="gridLayout_7">
-             <property name="margin">
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
               <number>0</number>
              </property>
              <item row="0" column="0">
@@ -155,7 +164,16 @@
              <string>Unlikely Supported</string>
             </attribute>
             <layout class="QGridLayout" name="gridLayout_4">
-             <property name="margin">
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
               <number>0</number>
              </property>
              <item row="0" column="0">
@@ -235,7 +253,16 @@
              <string>Unsupported</string>
             </attribute>
             <layout class="QGridLayout" name="gridLayout_3">
-             <property name="margin">
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
               <number>0</number>
              </property>
              <item row="0" column="0">
@@ -446,7 +473,7 @@
          <item row="5" column="0">
           <widget class="QLineEdit" name="macInput">
            <property name="inputMask">
-            <string>HH:HH:HH:HH:HH:HH; </string>
+            <string>HH:HH:HH:HH:HH:HH</string>
            </property>
           </widget>
          </item>
@@ -476,11 +503,8 @@
        <property name="frameShadow">
         <enum>QFrame::Raised</enum>
        </property>
-       <layout class="QGridLayout" name="gridLayout_2">
-        <item row="2" column="0">
-         <widget class="QListWidget" name="passwordsList"/>
-        </item>
-        <item row="0" column="0">
+       <layout class="QVBoxLayout" name="verticalLayout">
+        <item>
          <widget class="QLabel" name="passwordsLabel">
           <property name="font">
            <font>
@@ -492,7 +516,7 @@
           </property>
          </widget>
         </item>
-        <item row="1" column="0">
+        <item>
          <spacer name="horizontalSpacer_5">
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
@@ -508,6 +532,33 @@
           </property>
          </spacer>
         </item>
+        <item>
+         <widget class="QListWidget" name="passwordsList"/>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_5">
+          <item>
+           <spacer name="horizontalSpacer_7">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>300</width>
+              <height>17</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QPushButton" name="copyAllButton">
+            <property name="text">
+             <string>Copy all</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
        </layout>
       </widget>
      </widget>
@@ -521,12 +572,12 @@
      <x>0</x>
      <y>0</y>
      <width>1017</width>
-     <height>26</height>
+     <height>20</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuAbout">
     <property name="title">
-     <string>About</string>
+     <string>&amp;About</string>
     </property>
     <addaction name="actionDonate"/>
     <addaction name="actionDonate_Google_Play"/>
@@ -537,7 +588,7 @@
    </widget>
    <widget class="QMenu" name="menuPreferences">
     <property name="title">
-     <string>Preferences</string>
+     <string>Preferen&amp;ces</string>
     </property>
    </widget>
    <addaction name="menuPreferences"/>
@@ -545,12 +596,12 @@
   </widget>
   <action name="actionDonate">
    <property name="text">
-    <string>Donate (Paypal)</string>
+    <string>&amp;Donate (Paypal)</string>
    </property>
   </action>
   <action name="actionDonate_Google_Play">
    <property name="text">
-    <string>Donate (Google Play)</string>
+    <string>Donate (&amp;Google Play)</string>
    </property>
   </action>
   <action name="actionRun_on_Start_up">
@@ -571,17 +622,17 @@
   </action>
   <action name="actionAbout">
    <property name="text">
-    <string>About RouterKeygen</string>
+    <string>&amp;About RouterKeygen</string>
    </property>
   </action>
   <action name="actionCheck_for_Updates">
    <property name="text">
-    <string>Check for Updates</string>
+    <string>&amp;Check for Updates</string>
    </property>
   </action>
   <action name="actionFeedback">
    <property name="text">
-    <string>Feedback and Bugs</string>
+    <string>&amp;Feedback and Bugs</string>
    </property>
   </action>
  </widget>
