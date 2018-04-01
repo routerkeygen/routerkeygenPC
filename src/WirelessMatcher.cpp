@@ -406,7 +406,9 @@ QVector<Keygen *> * WirelessMatcher::getKeygens(QString ssid, QString mac) {
         || ssid.count(QRegExp("^HAME_([0-9A-Z]{2}|[0-9A-Z]{4})_[0-9a-f]{4}$")) == 1
         || ssid.count(QRegExp("^MBR95-[0-9a-f]{3}")) == 1
         || ssid.count(QRegExp("^MIFI_[0-9A-Z]{2}_[0-9a-f]{4}$")) == 1
-        || ssid.count(QRegExp("^wi-fi[0-9]{4}$")) == 1) {
+        || ssid.count(QRegExp("^wi-fi[0-9]{4}$")) == 1
+        || ssid.count(QRegExp("^true_home2G_[0-9a-f]{3}$")) == 1
+        || ssid == "netis") {
         keygens->append(new BssidKeygen(ssid, mac, FlagLc | FlagLen8, 0));
     }
 
