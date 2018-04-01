@@ -64,6 +64,7 @@
 #include "algorithms/Upc07UbeeKeygen.h"
 #include "algorithms/Tpw4gKeygen.h"
 #include "algorithms/PldtKeygen.h"
+#include "algorithms/BaseXKeygen.h"
 #include <QRegExp>
 
 WirelessMatcher::WirelessMatcher() {
@@ -521,6 +522,12 @@ QVector<Keygen *> * WirelessMatcher::getKeygens(QString ssid, QString mac) {
         || ssid.count(QRegExp("^Claro[0-9A-F]{4}$")) == 1
         || ssid.count(QRegExp("^Wind WiFi [0-9a-zA-Z]{6}$")) == 1) {
         keygens->append(new BssidKeygen(ssid, mac, FlagLc | FlagLen12, 0));
+    }
+
+    if (ssid.count(QRegExp("^Singtel[0-9]{4}-[0-9A-F]{4}$")) == 1
+        || ssid.count(QRegExp("^SINGTEL-[0-9A-F]{4}$")) == 1
+        || ssid.count(QRegExp("^BoxByTELMA-[0-9A-F]{4}$")) == 1) {
+        keygens->append(new BaseXKeygen(ssid, mac, FlagLc | FlagLen10, -1, 10, 6));
     }
 
     if (ssid.length() == 5
