@@ -42,6 +42,7 @@
 #include "algorithms/Upc07UbeeKeygen.h"
 #include "algorithms/Tpw4gKeygen.h"
 #include "algorithms/PldtKeygen.h"
+#include "algorithms/BaseXKeygen.h"
 #include "WirelessMatcher.h"
 #include "wifi/QScanResult.h"
 #include <QDebug>
@@ -521,6 +522,18 @@ private slots:
         QVector<QString> results = keygen->getResults();
         QCOMPARE(results.size(),1);
         QCOMPARE( results.at(0),QString("b075d537cb4c"));
+    }
+
+    void testBaseX() {
+        QScanResult wifi("SINGTEL-54F5", "00:26:75:DE:54:F6");
+        wifi.checkSupport(matcher);
+        QVector<Keygen *> * keygens = wifi.getKeygens();
+        QVERIFY2(keygens->size() != 0 , "An algorithm was not detected");
+        Keygen * keygen = keygens->at(0);
+        QCOMPARE(typeid(*keygen), typeid(BaseXKeygen) );
+        QVector<QString> results = keygen->getResults();
+        QCOMPARE(results.size(),1);
+        QCOMPARE( results.at(0),QString("0014570741"));
     }
 
     void testWifimediaR() {
