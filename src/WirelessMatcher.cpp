@@ -444,7 +444,8 @@ QVector<Keygen *> * WirelessMatcher::getKeygens(QString ssid, QString mac) {
     }
 
     if (ssid.count(QRegExp("^Megared[0-9A-F]{4}$")) == 1
-        || ssid.count(QRegExp("^PTV[0-9]{4}$")) == 1) {
+        || ssid.count(QRegExp("^PTV[0-9]{4}$")) == 1
+        || ssid.count(QRegExp("^VIVO-[0-9A-F]{4}$")) == 1) {
         keygens->append(new BssidKeygen(ssid, mac, FlagUc | FlagLen10, 0));
     }
 
