@@ -445,8 +445,7 @@ QVector<Keygen *> * WirelessMatcher::getKeygens(QString ssid, QString mac) {
         keygens->append(new BssidKeygen(ssid, mac, FlagUc | FlagLen8, -16));
     }
 
-    if (ssid.count(QRegExp("^Megared[0-9A-F]{4}$")) == 1
-        || ssid.count(QRegExp("^PTV[0-9]{4}$")) == 1
+    if (ssid.count(QRegExp("^PTV[0-9]{4}$")) == 1
         || ssid.count(QRegExp("^VIVO-[0-9A-F]{4}$")) == 1) {
         keygens->append(new BssidKeygen(ssid, mac, FlagUc | FlagLen10, 0));
     }
@@ -527,7 +526,8 @@ QVector<Keygen *> * WirelessMatcher::getKeygens(QString ssid, QString mac) {
     if (ssid.count(QRegExp("^OTE[0-9a-f]{6}$")) == 1
         || ssid.count(QRegExp("^conn-x[0-9a-f]{6}$")) == 1
         || ssid.count(QRegExp("^Claro[0-9A-F]{4}$")) == 1
-        || ssid.count(QRegExp("^Wind WiFi [0-9a-zA-Z]{6}$")) == 1) {
+        || ssid.count(QRegExp("^Wind WiFi [0-9a-zA-Z]{6}$")) == 1
+        || ssid.count(QRegExp("^Megared[0-9a-f]{4}$")) == 1) {
         keygens->append(new BssidKeygen(ssid, mac, FlagLc | FlagLen12, 0));
     }
 
