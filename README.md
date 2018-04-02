@@ -65,9 +65,11 @@ DEB and RPM package are on `linux/`
 # Commandline version
 
 You can build commandline version without GUI dependecy libs:
+
 	cd cli
 	qmake
 	make
+
 Your binary should be `routerkeygen-cli`
 
 # Algorithm selftest
