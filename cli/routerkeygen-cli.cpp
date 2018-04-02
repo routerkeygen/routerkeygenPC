@@ -18,7 +18,7 @@ int main(int argc, char * argv[]) {
     parser.addOption("-q", QCmdLineArgument::StoreTrue, QObject::tr("Print only calculated keys"), "--quiet");
     QString error = "";
     QVariantMap options = parser.parse(QCoreApplication::arguments(), &error);
-    if ( !error.isEmpty() ) {
+    if ( !error.isEmpty() || !(options.contains("s") || options.contains("m")) ) {
         std::cout << error.toUtf8().data() << std::endl <<  parser.help().toUtf8().data();
         return -1;
     }
