@@ -61,3 +61,18 @@ Example: /Users/awesome/Qt/5.3.0/clang_64
 	bash build_linux.sh
 
 DEB and RPM package are on `linux/`
+
+# Commandline version
+
+You can build commandline version without GUI dependecy libs:
+	cd cli
+	qmake
+	make
+Your binary should be `routerkeygen-cli`
+
+# Algorithm selftest
+
+	cd test
+	qmake
+	make
+	./RouterKeygenTest
