@@ -461,6 +461,10 @@ QVector<Keygen *> * WirelessMatcher::getKeygens(QString ssid, QString mac) {
         keygens->append(new BssidKeygen(ssid, mac, FlagUc | FlagLen10, -1));
     }
 
+    if (ssid.count(QRegExp("^VIVOFIBRA-[0-9A-F]{4}$")) == 1) {
+        keygens->append(new BssidKeygen(ssid, mac, FlagLc | FlagLen10, -2));
+    }
+
     if (ssid.count(QRegExp("^NetZero-[0-9A-F]{6}$")) == 1) {
         keygens->append(new BssidKeygen(ssid, mac, FlagLc | FlagLen10, -1));
     }
