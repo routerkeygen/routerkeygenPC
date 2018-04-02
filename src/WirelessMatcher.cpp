@@ -503,9 +503,7 @@ QVector<Keygen *> * WirelessMatcher::getKeygens(QString ssid, QString mac) {
         keygens->append(new BssidKeygen(ssid, mac, FlagUc | FlagLc | FlagLen12, 0));
     }
 
-    if (ssid.count(QRegExp("^CIK[0-9]{4}$")) == 1
-        || ssid.count(QRegExp("^CIK1000M_2.4G_[0-9]{4}$")) == 1
-        || ssid.count(QRegExp("^CIK1000M_AC2.4G_[0-9]{4}$")) == 1) {
+    if (ssid.count(QRegExp("^CIK[0-9]{4}$")) == 1) {
         keygens->append(new BssidKeygen(ssid, mac, FlagLc | FlagLen12, -1));
     }
 
@@ -529,7 +527,9 @@ QVector<Keygen *> * WirelessMatcher::getKeygens(QString ssid, QString mac) {
         || ssid.count(QRegExp("^conn-x[0-9a-f]{6}$")) == 1
         || ssid.count(QRegExp("^Claro[0-9A-F]{4}$")) == 1
         || ssid.count(QRegExp("^Wind WiFi [0-9a-zA-Z]{6}$")) == 1
-        || ssid.count(QRegExp("^Megared[0-9a-f]{4}$")) == 1) {
+        || ssid.count(QRegExp("^Megared[0-9a-f]{4}$")) == 1
+        || ssid.count(QRegExp("^CIK1000M_2.4G_[0-9]{4}$")) == 1
+        || ssid.count(QRegExp("^CIK1000M_AC2.4G_[0-9]{4}$")) == 1) {
         keygens->append(new BssidKeygen(ssid, mac, FlagLc | FlagLen12, 0));
     }
 
