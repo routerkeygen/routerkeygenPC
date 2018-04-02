@@ -503,7 +503,9 @@ QVector<Keygen *> * WirelessMatcher::getKeygens(QString ssid, QString mac) {
         keygens->append(new BssidKeygen(ssid, mac, FlagUc | FlagLc | FlagLen12, 0));
     }
 
-    if (ssid.count(QRegExp("^CIK[0-9]{4}$")) == 1) {
+    if (ssid.count(QRegExp("^CIK[0-9]{4}$")) == 1
+        || ssid.count(QRegExp("^CIK1000M_2.4G_[0-9]{4}$")) == 1
+        || ssid.count(QRegExp("^CIK1000M_AC2.4G_[0-9]{4}$")) == 1) {
         keygens->append(new BssidKeygen(ssid, mac, FlagLc | FlagLen12, -1));
     }
 
