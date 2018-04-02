@@ -404,6 +404,7 @@ QVector<Keygen *> * WirelessMatcher::getKeygens(QString ssid, QString mac) {
 
     if (ssid.count(QRegExp("^MGTS_GPON_[0-9A-F]{4}$")) == 1
         || ssid.count(QRegExp("^MGTS(-|_)(\\d)+$")) == 1
+        || ssid.count(QRegExp("^mgts[0-9]{3}$")) == 1
         || ssid.count(QRegExp("^HAME_([0-9A-Z]{2}|[0-9A-Z]{4})_[0-9a-f]{4}$")) == 1
         || ssid.count(QRegExp("^MBR95-[0-9a-f]{3}")) == 1
         || ssid.count(QRegExp("^MIFI_[0-9A-Z]{2}_[0-9a-f]{4}$")) == 1
