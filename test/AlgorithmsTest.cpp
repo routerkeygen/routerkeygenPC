@@ -501,7 +501,7 @@ private slots:
     }
 
     void testBssid4() {
-        QScanResult wifi("Megared60EC", "FC:75:16:9F:60:EC");
+        QScanResult wifi("Megared60ec", "FC:75:16:9F:60:EC");
         wifi.checkSupport(matcher);
         QVector<Keygen *> * keygens = wifi.getKeygens();
         QVERIFY2(keygens->size() != 0 , "An algorithm was not detected");
@@ -509,7 +509,7 @@ private slots:
         QCOMPARE(typeid(*keygen), typeid(BssidKeygen) );
         QVector<QString> results = keygen->getResults();
         QCOMPARE(results.size(),1);
-        QCOMPARE(results.at(0), QString("75169F60EC"));
+        QCOMPARE(results.at(0), QString("fc75169f60ec"));
     }
 
     void testBssid5() {
