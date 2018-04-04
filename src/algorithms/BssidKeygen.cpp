@@ -24,6 +24,15 @@ BssidKeygen::BssidKeygen(QString ssid, QString mac, int flags, int offset) :
     kgname = "Bssid";
     this->flags = flags;
     this->offset = offset;
+    this->cutright = true;
+}
+
+BssidKeygen::BssidKeygen(QString ssid, QString mac, int flags, int offset, bool cutright) :
+		Keygen(ssid, mac) {
+    kgname = "Bssid";
+    this->flags = flags;
+    this->offset = offset;
+    this->cutright = cutright;
 }
 
 QVector<QString> & BssidKeygen::getKeys() {
@@ -32,7 +41,7 @@ QVector<QString> & BssidKeygen::getKeys() {
         throw ERROR;
 
     /* Apply offset value */
-    if (offset != 0) {
+    if (offset && cutright) {
         QString shortMac = mac.left(10);
         int last = mac.right(2).toInt(0, 16);
         mac = shortMac + QString("%1").arg(last + offset, 2, 16, QLatin1Char('0')).right(2);
@@ -40,16 +49,32 @@ QVector<QString> & BssidKeygen::getKeys() {
     
     /* Check flags */
     if (flags & FlagLen8) {
-        if (flags & FlagUc)
-            results.append(mac.right(8).toUpper());
-        if (flags & FlagLc)
-            results.append(mac.right(8).toLower());
+        if (flags & FlagUc) {
+            if (cutright)
+                results.append(mac.right(8).toUpper());
+            else
+                results.append(mac.left(8).toUpper());
+        }
+        if (flags & FlagLc) {
+            if (cutright)
+                results.append(mac.right(8).toLower());
+            else
+                results.append(mac.left(8).toLower());
+        }
     }
     if (flags & FlagLen10) {
-        if (flags & FlagUc)
-            results.append(mac.right(10).toUpper());
-        if (flags & FlagLc)
-            results.append(mac.right(10).toLower());
+        if (flags & FlagUc) {
+            if (cutright)
+                results.append(mac.right(10).toUpper());
+            else
+                results.append(mac.left(10).toUpper());
+        }
+        if (flags & FlagLc) {
+            if (cutright)
+                results.append(mac.right(10).toLower());
+            else
+                results.append(mac.left(10).toLower());
+        }
     }
     if (flags & FlagLen12) {
         if (flags & FlagUc)

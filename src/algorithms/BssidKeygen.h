@@ -33,11 +33,13 @@ enum BssidKeygenFlags {
 class BssidKeygen: public Keygen {
 public:
     BssidKeygen(QString ssid, QString mac, int flags, int offset);
+    BssidKeygen(QString ssid, QString mac, int flags, int offset, bool cutright);
 
 private:
 	QVector<QString> & getKeys();
 	unsigned int flags;
 	int offset;
+	bool cutright;
 };
 
 #endif /* BSSIDKEYGEN_H_ */
