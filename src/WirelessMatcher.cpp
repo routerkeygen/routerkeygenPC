@@ -396,10 +396,11 @@ QVector<Keygen *> * WirelessMatcher::getKeygens(QString ssid, QString mac) {
         || ssid.count(QRegExp("^MBLAZE-AC3633R2-[0-9A-F]{4}$")) == 1
         || ssid.count(QRegExp("^VodafoneNet-[0-9A-F]{4}$")) == 1
         || (ssid.count(QRegExp("^TP-LINK_[0-9A-F]{6}$")) == 1 &&
-            (mac.startsWith("10:FE:ED") || mac.startsWith("30:B5:C2")
-            || mac.startsWith("64:66:B3") || mac.startsWith("64:70:02")
-            || mac.startsWith("90:F6:52") || mac.startsWith("A0:F3:C1")
-            || mac.startsWith("C0:4A:00") || mac.startsWith("F8:1A:67") ))) {
+            (mac.startsWith("C0:4A:00") || mac.startsWith("10:FE:ED")
+            || mac.startsWith("30:B5:C2") || mac.startsWith("64:66:B3")
+            || mac.startsWith("64:70:02") || mac.startsWith("90:F6:52")
+            || mac.startsWith("A0:F3:C1") || mac.startsWith("C0:4A:00")
+            || mac.startsWith("F8:1A:67") ))) {
         keygens->append(new BssidKeygen(ssid, mac, FlagUc | FlagLen8, 0));
     }
 
