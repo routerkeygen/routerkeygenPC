@@ -388,8 +388,10 @@ QVector<Keygen *> * WirelessMatcher::getKeygens(QString ssid, QString mac) {
         keygens->append(new ThomsonKeygen(ssid, mac));
 
     if (mac.startsWith("F8:D1:11")
-        || ssid == "YOTA"
         || ssid.startsWith("Reliance ")
+        || ssid == "YOTA"
+        || ssid == "YOTAZ"
+        || ssid.count(QRegExp("^YotaCPE[0-9A-F]{5}$")) == 1
         || ssid.count(QRegExp("^Aztech110_[0-9A-F]{4}$")) == 1
         || ssid.count(QRegExp("^HEXABYTE_[0-9A-F]{6}$")) == 1
         || ssid.count(QRegExp("^BOLT! SUPER 4G-[0-9A-F]{4}$")) == 1
