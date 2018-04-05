@@ -406,19 +406,20 @@ QVector<Keygen *> * WirelessMatcher::getKeygens(QString ssid, QString mac) {
         keygens->append(new BssidKeygen(ssid, mac, FlagUc | FlagLen8, 0));
     }
 
-    if (ssid.count(QRegExp("^MGTS_GPON_[0-9A-F]{4}$")) == 1
+    if (ssid == "netis"
+        || ssid.count(QRegExp("^MGTS_GPON_[0-9A-F]{4}$")) == 1
         || ssid.count(QRegExp("^MGTS(-|_)(\\d)+$")) == 1
         || ssid.count(QRegExp("^mgts[0-9]{3}$")) == 1
         || ssid.count(QRegExp("^HAME_([0-9A-Z]{2}|[0-9A-Z]{4})_[0-9a-f]{4}$")) == 1
-        || ssid.count(QRegExp("^MBR95-[0-9a-f]{3}")) == 1
+        || ssid.count(QRegExp("^MBR[0-9]{2,4}-[0-9a-f]{3}$")) == 1
         || ssid.count(QRegExp("^MIFI_[0-9A-Z]{2}_[0-9a-f]{4}$")) == 1
         || ssid.count(QRegExp("^wi-fi[0-9]{4}$")) == 1
-        || ssid.count(QRegExp("^true_home2G_[0-9a-f]{3}$")) == 1
-        || ssid == "netis") {
+        || ssid.count(QRegExp("^true_home2G_[0-9a-f]{3}$")) == 1) {
         keygens->append(new BssidKeygen(ssid, mac, FlagLc | FlagLen8, 0));
     }
 
-    if (ssid == "Broadband Express") {
+    if (ssid == "Broadband Express"
+        || ssid.count(QRegExp("^AER[0-9]{2,4}-[0-9a-f]{3}$")) == 1) {
         keygens->append(new BssidKeygen(ssid, mac, FlagUc | FlagLen8, -1));
     }
 
