@@ -487,7 +487,7 @@ QVector<Keygen *> * WirelessMatcher::getKeygens(QString ssid, QString mac) {
         keygens->append(new BssidKeygen(ssid, mac, FlagUc | FlagLen12, 1));
     }
 
-    if (ssid.count(QRegExp("^Upvel_[0-9a-f]{4}$")) == 1) {
+    if (ssid.count(QRegExp("^Upvel_?[0-9a-f]{4}$")) == 1) {
         keygens->append(new BssidKeygen(ssid, mac, FlagLc | FlagLen12, 1));
         keygens->append(new BssidKeygen(ssid, mac, FlagLc | FlagLen12, 2));
         keygens->append(new BssidKeygen(ssid, mac, FlagLc | FlagLen12, 3));
