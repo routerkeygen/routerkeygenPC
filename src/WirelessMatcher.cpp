@@ -454,7 +454,7 @@ QVector<Keygen *> * WirelessMatcher::getKeygens(QString ssid, QString mac) {
         keygens->append(new BssidKeygen(ssid, mac, FlagUc | FlagLen10, 0));
     }
 
-    if (ssid == "CTM-Broadband") {
+    if (ssid.startsWith("CTM-")) {
         keygens->append(new BssidKeygen(ssid, mac, FlagLc | FlagLen10, 0));
     }
 
