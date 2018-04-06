@@ -492,9 +492,9 @@ QVector<Keygen *> * WirelessMatcher::getKeygens(QString ssid, QString mac) {
     if (ssid.startsWith("Nemont")
         || ssid.startsWith("TURBONET")
         || ssid.startsWith("300NWLAN")
-        || ssid.count(QRegExp("^MAXCOM[0-9a-zA-Z]{4}$")) == 1
-        || ssid.count(QRegExp("^DJAWEB_[0-9A-F]{4}$")) == 1
+        || ssid.startsWith("DJAWEB_")
         || ssid.count(QRegExp("^Djaweb[0-9]{8}$")) == 1
+        || ssid.count(QRegExp("^MAXCOM[0-9a-zA-Z]{4}$")) == 1
         || ssid.count(QRegExp("^(PTV-|ptv|ptv-)[0-9a-zA-Z]{6}$")) == 1) {
         keygens->append(new BssidKeygen(ssid, mac, FlagUc | FlagLen12, 0));
     }
