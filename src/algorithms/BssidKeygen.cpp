@@ -42,9 +42,9 @@ QVector<QString> & BssidKeygen::getKeys() {
 
     /* Apply offset value */
     if (offset && cutright) {
-        QString shortMac = mac.left(10);
-        int last = mac.right(2).toInt(0, 16);
-        mac = shortMac + QString("%1").arg(last + offset, 2, 16, QLatin1Char('0')).right(2);
+        QString shortMac = mac.left(6);
+        int last = mac.right(6).toInt(0, 16);
+        mac = shortMac + QString("%1").arg(last + offset, 6, 16, QLatin1Char('0')).right(6);
     }
     
     /* Check flags */

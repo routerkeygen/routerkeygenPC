@@ -544,6 +544,11 @@ QVector<Keygen *> * WirelessMatcher::getKeygens(QString ssid, QString mac) {
         keygens->append(new BssidKeygen(ssid, mac, FlagLc | FlagLen12, 0));
     }
 
+    if (ssid.count(QRegExp("^OnLime_[0-9A-F]{4}$")) == 1) {
+        QString macfix = mac.left(12) + ssid.mid(7,2) + ":" + ssid.mid(9);
+        keygens->append(new BssidKeygen(ssid, macfix, FlagLc | FlagLen12, 0));
+    }
+
     if (ssid.count(QRegExp("^ZTE-[0-9a-f]{6}$")) == 1) {
         keygens->append(new BssidKeygen(ssid, mac, FlagLc | FlagLen8, 0, false));
     }
