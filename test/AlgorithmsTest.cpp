@@ -528,12 +528,17 @@ private slots:
         QScanResult wifi("ZTE-f24ab5", "08:3F:BC:F2:4A:B5");
         wifi.checkSupport(matcher);
         QVector<Keygen *> * keygens = wifi.getKeygens();
-        QVERIFY2(keygens->size() != 0 , "An algorithm was not detected");
+        QVERIFY2(keygens->size() == 2 , "An algorithm was not detected");
         Keygen * keygen = keygens->at(0);
         QCOMPARE(typeid(*keygen), typeid(BssidKeygen) );
         QVector<QString> results = keygen->getResults();
         QCOMPARE(results.size(),1);
         QCOMPARE( results.at(0),QString("083fbcf2"));
+        keygen = keygens->at(1);
+        QCOMPARE(typeid(*keygen), typeid(BssidKeygen) );
+        results = keygen->getResults();
+        QCOMPARE(results.size(),1);
+        QCOMPARE( results.at(0),QString("083fbcf3"));
     }
 
     void testBaseX() {

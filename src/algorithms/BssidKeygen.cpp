@@ -24,15 +24,6 @@ BssidKeygen::BssidKeygen(QString ssid, QString mac, int flags, int offset) :
     kgname = "Bssid";
     this->flags = flags;
     this->offset = offset;
-    this->cutright = true;
-}
-
-BssidKeygen::BssidKeygen(QString ssid, QString mac, int flags, int offset, bool cutright) :
-		Keygen(ssid, mac) {
-    kgname = "Bssid";
-    this->flags = flags;
-    this->offset = offset;
-    this->cutright = cutright;
 }
 
 QVector<QString> & BssidKeygen::getKeys() {
@@ -40,47 +31,51 @@ QVector<QString> & BssidKeygen::getKeys() {
     if ( mac.length() != 12 )
         throw ERROR;
 
-    /* Apply offset value */
-    if (offset && cutright) {
-        QString shortMac = mac.left(6);
-        int last = mac.right(6).toInt(0, 16);
-        mac = shortMac + QString("%1").arg(last + offset, 6, 16, QLatin1Char('0')).right(6);
-    }
-    
-    /* Check flags */
+    QString tMac;
+    int last;
+
+    /* Check flags and apply offest */
     if (flags & FlagLen8) {
+        if (flags & FlagCutLeft) {
+            tMac = mac.left(8);
+        } else {
+            tMac = mac.right(8);
+        }
+        last = tMac.right(6).toInt(0, 16);
+        tMac = tMac.left(2) + QString("%1").arg(last + offset, 6, 16, QLatin1Char('0')).right(6);
         if (flags & FlagUc) {
-            if (cutright)
-                results.append(mac.right(8).toUpper());
-            else
-                results.append(mac.left(8).toUpper());
+            results.append(tMac.toUpper());
         }
         if (flags & FlagLc) {
-            if (cutright)
-                results.append(mac.right(8).toLower());
-            else
-                results.append(mac.left(8).toLower());
+            results.append(tMac.toLower());
         }
     }
+
     if (flags & FlagLen10) {
+        if (flags & FlagCutLeft) {
+            tMac = mac.left(10);
+        } else {
+            tMac = mac.right(10);
+        }
+        last = tMac.right(6).toInt(0, 16);
+        tMac = tMac.left(4) + QString("%1").arg(last + offset, 6, 16, QLatin1Char('0')).right(6);
         if (flags & FlagUc) {
-            if (cutright)
-                results.append(mac.right(10).toUpper());
-            else
-                results.append(mac.left(10).toUpper());
+            results.append(tMac.toUpper());
         }
         if (flags & FlagLc) {
-            if (cutright)
-                results.append(mac.right(10).toLower());
-            else
-                results.append(mac.left(10).toLower());
+            results.append(tMac.toLower());
         }
     }
+
     if (flags & FlagLen12) {
-        if (flags & FlagUc)
-            results.append(mac.toUpper());
-        if (flags & FlagLc)
-            results.append(mac.toLower());
+        last = mac.right(6).toInt(0, 16);
+        tMac = mac.left(6) + QString("%1").arg(last + offset, 6, 16, QLatin1Char('0')).right(6);
+        if (flags & FlagUc) {
+            results.append(tMac.toUpper());
+        }
+        if (flags & FlagLc) {
+            results.append(tMac.toLower());
+        }
     }
 
     if (results.isEmpty())

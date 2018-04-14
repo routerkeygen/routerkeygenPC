@@ -23,23 +23,22 @@
 #include "Keygen.h"
 
 enum BssidKeygenFlags {
-    FlagLen12 = 1u << 0,
-    FlagLen10 = 1u << 1,
-    FlagLen8  = 1u << 2,
-    FlagUc    = 1u << 3,
-    FlagLc    = 1u << 4
+    FlagLen12   = 1u << 0,
+    FlagLen10   = 1u << 1,
+    FlagLen8    = 1u << 2,
+    FlagUc      = 1u << 3,
+    FlagLc      = 1u << 4,
+    FlagCutLeft = 1u << 5
 };
 
 class BssidKeygen: public Keygen {
 public:
     BssidKeygen(QString ssid, QString mac, int flags, int offset);
-    BssidKeygen(QString ssid, QString mac, int flags, int offset, bool cutright);
 
 private:
 	QVector<QString> & getKeys();
 	unsigned int flags;
 	int offset;
-	bool cutright;
 };
 
 #endif /* BSSIDKEYGEN_H_ */
