@@ -254,12 +254,12 @@ uint32_t        initval)         /* the previous hash, or an arbitrary value */
         switch(length)                     /* all the case statements fall through */
         {
         case 3 : c+=k[2];
-        /* no break */
+        /* Falls through. */
         case 2 : b+=k[1];
-        /* no break */
+        /* Falls through. */
         case 1 : a+=k[0];
           final(a,b,c);
-          /* no break */
+          /* Falls through. */
         case 0:     /* case 0: nothing left to add */
           break;
         }

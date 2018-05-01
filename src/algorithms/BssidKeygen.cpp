@@ -31,31 +31,51 @@ QVector<QString> & BssidKeygen::getKeys() {
     if ( mac.length() != 12 )
         throw ERROR;
 
-    /* Apply offset value */
-    if (offset != 0) {
-        QString shortMac = mac.left(10);
-        int last = mac.right(2).toInt(0, 16);
-        mac = shortMac + QString("%1").arg(last + offset, 2, 16, QLatin1Char('0')).right(2);
-    }
-    
-    /* Check flags */
+    QString tMac;
+    int last;
+
+    /* Check flags and apply offest */
     if (flags & FlagLen8) {
-        if (flags & FlagUc)
-            results.append(mac.right(8).toUpper());
-        if (flags & FlagLc)
-            results.append(mac.right(8).toLower());
+        if (flags & FlagCutLeft) {
+            tMac = mac.left(8);
+        } else {
+            tMac = mac.right(8);
+        }
+        last = tMac.right(6).toInt(0, 16);
+        tMac = tMac.left(2) + QString("%1").arg(last + offset, 6, 16, QLatin1Char('0')).right(6);
+        if (flags & FlagUc) {
+            results.append(tMac.toUpper());
+        }
+        if (flags & FlagLc) {
+            results.append(tMac.toLower());
+        }
     }
+
     if (flags & FlagLen10) {
-        if (flags & FlagUc)
-            results.append(mac.right(10).toUpper());
-        if (flags & FlagLc)
-            results.append(mac.right(10).toLower());
+        if (flags & FlagCutLeft) {
+            tMac = mac.left(10);
+        } else {
+            tMac = mac.right(10);
+        }
+        last = tMac.right(6).toInt(0, 16);
+        tMac = tMac.left(4) + QString("%1").arg(last + offset, 6, 16, QLatin1Char('0')).right(6);
+        if (flags & FlagUc) {
+            results.append(tMac.toUpper());
+        }
+        if (flags & FlagLc) {
+            results.append(tMac.toLower());
+        }
     }
+
     if (flags & FlagLen12) {
-        if (flags & FlagUc)
-            results.append(mac.toUpper());
-        if (flags & FlagLc)
-            results.append(mac.toLower());
+        last = mac.right(6).toInt(0, 16);
+        tMac = mac.left(6) + QString("%1").arg(last + offset, 6, 16, QLatin1Char('0')).right(6);
+        if (flags & FlagUc) {
+            results.append(tMac.toUpper());
+        }
+        if (flags & FlagLc) {
+            results.append(tMac.toLower());
+        }
     }
 
     if (results.isEmpty())
