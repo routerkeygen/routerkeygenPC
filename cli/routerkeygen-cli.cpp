@@ -9,10 +9,9 @@
 
 #include "qcmdlineparser/qcmdlineparser.h"
 
-static void generateCode(QString &ssid, QString &mac)
+static void generateCode(WirelessMatcher &wm, QString &ssid, QString &mac)
 {
     QScanResult wifi(ssid, mac);
-    WirelessMatcher wm;
 
     // Add keygens
     wifi.checkSupport(wm);
@@ -77,6 +76,8 @@ int main(int argc, char * argv[]) {
         };
         std::string line;
 
+ 	WirelessMatcher wm;
+
         // Read line by line
         // Format is: MAC<TAB>SSID
         while (!std::cin.eof()) {
@@ -115,7 +116,7 @@ int main(int argc, char * argv[]) {
             }
 
             // Generate the code!
-            generateCode(ssid, mac);
+            generateCode(wm, ssid, mac);
         }
         return 0;
     }
