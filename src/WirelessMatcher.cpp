@@ -294,8 +294,9 @@ QVector<Keygen *> * WirelessMatcher::getKeygens(QString ssid, QString mac) {
     if (ssid.count(QRegExp("^PBS-[0-9A-F]{6}$")) == 1)
         keygens->append(new PBSKeygen(ssid, mac));
 
-    if (mac.startsWith("08:86:3B") || mac.startsWith("94:44:52")
-        || mac.startsWith("EC:1A:59"))
+    if (ssid.count(QRegExp("^belkin.[0-9a-f]{3}$")) == 1
+        && (mac.startsWith("08:86:3B") || mac.startsWith("14:91:82")
+            || mac.startsWith("94:44:52") || mac.startsWith("EC:1A:59")))
         keygens->append(new BelkinKeygen(ssid, mac));
 
     if (ssid.count(
