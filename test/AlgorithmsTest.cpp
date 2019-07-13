@@ -42,6 +42,7 @@
 #include "algorithms/Upc07UbeeKeygen.h"
 #include "algorithms/Tpw4gKeygen.h"
 #include "algorithms/PldtKeygen.h"
+#include "algorithms/BaseXKeygen.h"
 #include "WirelessMatcher.h"
 #include "wifi/QScanResult.h"
 #include <QDebug>
@@ -500,7 +501,7 @@ private slots:
     }
 
     void testBssid4() {
-        QScanResult wifi("Megared60EC", "FC:75:16:9F:60:EC");
+        QScanResult wifi("movistar_8c2022", "00:0A:C2:8C:20:2B");
         wifi.checkSupport(matcher);
         QVector<Keygen *> * keygens = wifi.getKeygens();
         QVERIFY2(keygens->size() != 0 , "An algorithm was not detected");
@@ -508,7 +509,7 @@ private slots:
         QCOMPARE(typeid(*keygen), typeid(BssidKeygen) );
         QVector<QString> results = keygen->getResults();
         QCOMPARE(results.size(),1);
-        QCOMPARE(results.at(0), QString("75169F60EC"));
+        QCOMPARE(results.at(0), QString("000ac28c2022"));
     }
 
     void testBssid5() {
@@ -521,6 +522,35 @@ private slots:
         QVector<QString> results = keygen->getResults();
         QCOMPARE(results.size(),1);
         QCOMPARE( results.at(0),QString("b075d537cb4c"));
+    }
+
+    void testBssid6() {
+        QScanResult wifi("ZTE-f24ab5", "08:3F:BC:F2:4A:B5");
+        wifi.checkSupport(matcher);
+        QVector<Keygen *> * keygens = wifi.getKeygens();
+        QVERIFY2(keygens->size() == 2 , "An algorithm was not detected");
+        Keygen * keygen = keygens->at(0);
+        QCOMPARE(typeid(*keygen), typeid(BssidKeygen) );
+        QVector<QString> results = keygen->getResults();
+        QCOMPARE(results.size(),1);
+        QCOMPARE( results.at(0),QString("083fbcf2"));
+        keygen = keygens->at(1);
+        QCOMPARE(typeid(*keygen), typeid(BssidKeygen) );
+        results = keygen->getResults();
+        QCOMPARE(results.size(),1);
+        QCOMPARE( results.at(0),QString("083fbcf3"));
+    }
+
+    void testBaseX() {
+        QScanResult wifi("SINGTEL-54F5", "00:26:75:DE:54:F6");
+        wifi.checkSupport(matcher);
+        QVector<Keygen *> * keygens = wifi.getKeygens();
+        QVERIFY2(keygens->size() != 0 , "An algorithm was not detected");
+        Keygen * keygen = keygens->at(0);
+        QCOMPARE(typeid(*keygen), typeid(BaseXKeygen) );
+        QVector<QString> results = keygen->getResults();
+        QCOMPARE(results.size(),1);
+        QCOMPARE( results.at(0),QString("0014570741"));
     }
 
     void testWifimediaR() {

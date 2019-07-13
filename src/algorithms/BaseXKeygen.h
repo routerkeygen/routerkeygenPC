@@ -1,5 +1,5 @@
 /*
- * Copyright 2016 Alex Stanev <alex@stanev.org>
+ * Copyright 2018 Alex Stanev <alex@stanev.org>
  *
  * This file is part of Router Keygen.
  *
@@ -17,28 +17,29 @@
  * along with Router Keygen.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef BSSIDKEYGEN_H_
-#define BSSIDKEYGEN_H_
+#ifndef BASEXKEYGEN_H_
+#define BASEXKEYGEN_H_
 
 #include "Keygen.h"
 
-enum BssidKeygenFlags {
-    FlagLen12   = 1u << 0,
-    FlagLen10   = 1u << 1,
-    FlagLen8    = 1u << 2,
-    FlagUc      = 1u << 3,
-    FlagLc      = 1u << 4,
-    FlagCutLeft = 1u << 5
+enum BaseXKeygenKeygenFlags {
+    xFlagLen12  = 1u << 0,
+    xFlagLen10  = 1u << 1,
+    xFlagLen8   = 1u << 2,
+    xFlagUc     = 1u << 3,
+    xFlagLc     = 1u << 4
 };
 
-class BssidKeygen: public Keygen {
+class BaseXKeygen: public Keygen {
 public:
-    BssidKeygen(QString ssid, QString mac, int flags, int offset);
+    BaseXKeygen(QString ssid, QString mac, int flags, int offset, int base, int nibbles);
 
 private:
 	QVector<QString> & getKeys();
 	unsigned int flags;
 	int offset;
+	int base;
+	int nibbles;
 };
 
-#endif /* BSSIDKEYGEN_H_ */
+#endif /* BASEXKEYGEN_H_ */
