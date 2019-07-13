@@ -529,6 +529,12 @@ QVector<Keygen *> * WirelessMatcher::getKeygens(QString ssid, QString mac) {
         keygens->append(new BssidKeygen(ssid, mac, FlagLc | FlagLen12, -6));
     }
 
+    if (ssid.count(QRegExp("^HOTBOX-[0-9A-F]{4}$")) == 1 &&
+        (mac.startsWith("7C:B7:33") || mac.startsWith("A0:64:8F")
+         || mac.startsWith("B4:EE:B4") || mac.startsWith("E0:CE:C3"))) {
+        keygens->append(new BssidKeygen(ssid, mac, FlagLc | FlagLen12, -6));
+    }
+
     if (ssid.count(QRegExp("^movistar_[0-9a-f]{6}$")) == 1) {
         keygens->append(new BssidKeygen(ssid, mac, FlagLc | FlagLen12, -9));
     }
