@@ -66,6 +66,7 @@
 #include "algorithms/PldtKeygen.h"
 #include "algorithms/BaseXKeygen.h"
 #include "algorithms/EijsinkKeygen.h"
+#include "algorithms/GontwifiKeygen.h"
 #include <QRegExp>
 
 WirelessMatcher::WirelessMatcher() {
@@ -451,8 +452,12 @@ QVector<Keygen *> * WirelessMatcher::getKeygens(QString ssid, QString mac) {
         keygens->append(new BssidKeygen(ssid, mac, FlagLc | FlagLen8, -2));
     }
 
-    if (ssid.count(QRegExp("^NET_2G[0-9A-F]{6}$")) == 1) {
+    if (ssid.count(QRegExp("^NET_2G[0-9A-F]{6}$")) == 1
+        || ssid.count(QRegExp("^NET_2G_[0-9]{3}$")) == 1) {
         keygens->append(new BssidKeygen(ssid, mac, FlagUc | FlagLen8, -6));
+        keygens->append(new BssidKeygen(ssid, mac, FlagUc | FlagLen8, -5));
+        keygens->append(new BssidKeygen(ssid, mac, FlagUc | FlagLen12, -6));
+        keygens->append(new BssidKeygen(ssid, mac, FlagUc | FlagLen12, -5));
     }
 
     if (ssid.count(QRegExp("^OPTIC[0-9a-fA-F]{4}$")) == 1) {
@@ -657,6 +662,10 @@ QVector<Keygen *> * WirelessMatcher::getKeygens(QString ssid, QString mac) {
 
     if (ssid.count(QRegExp("^Eijsink[0-9]{5}(K5|k5|)$")) == 1)
         keygens->append(new EijsinkKeygen(ssid, mac));
+
+    if (ssid.startsWith("GONTWIFI")
+        || ssid.startsWith("GONT_WIFI"))
+        keygens->append(new GontwifiKeygen(ssid, mac));
 
     return keygens;
 }

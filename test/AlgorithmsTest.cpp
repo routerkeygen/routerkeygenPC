@@ -44,6 +44,7 @@
 #include "algorithms/PldtKeygen.h"
 #include "algorithms/BaseXKeygen.h"
 #include "algorithms/EijsinkKeygen.h"
+#include "algorithms/GontwifiKeygen.h"
 #include "WirelessMatcher.h"
 #include "wifi/QScanResult.h"
 #include <QDebug>
@@ -720,6 +721,18 @@ private slots:
         QVector<QString> results = keygen->getResults();
         QCOMPARE( results.size(),1);
         QCOMPARE(results.at(0), QString("95112345"));
+    }
+
+    void Gontwifi() {
+        QScanResult wifi("GONTWIFI_ABCD", "18:d0:71:AB:CD:EF");
+        wifi.checkSupport(matcher);
+        QVector<Keygen *> * keygens = wifi.getKeygens();
+        QVERIFY2(keygens->size() == 1 , "An algorithm was not detected");
+        Keygen * keygen = keygens->at(0);
+        QCOMPARE(typeid(*keygen),typeid(GontwifiKeygen) );
+        QVector<QString> results = keygen->getResults();
+        QCOMPARE( results.size(),1);
+        QCOMPARE(results.at(0), QString("000000DCBA"));
     }
 };
 
