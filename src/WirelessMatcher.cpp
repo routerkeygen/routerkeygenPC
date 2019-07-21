@@ -342,10 +342,16 @@ QVector<Keygen *> * WirelessMatcher::getKeygens(QString ssid, QString mac) {
             || mac.startsWith("00:22:3F") || mac.startsWith("00:24:B2")))
         keygens->append(new SkyV1Keygen(ssid, mac));
 
-    if (ssid.count(QRegExp("^WLAN-[0-9a-fA-F]{6}$")) == 1
-            && (mac.startsWith("00:12:BF") || mac.startsWith("00:1A:2A")
-            || mac.startsWith("00:1D:19")))
-        keygens->append(new Speedport500Keygen(ssid, mac));
+    if (ssid.count(QRegExp("^WLAN-[0-9A-F]{6}$")) == 1
+        && ssid.mid(5, 4) == mac.mid(9, 5).replace(":", "")) {
+        if (mac.startsWith("00:12:BF") || mac.startsWith("00:1A:2A")
+            || mac.startsWith("00:1D:19")) {
+            keygens->append(new Speedport500Keygen(ssid, mac, "-"));
+        }
+        if (mac.startsWith("00:1D:19") || mac.startsWith("00:23:08")) {
+            keygens->append(new Speedport500Keygen(ssid, mac, ""));
+        }
+    }
 
     if (ssid.count(QRegExp("^TECOM-AH4(021|222)-[0-9A-Z]{6}$")) == 1) {
         keygens->append(new TecomKeygen(ssid, mac));
