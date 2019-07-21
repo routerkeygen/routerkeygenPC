@@ -460,7 +460,7 @@ QVector<Keygen *> * WirelessMatcher::getKeygens(QString ssid, QString mac) {
 
     if (ssid.count(QRegExp("^PTV[0-9]{4}$")) == 1
         || ssid.count(QRegExp("^VIVO-[0-9A-F]{4}$")) == 1
-        || (ssid.count(QRegExp("^WIFI-[0-9A-F]{4}$")) == 1 && mac.replace(":", "").right(4) == ssid.right(4) ) ) {
+        || (ssid.count(QRegExp("^WIFI-[0-9A-F]{4}$")) == 1 && mac.right(5).replace(":", "") == ssid.right(4) ) ) {
         keygens->append(new BssidKeygen(ssid, mac, FlagUc | FlagLen10, 0));
     }
 
@@ -485,6 +485,19 @@ QVector<Keygen *> * WirelessMatcher::getKeygens(QString ssid, QString mac) {
     if (ssid == "D-Link"
         || ssid.count(QRegExp("^NetZero-[0-9A-F]{6}$")) == 1) {
         keygens->append(new BssidKeygen(ssid, mac, FlagLc | FlagLen10, -1));
+    }
+
+    if (ssid.count(QRegExp("^ORANGE-[0-9A-F]{4}$")) == 1) {
+        keygens->append(new BssidKeygen(ssid, mac, FlagLc | FlagLen12, -6));
+    }
+
+    if (ssid.count(QRegExp("^Distributel_[0-9]{5}$")) == 1) {
+        keygens->append(new BssidKeygen(ssid, mac, FlagLc | FlagLen12, -3));
+        keygens->append(new BssidKeygen(ssid, mac, FlagLc | FlagLen12, -2));
+    }
+
+    if (ssid.count(QRegExp("^FLOW[0-9]{4}$")) == 1) {
+        keygens->append(new BssidKeygen(ssid, mac, FlagUc | FlagLen12, -2));
     }
 
     if (ssid.count(QRegExp("^Access[0-9]{3}$")) == 1) {
@@ -566,6 +579,11 @@ QVector<Keygen *> * WirelessMatcher::getKeygens(QString ssid, QString mac) {
     if (ssid.count(QRegExp("^ZTE-[0-9a-f]{6}$")) == 1) {
         keygens->append(new BssidKeygen(ssid, mac, FlagLc | FlagLen8 | FlagCutLeft, 0));
         keygens->append(new BssidKeygen(ssid, mac, FlagLc | FlagLen8 | FlagCutLeft, 1));
+    }
+
+    if (ssid.count(QRegExp("^LIME[0-9]{4}$")) == 1) {
+        keygens->append(new BssidKeygen(ssid, mac, FlagUc | FlagLen10 | FlagCutLeft, 0));
+        keygens->append(new BssidKeygen(ssid, mac, FlagUc | FlagLen12, -2));
     }
 
     if (ssid.count(QRegExp("^Singtel[0-9]{4}-[0-9A-F]{4}$")) == 1
