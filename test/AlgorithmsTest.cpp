@@ -183,7 +183,7 @@ private slots:
     }
 
     void testBelkin() {
-        QScanResult wifi("Belkin.c0de","94:44:52:00:C0:DE");
+        QScanResult wifi("Belkin_C0DE","94:44:52:00:C0:DE");
         wifi.checkSupport(matcher);
         QVector<Keygen *> * keygens = wifi.getKeygens();
         QVERIFY2(keygens->size() != 0 , "An algorithm was not detected");
@@ -204,6 +204,18 @@ private slots:
         QVector<QString> results = keygen->getResults();
         QCOMPARE(results.size(),1);
         QCOMPARE(results.at(0),QString("d49496b9"));
+    }
+
+    void testBelkin3() {
+        QScanResult wifi("Belkin_24615A","08:86:3b:24:61:5a");
+        wifi.checkSupport(matcher);
+        QVector<Keygen *> * keygens = wifi.getKeygens();
+        QVERIFY2(keygens->size() != 0 , "An algorithm was not detected");
+        Keygen * keygen = keygens->at(0);
+        QCOMPARE(typeid(*keygen), typeid(BelkinKeygen) );
+        QVector<QString> results = keygen->getResults();
+        QCOMPARE(results.size(),1);
+        QCOMPARE(results.at(0),QString("2E4C5631"));
     }
 
     void testCONN() {
