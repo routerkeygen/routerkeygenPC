@@ -65,6 +65,8 @@
 #include "algorithms/Tpw4gKeygen.h"
 #include "algorithms/PldtKeygen.h"
 #include "algorithms/BaseXKeygen.h"
+#include "algorithms/EijsinkKeygen.h"
+#include "algorithms/GontwifiKeygen.h"
 #include <QRegExp>
 
 WirelessMatcher::WirelessMatcher() {
@@ -269,7 +271,7 @@ QVector<Keygen *> * WirelessMatcher::getKeygens(QString ssid, QString mac) {
     }
 
 
-    if (ssid.count(QRegExp("^InfostradaWiFi-[0-9a-zA-Z]{6}$")) == 1)
+    if (ssid.count(QRegExp("^InfostradaWiFi-[0-9a-f]{6}$")) == 1)
         keygens->append(new InfostradaKeygen(ssid, mac));
 
     if (ssid.startsWith("InterCable"))
@@ -295,8 +297,11 @@ QVector<Keygen *> * WirelessMatcher::getKeygens(QString ssid, QString mac) {
     if (ssid.count(QRegExp("^PBS-[0-9A-F]{6}$")) == 1)
         keygens->append(new PBSKeygen(ssid, mac));
 
-    if (mac.startsWith("08:86:3B") || mac.startsWith("94:44:52")
-        || mac.startsWith("EC:1A:59"))
+    if (ssid.count(QRegExp("^(B|b)elkin(\\.|_)[0-9a-fA-F]{3,6}$")) == 1
+        && (mac.startsWith("08:86:3B") || mac.startsWith("14:91:82")
+            || mac.startsWith("94:10:3E") || mac.startsWith("94:44:52")
+            || mac.startsWith("B4:75:0E") || mac.startsWith("C0:56:27")
+            || mac.startsWith("EC:1A:59")))
         keygens->append(new BelkinKeygen(ssid, mac));
 
     if (ssid.count(
@@ -341,10 +346,16 @@ QVector<Keygen *> * WirelessMatcher::getKeygens(QString ssid, QString mac) {
             || mac.startsWith("00:22:3F") || mac.startsWith("00:24:B2")))
         keygens->append(new SkyV1Keygen(ssid, mac));
 
-    if (ssid.count(QRegExp("^WLAN-[0-9a-fA-F]{6}$")) == 1
-            && (mac.startsWith("00:12:BF") || mac.startsWith("00:1A:2A")
-            || mac.startsWith("00:1D:19")))
-        keygens->append(new Speedport500Keygen(ssid, mac));
+    if (ssid.count(QRegExp("^WLAN-[0-9A-F]{6}$")) == 1
+        && ssid.mid(5, 4) == mac.mid(9, 5).replace(":", "")) {
+        if (mac.startsWith("00:12:BF") || mac.startsWith("00:1A:2A")
+            || mac.startsWith("00:1D:19")) {
+            keygens->append(new Speedport500Keygen(ssid, mac, "-"));
+        }
+        if (mac.startsWith("00:1D:19") || mac.startsWith("00:23:08")) {
+            keygens->append(new Speedport500Keygen(ssid, mac, ""));
+        }
+    }
 
     if (ssid.count(QRegExp("^TECOM-AH4(021|222)-[0-9A-Z]{6}$")) == 1) {
         keygens->append(new TecomKeygen(ssid, mac));
@@ -441,17 +452,27 @@ QVector<Keygen *> * WirelessMatcher::getKeygens(QString ssid, QString mac) {
         keygens->append(new BssidKeygen(ssid, mac, FlagLc | FlagLen8, -2));
     }
 
-    if (ssid.count(QRegExp("^NET_2G[0-9A-F]{6}$")) == 1) {
+    if (ssid.count(QRegExp("^NET_2G[0-9A-F]{6}$")) == 1
+        || ssid.count(QRegExp("^NET_2G_[0-9]{3}$")) == 1) {
         keygens->append(new BssidKeygen(ssid, mac, FlagUc | FlagLen8, -6));
+        keygens->append(new BssidKeygen(ssid, mac, FlagUc | FlagLen8, -5));
+        keygens->append(new BssidKeygen(ssid, mac, FlagUc | FlagLen12, -6));
+        keygens->append(new BssidKeygen(ssid, mac, FlagUc | FlagLen12, -5));
     }
 
     if (ssid.count(QRegExp("^OPTIC[0-9a-fA-F]{4}$")) == 1) {
         keygens->append(new BssidKeygen(ssid, mac, FlagUc | FlagLen8, -16));
     }
 
+    /* Hon Hai Precision Ind. Co.,Ltd. algo */
+    if (ssid.count(QRegExp("^TeleRed-[0-9A-F]{4}$")) == 1
+        || ssid.count(QRegExp("^Ubee[0-9A-F]{4}$")) == 1) {
+        keygens->append(new BssidKeygen(ssid, mac, FlagUc | FlagLen10, -4));
+    }
+
     if (ssid.count(QRegExp("^PTV[0-9]{4}$")) == 1
         || ssid.count(QRegExp("^VIVO-[0-9A-F]{4}$")) == 1
-        || (ssid.count(QRegExp("^WIFI-[0-9A-F]{4}$")) == 1 && mac.replace(":", "").right(4) == ssid.right(4) ) ) {
+        || (ssid.count(QRegExp("^WIFI-[0-9A-F]{4}$")) == 1 && mac.right(5).replace(":", "") == ssid.right(4) ) ) {
         keygens->append(new BssidKeygen(ssid, mac, FlagUc | FlagLen10, 0));
     }
 
@@ -476,6 +497,19 @@ QVector<Keygen *> * WirelessMatcher::getKeygens(QString ssid, QString mac) {
     if (ssid == "D-Link"
         || ssid.count(QRegExp("^NetZero-[0-9A-F]{6}$")) == 1) {
         keygens->append(new BssidKeygen(ssid, mac, FlagLc | FlagLen10, -1));
+    }
+
+    if (ssid.count(QRegExp("^ORANGE-[0-9A-F]{4}$")) == 1) {
+        keygens->append(new BssidKeygen(ssid, mac, FlagLc | FlagLen12, -6));
+    }
+
+    if (ssid.count(QRegExp("^Distributel_[0-9]{5}$")) == 1) {
+        keygens->append(new BssidKeygen(ssid, mac, FlagLc | FlagLen12, -3));
+        keygens->append(new BssidKeygen(ssid, mac, FlagLc | FlagLen12, -2));
+    }
+
+    if (ssid.count(QRegExp("^FLOW[0-9]{4}$")) == 1) {
+        keygens->append(new BssidKeygen(ssid, mac, FlagUc | FlagLen12, -2));
     }
 
     if (ssid.count(QRegExp("^Access[0-9]{3}$")) == 1) {
@@ -528,6 +562,12 @@ QVector<Keygen *> * WirelessMatcher::getKeygens(QString ssid, QString mac) {
         keygens->append(new BssidKeygen(ssid, mac, FlagLc | FlagLen12, -6));
     }
 
+    if (ssid.count(QRegExp("^HOTBOX-[0-9A-F]{4}$")) == 1 &&
+        (mac.startsWith("7C:B7:33") || mac.startsWith("A0:64:8F")
+         || mac.startsWith("B4:EE:B4") || mac.startsWith("E0:CE:C3"))) {
+        keygens->append(new BssidKeygen(ssid, mac, FlagLc | FlagLen12, -6));
+    }
+
     if (ssid.count(QRegExp("^movistar_[0-9a-f]{6}$")) == 1) {
         keygens->append(new BssidKeygen(ssid, mac, FlagLc | FlagLen12, -9));
     }
@@ -551,6 +591,11 @@ QVector<Keygen *> * WirelessMatcher::getKeygens(QString ssid, QString mac) {
     if (ssid.count(QRegExp("^ZTE-[0-9a-f]{6}$")) == 1) {
         keygens->append(new BssidKeygen(ssid, mac, FlagLc | FlagLen8 | FlagCutLeft, 0));
         keygens->append(new BssidKeygen(ssid, mac, FlagLc | FlagLen8 | FlagCutLeft, 1));
+    }
+
+    if (ssid.count(QRegExp("^LIME[0-9]{4}$")) == 1) {
+        keygens->append(new BssidKeygen(ssid, mac, FlagUc | FlagLen10 | FlagCutLeft, 0));
+        keygens->append(new BssidKeygen(ssid, mac, FlagUc | FlagLen12, -2));
     }
 
     if (ssid.count(QRegExp("^Singtel[0-9]{4}-[0-9A-F]{4}$")) == 1
@@ -614,6 +659,13 @@ QVector<Keygen *> * WirelessMatcher::getKeygens(QString ssid, QString mac) {
         || ssid.startsWith("PLDTHOMEFIBR")) {
         keygens->append(new PldtKeygen(ssid, mac, 1));
     }
+
+    if (ssid.count(QRegExp("^Eijsink[0-9]{5}(K5|k5|)$")) == 1)
+        keygens->append(new EijsinkKeygen(ssid, mac));
+
+    if (ssid.startsWith("GONTWIFI")
+        || ssid.startsWith("GONT_WIFI"))
+        keygens->append(new GontwifiKeygen(ssid, mac));
 
     return keygens;
 }
