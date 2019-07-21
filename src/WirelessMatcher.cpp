@@ -458,6 +458,12 @@ QVector<Keygen *> * WirelessMatcher::getKeygens(QString ssid, QString mac) {
         keygens->append(new BssidKeygen(ssid, mac, FlagUc | FlagLen8, -16));
     }
 
+    /* Hon Hai Precision Ind. Co.,Ltd. algo */
+    if (ssid.count(QRegExp("^TeleRed-[0-9A-F]{4}$")) == 1
+        || ssid.count(QRegExp("^Ubee[0-9A-F]{4}$")) == 1) {
+        keygens->append(new BssidKeygen(ssid, mac, FlagUc | FlagLen10, -4));
+    }
+
     if (ssid.count(QRegExp("^PTV[0-9]{4}$")) == 1
         || ssid.count(QRegExp("^VIVO-[0-9A-F]{4}$")) == 1
         || (ssid.count(QRegExp("^WIFI-[0-9A-F]{4}$")) == 1 && mac.right(5).replace(":", "") == ssid.right(4) ) ) {
