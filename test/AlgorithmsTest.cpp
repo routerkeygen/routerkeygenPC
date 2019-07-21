@@ -433,11 +433,15 @@ private slots:
         QVector<Keygen *> * keygens = wifi.getKeygens();
         QVERIFY2(keygens->size() != 0 , "An algorithm was not detected");
         QCOMPARE(typeid(*(keygens->at(0))), typeid(ArcadyanKeygen) );
-        QVERIFY2(keygens->size() == 2, "2 algorithm should have been detected");
+        QVERIFY2(keygens->size() == 3, "3 algorithms should have been detected");
         Keygen * keygen = keygens->at(1);
         QCOMPARE(typeid(*keygen), typeid(Speedport500Keygen) );
         QVector<QString> results = keygen->getResults();
         QCOMPARE(results.size(),1000);
+        Keygen * keygen2 = keygens->at(2);
+        QCOMPARE(typeid(*keygen2), typeid(Speedport500Keygen) );
+        QVector<QString> results2 = keygen->getResults();
+        QCOMPARE(results2.size(),1000);
         bool found = false;
         for ( int i = 0; i < results.size() ; ++i ){
             if (  results.at(i) == "SP-0947DD059" ){
@@ -446,6 +450,26 @@ private slots:
             }
         }
         QVERIFY2(found, "SP-0947DD059 was not found");
+    }
+
+    void testSpeedport5002() {
+        QScanResult wifi("WLAN-068370", "00:23:08:06:83:5b");
+        wifi.checkSupport(matcher);
+        QVector<Keygen *> * keygens = wifi.getKeygens();
+        QVERIFY2(keygens->size() == 2, "2 algorithm should have been detected");
+        QCOMPARE(typeid(*(keygens->at(0))), typeid(ArcadyanKeygen) );
+        Keygen * keygen = keygens->at(1);
+        QCOMPARE(typeid(*keygen), typeid(Speedport500Keygen) );
+        QVector<QString> results = keygen->getResults();
+        QCOMPARE(results.size(),1000);
+        bool found = false;
+        for ( int i = 0; i < results.size() ; ++i ){
+            if (  results.at(i) == "SP70035B050" ){
+                found = true;
+                break;
+            }
+        }
+        QVERIFY2(found, "SP70035B050 was not found");
     }
 
     void testTeletu() {
