@@ -43,6 +43,7 @@
 #include "algorithms/Tpw4gKeygen.h"
 #include "algorithms/PldtKeygen.h"
 #include "algorithms/BaseXKeygen.h"
+#include "algorithms/EijsinkKeygen.h"
 #include "WirelessMatcher.h"
 #include "wifi/QScanResult.h"
 #include <QDebug>
@@ -709,6 +710,17 @@ private slots:
         QCOMPARE(results.at(0), QString("wlanbb5544"));
     }
 
+    void Eijsink() {
+        QScanResult wifi("Eijsink12345k5", "11:22:33:44:aa:bb");
+        wifi.checkSupport(matcher);
+        QVector<Keygen *> * keygens = wifi.getKeygens();
+        QVERIFY2(keygens->size() == 1 , "An algorithm was not detected");
+        Keygen * keygen = keygens->at(0);
+        QCOMPARE(typeid(*keygen),typeid(EijsinkKeygen) );
+        QVector<QString> results = keygen->getResults();
+        QCOMPARE( results.size(),1);
+        QCOMPARE(results.at(0), QString("95112345"));
+    }
 };
 
 

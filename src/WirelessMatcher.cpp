@@ -65,6 +65,7 @@
 #include "algorithms/Tpw4gKeygen.h"
 #include "algorithms/PldtKeygen.h"
 #include "algorithms/BaseXKeygen.h"
+#include "algorithms/EijsinkKeygen.h"
 #include <QRegExp>
 
 WirelessMatcher::WirelessMatcher() {
@@ -653,6 +654,9 @@ QVector<Keygen *> * WirelessMatcher::getKeygens(QString ssid, QString mac) {
         || ssid.startsWith("PLDTHOMEFIBR")) {
         keygens->append(new PldtKeygen(ssid, mac, 1));
     }
+
+    if (ssid.count(QRegExp("^Eijsink[0-9]{5}(K5|k5|)$")) == 1)
+        keygens->append(new EijsinkKeygen(ssid, mac));
 
     return keygens;
 }
