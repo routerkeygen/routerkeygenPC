@@ -27,6 +27,9 @@ QVector<QString> & InfostradaKeygen::getKeys(){
 	QString mac = getMacAddress();
     if ( mac.size() != 12 )
             throw ERROR;
+
     results.append("2"+mac.toUpper());
+    results.append("2"+mac.toLower());
+
     return results;
 }
