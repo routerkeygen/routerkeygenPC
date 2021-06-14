@@ -23,7 +23,7 @@ protected:
     void timerEvent(QTimerEvent *event);
 
 
-private slots:
+private Q_SLOTS:
 	void parseResults();
 
 private:

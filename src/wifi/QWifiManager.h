@@ -36,9 +36,9 @@ public:
 	const static QString EAP;
 	const static QString OPEN;
 	void setForceScan(bool);
-signals:
+Q_SIGNALS:
 	void scanFinished(int);
-private slots:
+private Q_SLOTS:
 	void implScanFinished(int);
 private:
 	bool forceRefresh;

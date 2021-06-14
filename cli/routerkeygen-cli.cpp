@@ -52,7 +52,7 @@ int main(int argc, char * argv[]) {
             try {
                 QVector<QString> r = keygens->at(i)->getResults();
                 if (kg) {
-                    foreach (QString s, r) {
+                    Q_FOREACH (QString s, r) {
                          results.append(keygens->at(i)->kgname + ":" + s);
                      }
                 } else {

@@ -36,29 +36,29 @@ void QWifiManagerPrivateUnix::startScan() {
     QDBusInterface networkManager(NM_DBUS_SERVICE, NM_DBUS_PATH,
                                   NM_DBUS_INTERFACE, QDBusConnection::systemBus());
     if (!networkManager.isValid()) {
-        emit scanFinished(QWifiManager::ERROR_NO_NM);
+        Q_EMIT scanFinished(QWifiManager::ERROR_NO_NM);
         return;
     }
     QDBusReply<QList<QDBusObjectPath> > devices = networkManager.call(
             "GetDevices");
     if (!devices.isValid()) {
-        emit scanFinished(QWifiManager::ERROR);
+        Q_EMIT scanFinished(QWifiManager::ERROR);
         return;
     }
 
     bool foundWifi = false;
-    foreach (const QDBusObjectPath& connection, devices.value()) {
+    Q_FOREACH (const QDBusObjectPath& connection, devices.value()) {
         //qDebug() << connection.path();
         QDBusInterface device(NM_DBUS_SERVICE, connection.path(),
                               NM_DBUS_INTERFACE_DEVICE, QDBusConnection::systemBus());
         if (!device.isValid()) {
-            emit scanFinished(QWifiManager::ERROR);
+            Q_EMIT scanFinished(QWifiManager::ERROR);
             return;
         }
 
         QVariant deviceType = device.property("DeviceType");
         if (!deviceType.isValid()) {
-            emit scanFinished(QWifiManager::ERROR);
+            Q_EMIT scanFinished(QWifiManager::ERROR);
             return;
         }
         //qDebug() << deviceType.toUInt();
@@ -66,7 +66,7 @@ void QWifiManagerPrivateUnix::startScan() {
             foundWifi = true;
             QVariant deviceState = device.property("State");
             if (!deviceState.isValid()) {
-                emit scanFinished(QWifiManager::ERROR);
+                Q_EMIT scanFinished(QWifiManager::ERROR);
                 return;
             }
             if (deviceState.toUInt() <= NM_DEVICE_STATE_UNAVAILABLE)
@@ -75,7 +75,7 @@ void QWifiManagerPrivateUnix::startScan() {
                                                 connection.path(), NM_DBUS_INTERFACE_DEVICE_WIRELESS,
                                                 QDBusConnection::systemBus());
             if (!wirelessDevice->isValid()) {
-                emit scanFinished(QWifiManager::ERROR);
+                Q_EMIT scanFinished(QWifiManager::ERROR);
                 return;
             }
             QDBusConnection::systemBus().connect(NM_DBUS_SERVICE,
@@ -93,11 +93,11 @@ void QWifiManagerPrivateUnix::startScan() {
             QDBusReply<QList<QDBusObjectPath> > accessPoints =
                     wirelessDevice->call("GetAccessPoints");
             if (!accessPoints.isValid()) {
-                emit scanFinished(QWifiManager::ERROR);
+                Q_EMIT scanFinished(QWifiManager::ERROR);
                 return;
             }
             clearPreviousScanResults();
-            foreach (const QDBusObjectPath& connection, accessPoints.value()) {
+            Q_FOREACH (const QDBusObjectPath& connection, accessPoints.value()) {
                 //qDebug() << connection.path();
                 QDBusInterface accessPoint(NM_DBUS_SERVICE, connection.path(),
                                            NM_DBUS_INTERFACE_ACCESS_POINT,
@@ -113,7 +113,7 @@ void QWifiManagerPrivateUnix::startScan() {
                 if (!ssid.isValid() || !mac.isValid() || !frequency.isValid()
                     || !strengh.isValid() || !capabilitiesRSN.isValid()
                     || !capabilitiesWPA.isValid() || !flags.isValid() ) {
-                    emit scanFinished(QWifiManager::ERROR);
+                    Q_EMIT scanFinished(QWifiManager::ERROR);
                     return;
                 }
                 unsigned int capabilities = capabilitiesWPA.toUInt()
@@ -142,14 +142,14 @@ void QWifiManagerPrivateUnix::startScan() {
                             QSharedPointer<QScanResult> ( new QScanResult(ssid.toString(), mac.toString(), enc,
                                         frequency.toInt(), strengh.toInt())));
             }
-            emit scanFinished(QWifiManager::SCAN_OK);
+            Q_EMIT scanFinished(QWifiManager::SCAN_OK);
             return;
         }
     }
     if (foundWifi)
-        emit scanFinished(QWifiManager::ERROR_NO_WIFI_ENABLED);
+        Q_EMIT scanFinished(QWifiManager::ERROR_NO_WIFI_ENABLED);
     else
-        emit scanFinished(QWifiManager::ERROR_NO_WIFI);
+        Q_EMIT scanFinished(QWifiManager::ERROR_NO_WIFI);
 }
 
 void QWifiManagerPrivateUnix::updateAccessPoints() {
@@ -163,26 +163,26 @@ void QWifiManagerPrivateUnix::updateAccessPoints() {
     QDBusInterface device(NM_DBUS_SERVICE, wirelessDevice->path(),
                           NM_DBUS_INTERFACE_DEVICE, QDBusConnection::systemBus());
     if (!device.isValid()) {
-        emit scanFinished(QWifiManager::ERROR);
+        Q_EMIT scanFinished(QWifiManager::ERROR);
         return;
     }
     QVariant deviceState = device.property("State");
     if (!deviceState.isValid()) {
-        emit scanFinished(QWifiManager::ERROR);
+        Q_EMIT scanFinished(QWifiManager::ERROR);
         return;
     }
     if (deviceState.toUInt() <= NM_DEVICE_STATE_UNAVAILABLE) {
-        emit scanFinished(QWifiManager::ERROR_NO_WIFI_ENABLED);
+        Q_EMIT scanFinished(QWifiManager::ERROR_NO_WIFI_ENABLED);
         return; // we are only interested in enabled wifi devices
     }
     QDBusReply<QList<QDBusObjectPath> > accessPoints = wirelessDevice->call(
             "GetAccessPoints");
     if (!accessPoints.isValid()) {
-        emit scanFinished(QWifiManager::ERROR);
+        Q_EMIT scanFinished(QWifiManager::ERROR);
         return;
     }
     clearPreviousScanResults();
-    foreach (const QDBusObjectPath& connection, accessPoints.value()) {
+    Q_FOREACH (const QDBusObjectPath& connection, accessPoints.value()) {
         //qDebug() << connection.path();
         QDBusInterface accessPoint(NM_DBUS_SERVICE, connection.path(),
                                    NM_DBUS_INTERFACE_ACCESS_POINT, QDBusConnection::systemBus());
@@ -197,7 +197,7 @@ void QWifiManagerPrivateUnix::updateAccessPoints() {
         if (!ssid.isValid() || !mac.isValid() || !frequency.isValid()
             || !strengh.isValid() || !capabilitiesRSN.isValid()
             || !capabilitiesWPA.isValid() || !flags.isValid()) {
-            emit scanFinished(QWifiManager::ERROR);
+            Q_EMIT scanFinished(QWifiManager::ERROR);
             return;
         }
         unsigned int capabilities = capabilitiesWPA.toUInt()
@@ -223,6 +223,6 @@ void QWifiManagerPrivateUnix::updateAccessPoints() {
             QSharedPointer<QScanResult> (new QScanResult(ssid.toString(), mac.toString(), enc,
                                 frequency.toInt(), strengh.toInt())));
     }
-    emit scanFinished(QWifiManager::SCAN_OK);
+    Q_EMIT scanFinished(QWifiManager::SCAN_OK);
 }
 

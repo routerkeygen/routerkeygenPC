@@ -21,7 +21,7 @@ public:
 	QWifiManagerPrivateUnix();
 	virtual ~QWifiManagerPrivateUnix();
 	void startScan();
-private slots:
+private Q_SLOTS:
 	void updateAccessPoints();
 
 private:

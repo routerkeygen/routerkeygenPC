@@ -42,7 +42,7 @@ void QCmdLineParser::QCmdLineParserPrivate::addOptionalArg(const QCmdLineArgumen
     int idx = m_optionalArgs.count();
     m_optionalArgs.push_back(option);
     m_optionalArgIndex[option.name()] = idx;
-    foreach (const QString& alias, option.aliases())
+    Q_FOREACH (const QString& alias, option.aliases())
         m_optionalArgIndex[alias] = idx;
 }
 
@@ -200,7 +200,7 @@ void QCmdLineParser::disableHelpOption()
     m_d->m_optionalArgIndex.remove("-h");
     m_d->m_optionalArgIndex.remove("--help");
     // re-index everybody
-    foreach (QString str, m_d->m_optionalArgIndex.keys())
+    Q_FOREACH (QString str, m_d->m_optionalArgIndex.keys())
         m_d->m_optionalArgIndex[str]--;
 }
 
@@ -251,7 +251,7 @@ QString QCmdLineParser::QCmdLineParserPrivate::usage(const QString& applicationN
     QTextStream s(&usage);
     s << tr("Usage: %1").arg(applicationName);
 
-    foreach (const QCmdLineArgument arg, m_optionalArgs) {
+    Q_FOREACH (const QCmdLineArgument arg, m_optionalArgs) {
         s << " [" << arg.name();
         if (arg.action() == QCmdLineArgument::StoreValue)
             s << ' ' << arg.valueName();
@@ -299,7 +299,7 @@ QString QCmdLineParser::help() const
             keyName = it->valueName();
 
         QStringList args;
-        foreach(QString name, it->aliases()) {
+        Q_FOREACH(QString name, it->aliases()) {
             args << name;
             if (isStorable) {
                 args.last().append(' ');

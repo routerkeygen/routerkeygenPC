@@ -20,7 +20,7 @@ private:
     Ui::UpdateDialog *ui;
     QString url;
 
-private slots:
+private Q_SLOTS:
     void openWebsite();
     void closeWindow();
 };

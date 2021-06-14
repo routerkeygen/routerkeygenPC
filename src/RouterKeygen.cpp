@@ -389,7 +389,7 @@ void RouterKeygen::scanFinished(int code) {
     enableUI(true);
     switch (code) {
     case QWifiManager::SCAN_OK: {
-            foreach ( QSharedPointer<QScanResult> scanResult, wifiNetworks )
+            Q_FOREACH ( QSharedPointer<QScanResult> scanResult, wifiNetworks )
                 scanResult.clear();
             bool setTabPosition = false;
             if ( wifiNetworks.size() == 0 )

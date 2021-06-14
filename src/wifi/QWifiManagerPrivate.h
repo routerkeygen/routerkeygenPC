@@ -20,7 +20,7 @@ public:
 	virtual void startScan() = 0;
     QVector<QSharedPointer<QScanResult> > & getScanResults();
 
-signals:
+Q_SIGNALS:
 	void scanFinished(int);
 
 protected:

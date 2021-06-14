@@ -108,6 +108,7 @@ if (Qt5Core_FOUND)
     qt5_wrap_ui(ROUTERKEYGEN_UIS_H ${ROUTERKEYGEN_UIS})
     qt5_add_resources(ROUTERKEYGEN_RCC_SRCS ${ROUTERKEYGEN_RCC})
     add_definitions(-DQT_DISABLE_DEPRECATED_BEFORE=0x000000) #handle deprecated methods
+    add_definitions(-DQT_NO_KEYWORDS)
 else(Qt5Core_FOUND)
     qt4_wrap_ui(ROUTERKEYGEN_UIS_H ${ROUTERKEYGEN_UIS})
     qt4_add_resources(ROUTERKEYGEN_RCC_SRCS ${ROUTERKEYGEN_RCC})

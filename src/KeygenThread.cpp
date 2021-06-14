@@ -28,7 +28,7 @@ void KeygenThread::run(){
     for ( int i = 0; i < routers->size(); ++i ){
         try{
             QVector<QString> r = routers->at(i)->getResults();
-            foreach (QString s, r) {
+            Q_FOREACH (QString s, r) {
                 results.append(s);
             }
         } catch (int e){

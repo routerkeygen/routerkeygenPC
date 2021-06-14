@@ -17,7 +17,7 @@ public:
 private:
     Ui::WelcomeDialog *ui;
 
-private slots:
+private Q_SLOTS:
     void donatePaypal();
     void donateGooglePlay();
     
