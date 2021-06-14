@@ -31,7 +31,7 @@ QVector<QSharedPointer<QScanResult> > & QWifiManagerPrivate::getScanResults() {
 }
 
 void QWifiManagerPrivate::clearPreviousScanResults() {
-    foreach ( QSharedPointer<QScanResult> scanResult, scanResults )
+    Q_FOREACH ( QSharedPointer<QScanResult> scanResult, scanResults )
         scanResult.clear();
 	scanResults.clear();
 }

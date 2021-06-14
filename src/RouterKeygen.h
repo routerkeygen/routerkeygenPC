@@ -36,7 +36,7 @@ public:
 protected:
     bool eventFilter(QObject *obj, QEvent *event);
 
-private slots:
+private Q_SLOTS:
     void rightButtonClicked(QObject *obj,const QPoint &p);
     void copyKey();
     void forceRefreshToggle(int);

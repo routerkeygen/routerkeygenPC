@@ -84,7 +84,7 @@ QVector<QSharedPointer<QScanResult> > & QWifiManager::getScanResults() {
 
 
 void QWifiManager::implScanFinished(int s){
-	emit scanFinished(s);
+	Q_EMIT scanFinished(s);
 }
 
 

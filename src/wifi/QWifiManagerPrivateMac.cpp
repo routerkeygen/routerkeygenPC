@@ -56,12 +56,12 @@ void QWifiManagerPrivateMac::parseResults() {
     int level;
     clearPreviousScanResults();
     if ( lines.size() <= 1 ){
-        emit scanFinished(QWifiManager::SCAN_OK);
+        Q_EMIT scanFinished(QWifiManager::SCAN_OK);
         return;
     }
     int ssidLimit = lines.at(0).indexOf("BSSID");
     if (ssidLimit == -1 ){
-        emit scanFinished(QWifiManager::SCAN_OK);
+        Q_EMIT scanFinished(QWifiManager::SCAN_OK);
         return;
     }
     for (int i = 1; i < lines.size(); ++i) {
@@ -80,7 +80,7 @@ void QWifiManagerPrivateMac::parseResults() {
             enc = "Open";
         scanResults.append(QSharedPointer<QScanResult>(new QScanResult(ssid, bssid, enc, 0, level)));
     }
-    emit scanFinished(QWifiManager::SCAN_OK);
+    Q_EMIT scanFinished(QWifiManager::SCAN_OK);
 
 }
 

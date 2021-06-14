@@ -69,7 +69,7 @@ void QWifiManagerPrivateWin::parseResults() {
 		}
 
 	}
-	emit scanFinished(QWifiManager::SCAN_OK);
+	Q_EMIT scanFinished(QWifiManager::SCAN_OK);
 }
 
 void QWifiManagerPrivateWin::timerEvent(QTimerEvent *)
