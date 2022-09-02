@@ -30,6 +30,7 @@ Router Keygen generate default WPA/WEP keys for the following router:
   * Cabovisao Sagem
   * Alice in Germany
   * Speedport 
+  * IZZI-XXXX
 
 # Releases
 
